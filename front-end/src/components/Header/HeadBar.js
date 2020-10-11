@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
 // }); 
 
 
-function Header() {
+function HeadBar() {
   //constants
   const classes = useStyles();
   // const colors = color();
@@ -152,7 +152,7 @@ function Header() {
         color="primary"
         className={classes.search}
         endIcon={<SearchIcon />}
-        style={{ width: "60em" }}
+        style={{ width: "100%" }}
         onClick={handleOpen}
       >
         검색하기
@@ -193,7 +193,7 @@ function Header() {
           label={auth ? 'Logout' : 'Login'}
         />
       </FormGroup>
-      <AppBar position="static">
+      <AppBar>
         <Toolbar>
           <Grid item xs={3}>
             <Typography className={classes.title} variant="h6" noWrap>
@@ -235,4 +235,4 @@ function Header() {
   );
 }
 
-export default Header; 
+export default HeadBar; 
