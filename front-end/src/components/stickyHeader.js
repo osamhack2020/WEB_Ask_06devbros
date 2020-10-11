@@ -16,8 +16,9 @@ import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup'
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -50,7 +51,18 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(10),
     marginBottom: theme.spacing(2.5),
     marginTop: theme.spacing(2.5),
-  }
+  },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
 }));
 
 // const color = createMuiTheme({
@@ -71,11 +83,19 @@ function Header() {
   // const colors = color();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [auth, setAuth] = React.useState(true);  //로그인 체크
-  const [showSearch, setShowSearch] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
 
   const isMenuOpen = Boolean(anchorEl);
 
   // event handler
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -87,11 +107,9 @@ function Header() {
 
   const handleChange = (event) => {
     setAuth(event.target.checked);
+    
   };
 
-  const handleClickSearchBtn = (event) => {
-    setShowSearch(true);
-  }
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (     // 회원 정보 누를 시 나오는 메뉴바
@@ -124,22 +142,8 @@ function Header() {
     </Menu>
   );
   
-  const newSearchbar = (
-    <Grid item xs={6}>
-      <Grid container justify="center" direction="row" alignItems="center">
-        <Link href="#" className={classes.link} color="inherit">고민상담하기</Link>
-        <Link href="#" className={classes.link} color="inherit">고민들어주기</Link>
-        <Link href="#" className={classes.link} color="inherit">챗봇과 상담하기</Link>
-      </Grid>
-      <Grid container justify="center" direction="row" alignItems="center">
-      <ButtonGroup  variant="contained" aria-label="contained primary button group" style={{marginBottom: "2em"}}>
-        <Button style={{ width: "20em" }}>One</Button>
-        <Button style={{ width: "20em" }}>Two</Button>
-        <Button style={{ width: "20em" }}>Three</Button>
-      </ButtonGroup>
-      </Grid>
-    </Grid>
-  );
+  // const newSearchbar = (
+  // );
 
   const basicSearchbar = (
     <Grid item xs={6}>
@@ -149,10 +153,33 @@ function Header() {
         className={classes.search}
         endIcon={<SearchIcon />}
         style={{ width: "60em" }}
-        onClick={handleClickSearchBtn}
+        onClick={handleOpen}
       >
         검색하기
     </Button>
+
+    <div>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        {/* 모달 내용 */}
+        <Fade in={open}> 
+          <div className={classes.paper}>
+            <h2 id="transition-modal-title">Transition modal</h2>
+            <p id="transition-modal-description">react-transition-group animates me.</p>
+          </div>
+        </Fade>
+      </Modal>
+    </div>
     </Grid>
   );
 
@@ -173,13 +200,7 @@ function Header() {
               물어봐
             </Typography>
           </Grid>
-          {showSearch || 
-            basicSearchbar
-          }
-
-          {showSearch &&
-            newSearchbar
-          }
+          {basicSearchbar}
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             {auth &&
