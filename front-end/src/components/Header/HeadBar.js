@@ -19,6 +19,7 @@ import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -118,7 +119,7 @@ function HeadBar() {
 
       {auth || (<div>
         <MenuItem onClick={handleMenuClose}>회원가입</MenuItem>
-        <MenuItem onClick={handleMenuClose}>로그인</MenuItem>
+        <MenuItem> <Link to="/Login">로그인</Link></MenuItem>
         <MenuItem onClick={handleMenuClose}>홈페이지 기여하기</MenuItem>
         <MenuItem onClick={handleMenuClose}>도움말</MenuItem>
       </div>)

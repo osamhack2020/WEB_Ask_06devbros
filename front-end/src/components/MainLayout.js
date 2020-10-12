@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+// import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Box from '@material-ui/core/Box';
@@ -14,32 +14,6 @@ import { makeStyles } from '@material-ui/core/styles';
 // Import custom components
 import Footer from './Footer';
 import HeadBar from './Header/HeadBar';
-
-const styles = (theme) => ({
-    root: {
-        width: '100%',
-        height: 'auto',
-        zIndex: 1,
-        overflow: 'hidden',
-    },
-    appFrame: {
-        position: 'relative',
-        display: 'flex',
-        width: '100%',
-        height: '100%',
-    },
-    content: {
-        width: '100%',
-        flexGrow: 1,
-        padding: 24,
-        height: 'calc(100% - 56px)',
-        marginTop: 56,
-        [theme.breakpoints.up('sm')]: {
-            height: 'calc(100% - 64px)',
-            marginTop: 64,
-        },
-    },
-});
 
 // 맨위로 올라가는 스크롤 버튼 함수
 
@@ -92,11 +66,10 @@ ScrollTop.propTypes = {
 // 맨위로 올라가는 스크롤 버튼 함수
 
 const MainLayout = (props) => {
-    const { classes } = props;
 
     return (
-        <div className={classes.root}>
-            <div className={classes.appFrame}>
+        <div>
+            <div>
                 <CssBaseline />
                 <HeadBar />
 
@@ -130,4 +103,4 @@ MainLayout.propTypes = {
     children: PropTypes.element,
 };
 
-export default withStyles(styles)(MainLayout);
+export default (MainLayout);
