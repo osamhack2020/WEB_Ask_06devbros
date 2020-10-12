@@ -1,5 +1,5 @@
 import React from 'react';
-import { fade, makeStyles  } from '@material-ui/core/styles';
+import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -19,14 +19,14 @@ import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
   },
   title: {
-    marginRight: theme.spacing(2),
-    display: 'none',
+    display: 'block',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
@@ -37,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
-    marginRight: theme.spacing(2),
     marginLeft: 0,
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(),
@@ -64,18 +63,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 4, 3),
   },
 }));
-
-// const color = createMuiTheme({
-//   palette: {
-//     primary: {
-//       main: '#a7ffeb',
-//     },
-//     secondary: {
-//       main: '#f44336',
-//     },
-//   },
-// }); 
-
 
 function HeadBar() {
   //constants
@@ -107,7 +94,6 @@ function HeadBar() {
 
   const handleChange = (event) => {
     setAuth(event.target.checked);
-    
   };
 
 
@@ -133,7 +119,7 @@ function HeadBar() {
 
       {auth || (<div>
         <MenuItem onClick={handleMenuClose}>회원가입</MenuItem>
-        <MenuItem onClick={handleMenuClose}>로그인</MenuItem>
+        <MenuItem> <Link to="/Login">로그인</Link></MenuItem>
         <MenuItem onClick={handleMenuClose}>홈페이지 기여하기</MenuItem>
         <MenuItem onClick={handleMenuClose}>도움말</MenuItem>
       </div>)
@@ -141,9 +127,6 @@ function HeadBar() {
 
     </Menu>
   );
-  
-  // const newSearchbar = (
-  // );
 
   const basicSearchbar = (
     <Grid item xs={6}>
@@ -158,28 +141,28 @@ function HeadBar() {
         검색하기
     </Button>
 
-    <div>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        className={classes.modal}
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        {/* 모달 내용 */}
-        <Fade in={open}> 
-          <div className={classes.paper}>
-            <h2 id="transition-modal-title">Transition modal</h2>
-            <p id="transition-modal-description">react-transition-group animates me.</p>
-          </div>
-        </Fade>
-      </Modal>
-    </div>
+      <div>
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          className={classes.modal}
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          {/* 모달 내용 */}
+          <Fade in={open}>
+            <div className={classes.paper}>
+              <h2 id="transition-modal-title">Transition modal</h2>
+              <p id="transition-modal-description">react-transition-group animates me.</p>
+            </div>
+          </Fade>
+        </Modal>
+      </div>
     </Grid>
   );
 
@@ -187,13 +170,13 @@ function HeadBar() {
 
   return (
     <div className={classes.grow}>
+      <AppBar>
       <FormGroup>
         <FormControlLabel
           control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
           label={auth ? 'Logout' : 'Login'}
         />
       </FormGroup>
-      <AppBar>
         <Toolbar>
           <Grid item xs={3}>
             <Typography className={classes.title} variant="h6" noWrap>

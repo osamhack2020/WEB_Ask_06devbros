@@ -1,10 +1,14 @@
 import React from 'react';
-import Header from './components/Header';
+import { HashRouter, Route } from 'react-router-dom';
+import MainLayout from './components/MainLayout';
+import LoginForm from './components/LoginForm';
+
 function App() {
   return (
-    <div className="App">
-      <Header />
-    </div>
+    <HashRouter>
+      <Route path="/" exact={true} component={MainLayout} />
+      <Route path="/Login" component={LoginForm} />
+    </HashRouter>
   );
 }
 
