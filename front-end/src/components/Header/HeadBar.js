@@ -119,7 +119,7 @@ function HeadBar() {
 
       {auth || (<div>
         <MenuItem onClick={handleMenuClose}>회원가입</MenuItem>
-        <MenuItem> <Link to="/Login">로그인</Link></MenuItem>
+        <Link to="/Login" color="inherit"><MenuItem>로그인</MenuItem></Link>
         <MenuItem onClick={handleMenuClose}>홈페이지 기여하기</MenuItem>
         <MenuItem onClick={handleMenuClose}>도움말</MenuItem>
       </div>)
