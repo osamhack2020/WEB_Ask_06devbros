@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 // import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
+
 import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Zoom from '@material-ui/core/Zoom';
@@ -14,6 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 // Import custom components
 import Footer from './Footer';
 import HeadBar from './Header/HeadBar';
+import Jumbotron from './Jumbotron';
 
 // 맨위로 올라가는 스크롤 버튼 함수
 
@@ -65,6 +65,15 @@ ScrollTop.propTypes = {
 
 // 맨위로 올라가는 스크롤 버튼 함수
 
+const mainFeaturedPost = {
+    title: 'Title of a longer featured blog post',
+    description:
+      "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
+    image: 'https://source.unsplash.com/random',
+    imgText: 'main image description',
+    linkText: 'Continue reading…',
+  };
+
 const MainLayout = (props) => {
 
     return (
@@ -75,18 +84,7 @@ const MainLayout = (props) => {
 
                 {/* <main className={classes.content}>{children}</main> */}
                 <Toolbar id="back-to-top-anchor" />
-                <Container>
-                    <Box my={2}>
-                        {[...new Array(12)]
-                            .map(
-                                () => `Cras mattis consectetur purus sit amet fermentum.
-  Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-  Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-  Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
-                            )
-                            .join('\n')}
-                    </Box>
-                </Container>
+        <Jumbotron post={mainFeaturedPost}/>
                 <ScrollTop {...props}>
                     <Fab color="secondary" size="small" aria-label="scroll back to top">
                         <KeyboardArrowUpIcon />
