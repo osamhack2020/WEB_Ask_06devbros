@@ -56,13 +56,13 @@ class Home extends React.Component {
         return (
             <React.Fragment>
                 <Jumbotron post={mainFeaturedPost} />
-                    <Grid item xs={12} className={classes.cards}>
-                        <Grid container direction="row" justify="space-between" alignItems="center" spacing={4}>
-                            {cards.map((post) => (
-                                <CardContent key={post.title} title={post.title} description={post.description} image={post.image} />
-                            ))}
+                <Grid container className={classes.cards} spacing={4}>
+                    {cards.map((post) => (
+                        <Grid item xs={12} sm={post.title === '챗봇을 이용하기' ? 12 : 6} md={4} lg={4} >
+                            <CardContent key={post.title} title={post.title} description={post.description} image={post.image} />
                         </Grid>
-                    </Grid>
+                    ))}
+                </Grid>
 
                 <p>탄핵소추의 의결을 받은 자는 탄핵심판이 있을 때까지 그 권한행사가 정지된다. 정기회의 회기는 100일을, 임시회의 회기는 30일을 초과할 수 없다. 군사법원의 조직·권한 및 재판관의 자격은 법률로 정한다. 국가는 농수산물의 수급균형과 유통구조의 개선에 노력하여 가격안정을 도모함으로써 농·어민의 이익을 보호한다. 정당은 그 목적·조직과 활동이 민주적이어야 하며, 국민의 정치적 의사형성에 참여하는데 필요한 조직을 가져야 한다. 재판의 심리와 판결은 공개한다. 다만, 심리는 국가의 안전보장 또는 안녕질서를 방해하거나 선량한 풍속을 해할 염려가 있을 때에는 법원의 결정으로 공개하지 아니할 수 있다.</p>
 
