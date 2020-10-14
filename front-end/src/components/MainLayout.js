@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 
@@ -13,18 +13,17 @@ import { makeStyles } from '@material-ui/core/styles';
 // Import custom components
 import Footer from './Footer';
 import HeadBar from './Header/HeadBar';
-import Jumbotron from './Jumbotron';
 import { Container } from '@material-ui/core';
 
 // 맨위로 올라가는 스크롤 버튼 함수
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      position: 'fixed',
-      bottom: theme.spacing(2),
-      right: theme.spacing(2),
+        position: 'fixed',
+        bottom: theme.spacing(2),
+        right: theme.spacing(2),
     },
-  }));
+}));
 
 function ScrollTop(props) {
     const { children, window } = props;
@@ -66,17 +65,23 @@ ScrollTop.propTypes = {
 
 // 맨위로 올라가는 스크롤 버튼 함수
 
-const mainFeaturedPost = {
-    title: 'Title of a longer featured blog post',
-    description:
-      "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
-    image: 'https://source.unsplash.com/random',
-    imgText: 'main image description',
-    linkText: 'Continue reading…',
-  };
+
+const styles = (theme) => ({
+    content: {
+      width: '100%',
+      flexGrow: 1,
+      padding: 24,
+      height: 'calc(100% - 56px)',
+      marginTop: 56,
+      [theme.breakpoints.up('sm')]: {
+        height: 'calc(100% - 64px)',
+        marginTop: 64,
+      },
+    },
+  });
 
 const MainLayout = (props) => {
-
+    const { classes, children } = props;
     return (
         <div>
             <div>
@@ -85,7 +90,7 @@ const MainLayout = (props) => {
                 {/* <main className={classes.content}>{children}</main> */}
                 <Toolbar id="back-to-top-anchor" />
                 <Container maxWidth="lg">
-                    <Jumbotron post={mainFeaturedPost}/>
+                <main className={classes.content}>{children}</main>
                 </Container>
                 <ScrollTop {...props}>
                     <Fab color="secondary" size="small" aria-label="scroll back to top">
@@ -103,4 +108,4 @@ MainLayout.propTypes = {
     children: PropTypes.element,
 };
 
-export default (MainLayout);
+export default withStyles(styles)(MainLayout);
