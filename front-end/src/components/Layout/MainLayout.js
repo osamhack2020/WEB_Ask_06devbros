@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
+
 import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Zoom from '@material-ui/core/Zoom';
@@ -12,18 +11,19 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Import custom components
-import Footer from './Footer';
-import HeadBar from './Header/HeadBar';
+import Footer from '../Footer/Footer';
+import HeadBar from '../Header/HeadBar';
+import { Container } from '@material-ui/core';
 
 // 맨위로 올라가는 스크롤 버튼 함수
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      position: 'fixed',
-      bottom: theme.spacing(2),
-      right: theme.spacing(2),
+        position: 'fixed',
+        bottom: theme.spacing(2),
+        right: theme.spacing(2),
     },
-  }));
+}));
 
 function ScrollTop(props) {
     const { children, window } = props;
@@ -65,27 +65,32 @@ ScrollTop.propTypes = {
 
 // 맨위로 올라가는 스크롤 버튼 함수
 
-const MainLayout = (props) => {
 
+const styles = (theme) => ({
+    content: {
+      width: '100%',
+      flexGrow: 1,
+      padding: 24,
+      height: 'calc(100% - 56px)',
+      marginTop: 56,
+      [theme.breakpoints.up('sm')]: {
+        height: 'calc(100% - 64px)',
+        marginTop: 64,
+      },
+    },
+  });
+
+const MainLayout = (props) => {
+    const { classes, children } = props;
     return (
         <div>
             <div>
                 <CssBaseline />
                 <HeadBar />
-
                 {/* <main className={classes.content}>{children}</main> */}
                 <Toolbar id="back-to-top-anchor" />
-                <Container>
-                    <Box my={2}>
-                        {[...new Array(12)]
-                            .map(
-                                () => `Cras mattis consectetur purus sit amet fermentum.
-  Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-  Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-  Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
-                            )
-                            .join('\n')}
-                    </Box>
+                <Container maxWidth="lg">
+                <main className={classes.content}>{children}</main>
                 </Container>
                 <ScrollTop {...props}>
                     <Fab color="secondary" size="small" aria-label="scroll back to top">
@@ -103,4 +108,4 @@ MainLayout.propTypes = {
     children: PropTypes.element,
 };
 
-export default (MainLayout);
+export default withStyles(styles)(MainLayout);

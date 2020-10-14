@@ -14,13 +14,14 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup'
+
 import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { Link } from 'react-router-dom';
 
+// http://localhost:3000
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -119,7 +120,7 @@ function HeadBar() {
 
       {auth || (<div>
         <MenuItem onClick={handleMenuClose}>회원가입</MenuItem>
-        <MenuItem> <Link to="/Login">로그인</Link></MenuItem>
+        <Link to="/Login" style={{textDecoration:"none"}}><MenuItem>로그인</MenuItem></Link>
         <MenuItem onClick={handleMenuClose}>홈페이지 기여하기</MenuItem>
         <MenuItem onClick={handleMenuClose}>도움말</MenuItem>
       </div>)
@@ -171,12 +172,6 @@ function HeadBar() {
   return (
     <div className={classes.grow}>
       <AppBar>
-      <FormGroup>
-        <FormControlLabel
-          control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
-          label={auth ? 'Logout' : 'Login'}
-        />
-      </FormGroup>
         <Toolbar>
           <Grid item xs={3}>
             <Typography className={classes.title} variant="h6" noWrap>
@@ -211,6 +206,10 @@ function HeadBar() {
               <AccountCircle />
             </IconButton>
           </div>
+          <FormControlLabel
+          control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
+          label={auth ? 'Logout' : 'Login'}
+        />
         </Toolbar>
       </AppBar>
       {renderMenu}

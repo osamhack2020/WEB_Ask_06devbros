@@ -55,7 +55,7 @@ const Footer = (props) => {
             </Grid>
             <Divider variant="middle" />
             <div className={classes.copyright}>
-                © 2020 물어봐, Inc. All rights reserved <a href="https://github.com/osamhack2020/WEB_Ask_06devbros">06devbros</a>
+                © 2020 물어봐, Inc. All rights reserved <Link href="https://github.com/osamhack2020/WEB_Ask_06devbros" color="inherit">06devbros</Link>
             </div>
         </div>
     );
