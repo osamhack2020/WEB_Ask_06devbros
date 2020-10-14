@@ -89,7 +89,7 @@ const MainLayout = (props) => {
                 <HeadBar />
                 {/* <main className={classes.content}>{children}</main> */}
                 <Toolbar id="back-to-top-anchor" />
-                <Container maxWidth="lg">
+                <Container maxWidth="xl">
                 <main className={classes.content}>{children}</main>
                 </Container>
                 <ScrollTop {...props}>
