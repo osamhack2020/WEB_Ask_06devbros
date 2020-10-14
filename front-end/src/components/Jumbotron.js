@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
+    height:'600px',
   },
   overlay: {
     position: 'absolute',
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     right: 0,
     left: 0,
     backgroundColor: 'rgba(0,0,0,.3)',
-  },
+  },  
   mainFeaturedPostContent: {
     position: 'relative',
     padding: theme.spacing(3),
@@ -44,8 +45,8 @@ export default function Jumbotron(props) {
       {/* Increase the priority of the hero background image */}
       {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />}
       <div className={classes.overlay} />
-      <Grid container>
-        <Grid item md={6}>
+      <Grid>
+        <Grid item md={6} container direction="row-reverse" justify="flex-end" alignItems="flex-end">
           <div className={classes.mainFeaturedPostContent}>
             <Typography component="h1" variant="h3" color="inherit" gutterBottom>
               {post.title}

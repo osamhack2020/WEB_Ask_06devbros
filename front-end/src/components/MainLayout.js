@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Footer from './Footer';
 import HeadBar from './Header/HeadBar';
 import Jumbotron from './Jumbotron';
+import { Container } from '@material-ui/core';
 
 // 맨위로 올라가는 스크롤 버튼 함수
 
@@ -81,10 +82,11 @@ const MainLayout = (props) => {
             <div>
                 <CssBaseline />
                 <HeadBar />
-
                 {/* <main className={classes.content}>{children}</main> */}
                 <Toolbar id="back-to-top-anchor" />
-        <Jumbotron post={mainFeaturedPost}/>
+                <Container maxWidth="lg">
+                    <Jumbotron post={mainFeaturedPost}/>
+                </Container>
                 <ScrollTop {...props}>
                     <Fab color="secondary" size="small" aria-label="scroll back to top">
                         <KeyboardArrowUpIcon />

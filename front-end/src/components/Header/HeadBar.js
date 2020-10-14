@@ -20,6 +20,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { Link } from 'react-router-dom';
+import Anchor from '@material-ui/core/Link';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -119,7 +120,7 @@ function HeadBar() {
 
       {auth || (<div>
         <MenuItem onClick={handleMenuClose}>회원가입</MenuItem>
-        <Link to="/Login" color="inherit"><MenuItem>로그인</MenuItem></Link>
+        <Link to="/Login" style={{textDecoration:"none"}}><MenuItem>로그인</MenuItem></Link>
         <MenuItem onClick={handleMenuClose}>홈페이지 기여하기</MenuItem>
         <MenuItem onClick={handleMenuClose}>도움말</MenuItem>
       </div>)
@@ -171,12 +172,6 @@ function HeadBar() {
   return (
     <div className={classes.grow}>
       <AppBar>
-      <FormGroup>
-        <FormControlLabel
-          control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
-          label={auth ? 'Logout' : 'Login'}
-        />
-      </FormGroup>
         <Toolbar>
           <Grid item xs={3}>
             <Typography className={classes.title} variant="h6" noWrap>
@@ -211,6 +206,10 @@ function HeadBar() {
               <AccountCircle />
             </IconButton>
           </div>
+          <FormControlLabel
+          control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
+          label={auth ? 'Logout' : 'Login'}
+        />
         </Toolbar>
       </AppBar>
       {renderMenu}
