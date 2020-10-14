@@ -72,10 +72,10 @@ const styles = (theme) => ({
       flexGrow: 1,
       padding: 24,
       height: 'calc(100% - 56px)',
-      marginTop: 56,
+      marginTop: 28,
       [theme.breakpoints.up('sm')]: {
         height: 'calc(100% - 64px)',
-        marginTop: 64,
+        marginTop: 32,
       },
     },
   });
@@ -93,7 +93,7 @@ const MainLayout = (props) => {
                 <main className={classes.content}>{children}</main>
                 </Container>
                 <ScrollTop {...props}>
-                    <Fab color="secondary" size="small" aria-label="scroll back to top">
+                    <Fab color="primary" size="small" aria-label="scroll back to top">
                         <KeyboardArrowUpIcon />
                     </Fab>
                 </ScrollTop>

@@ -1,7 +1,7 @@
 import React from 'react';
 // Import custom components
-import Jumbotron from './Jumbotron';
-import CardContent from './CardContent';
+import Jumbotron from './Jumbo/Jumbotron';
+import CardContent from './Card/CardContent';
 import Test from './Photos';
 
 import { withStyles } from '@material-ui/core/styles';
