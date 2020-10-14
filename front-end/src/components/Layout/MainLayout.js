@@ -11,8 +11,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Import custom components
-import Footer from './Footer';
-import HeadBar from './Header/HeadBar';
+import Footer from '../Footer/Footer';
+import HeadBar from '../Header/HeadBar';
 import { Container } from '@material-ui/core';
 
 // 맨위로 올라가는 스크롤 버튼 함수
