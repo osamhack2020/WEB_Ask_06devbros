@@ -5,13 +5,8 @@ import { Link } from 'react-router-dom';
 
 function Profile(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const [auth, setAuth] = React.useState(true);  //로그인 체크
     const isMenuOpen = Boolean(anchorEl);
     //handler
-    const handleProfileMenuOpen = (event) => {
-        setAnchorEl(event.currentTarget);
-      };
-
     const handleMenuClose = () => {
         setAnchorEl(null);
       };
@@ -29,7 +24,7 @@ function Profile(props) {
         onClose={handleMenuClose}
       >
   
-        {auth && (<div>
+        {props.isLogin && (<div>
           <MenuItem onClick={handleMenuClose}>내 정보</MenuItem>
           <MenuItem onClick={handleMenuClose}>나의 질문 / 받은 질문</MenuItem>
           <MenuItem onClick={handleMenuClose}>홈페이지 기여하기</MenuItem>
@@ -37,7 +32,7 @@ function Profile(props) {
         </div>)
         }
   
-        {auth || (<div>
+        {props.isLogin || (<div>
           <MenuItem onClick={handleMenuClose}>회원가입</MenuItem>
           <Link to="/Login" style={{textDecoration:"none"}}><MenuItem>로그인</MenuItem></Link>
           <MenuItem onClick={handleMenuClose}>홈페이지 기여하기</MenuItem>
