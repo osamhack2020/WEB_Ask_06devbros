@@ -89,9 +89,7 @@ const MainLayout = (props) => {
                 <HeadBar />
                 {/* <main className={classes.content}>{children}</main> */}
                 <Toolbar id="back-to-top-anchor" />
-                <Container maxWidth="xl">
-                <main className={classes.content}>{children}</main>
-                </Container>
+                <main>{children}</main>
                 <ScrollTop {...props}>
                     <Fab color="primary" size="small" aria-label="scroll back to top">
                         <KeyboardArrowUpIcon />
