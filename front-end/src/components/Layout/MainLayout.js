@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 // Import custom components
 import Footer from '../Footer/Footer';
+import BottomNav from '../Footer/BottomNav';
 import HeadBar from '../Header/HeadBar';
 import { Container } from '@material-ui/core';
 
@@ -97,6 +98,7 @@ const MainLayout = (props) => {
                 </ScrollTop>
             </div>
             <Footer />
+            <BottomNav/>
         </div>
     );
 };
