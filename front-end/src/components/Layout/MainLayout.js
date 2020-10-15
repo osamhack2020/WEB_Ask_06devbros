@@ -6,6 +6,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Toolbar from '@material-ui/core/Toolbar';
+import Switch from '@material-ui/core/Switch';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 // Import custom components
 import Footer from '../Footer/Footer';
@@ -27,13 +29,26 @@ const styles = (theme) => ({
     },
   });
 
+
+
 const MainLayout = (props) => {
     const { classes, children } = props;
+    const [auth, setAuth] = React.useState(true);  //로그인 체크
+
+    const handleChange = (event) => {
+      setAuth(event.target.checked);
+    };
+
     return (
         <div>
             <div>
                 <CssBaseline />
-                <HeadBar />
+                <HeadBar isLogin={auth}>
+                    <FormControlLabel
+                        control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
+                        label={auth ? 'Logout' : 'Login'}
+                    />
+                </HeadBar>
                 {/* <main className={classes.content}>{children}</main> */}
                 <Toolbar id="back-to-top-anchor" />
                 <main>{children}</main>

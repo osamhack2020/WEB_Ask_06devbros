@@ -5,8 +5,13 @@ import { Link } from 'react-router-dom';
 
 function Profile(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [auth, setAuth] = React.useState(true);  //로그인 체크
+    React.useEffect(() => {
+        setAnchorEl(props.isOpen);
+    })
     const isMenuOpen = Boolean(anchorEl);
     //handler
+
     const handleMenuClose = () => {
         setAnchorEl(null);
       };
