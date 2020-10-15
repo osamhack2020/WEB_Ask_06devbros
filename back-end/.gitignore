@@ -2,3 +2,7 @@ node_modules
 .env
 .prettierrc
 *.http
+
+# dotenv environment variables file
+.env
+.env.test

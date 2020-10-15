@@ -4,6 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const morgan = require("morgan");
 
 const app = express();
 
@@ -11,7 +12,19 @@ const app = express();
 const adminRoutes = require("./routes/admin");
 const authRoutes = require("./routes/auth");
 
-const { PORT, MONGO_URL } = process.env;
+const { MONGO_URI } = process.env;
+
+// db 연결
+mongoose.connect(MONGO_URI, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true
+})
+.then(() => {
+  console.log('connect success');
+})
+.catch(err => {
+  console.log(err);
+});
 
 //for logging
 app.use(morgan("dev"));
@@ -40,13 +53,14 @@ app.use((req, res, next) => {
 app.use("/admin", adminRoutes);
 app.use(authRoutes);
 
-//404error handling
+//404 handling
 app.use((req, res, next) => {
   const error = new Error("Not Found");
   error.status = 404;
   next(error);
 });
 
+// error handling
 app.use((error, req, res, next) => {
   res.status(error.status || 500);
   res.json({
@@ -56,19 +70,4 @@ app.use((error, req, res, next) => {
   });
 });
 
-// set port number
-const port = PORT || 4000;
-
-mongoose.connect(MONGO_URL, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true
-  })
-  .then(() => {
-    console.log('connect success');
-    app.listen(port, () => {
-        console.log('Listening to port %d', port);
-      });
-    })
-  .catch(err => {
-    console.log(err);
-  });
+module.exports = app;
