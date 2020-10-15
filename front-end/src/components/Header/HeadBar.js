@@ -27,7 +27,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   sectionDesktop: {
-    display: 'flex'
+    display: 'flex',
+    [theme.breakpoints.down('sm')]: {
+      display:'none',
+
+    },
   },
   link: {
     marginRight: theme.spacing(10),
