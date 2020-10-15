@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 // Import custom components
 import Footer from '../Footer/Footer';
+import BottomNav from '../Footer/BottomNav';
 import HeadBar from '../Header/HeadBar';
 import { Container } from '@material-ui/core';
 
@@ -72,10 +73,10 @@ const styles = (theme) => ({
       flexGrow: 1,
       padding: 24,
       height: 'calc(100% - 56px)',
-      marginTop: 56,
+      marginTop: 28,
       [theme.breakpoints.up('sm')]: {
         height: 'calc(100% - 64px)',
-        marginTop: 64,
+        marginTop: 32,
       },
     },
   });
@@ -89,16 +90,15 @@ const MainLayout = (props) => {
                 <HeadBar />
                 {/* <main className={classes.content}>{children}</main> */}
                 <Toolbar id="back-to-top-anchor" />
-                <Container maxWidth="xl">
-                <main className={classes.content}>{children}</main>
-                </Container>
+                <main>{children}</main>
                 <ScrollTop {...props}>
-                    <Fab color="secondary" size="small" aria-label="scroll back to top">
+                    <Fab color="primary" size="small" aria-label="scroll back to top">
                         <KeyboardArrowUpIcon />
                     </Fab>
                 </ScrollTop>
             </div>
             <Footer />
+            <BottomNav/>
         </div>
     );
 };

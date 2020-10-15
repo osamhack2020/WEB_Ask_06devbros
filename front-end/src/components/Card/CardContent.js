@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     flexDirection: 'column',
   },
   media: {
-    height: 140,
+    height: 280,
   },
 });
 
