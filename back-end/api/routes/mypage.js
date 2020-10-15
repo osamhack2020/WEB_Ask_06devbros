@@ -7,13 +7,8 @@ const router = express.Router();
 // 내정보 조회 
 router.get('/', jwtMiddleware, mypageController.getUserInfo);
 
-// // 로그인
-// router.post('/login', mypageController.postLogin);
-
-
-// //로그아웃
-// router.post('/logout', mypageController.postLogout);
-
+// 내 정보 변경
+router.patch('/edit', jwtMiddleware, mypageController.patchUserInfo);
 
 module.exports = router;
 
