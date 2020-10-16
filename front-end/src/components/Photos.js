@@ -128,7 +128,7 @@ function ProductCategories(props) {
 
   return (
     <Container className={classes.root} component="section">
-      <Typography variant="h4" marked="center" align="center" component="h2">
+      <Typography variant="h4" marked="center" align="center" component="h2" style={{color:'white'}}>
         다양한 고민들
       </Typography>
       <div className={classes.images}>

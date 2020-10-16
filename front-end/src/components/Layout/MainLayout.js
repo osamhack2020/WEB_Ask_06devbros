@@ -27,6 +27,9 @@ const styles = (theme) => ({
         marginTop: 32,
       },
     },
+    main: {
+        backgroundColor: '#ffffff',
+    },
   });
 
 
@@ -40,7 +43,7 @@ const MainLayout = (props) => {
     };
 
     return (
-        <div>
+        <div className={classes.main}>
             <div>
                 <CssBaseline />
                 <HeadBar isLogin={auth}>
