@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
+// ======== 유저 인증 미들웨어 =======
 
-// 유저가 권한이 있는지 확인
 const jwtMiddleware = async (req, res, next) => {
   const token = req.cookies.access_token;
   if (!token) return res.status(401).json({
@@ -13,6 +13,7 @@ const jwtMiddleware = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.userData = decoded;
     const now = Math.floor(Date.now() / 1000);
+    // 기간 만료면 새로 발급
     if (decoded.exp - now < 60 * 60 * 24 * 3.5) {
       const user = await User.findById(decoded._id);
       const token = user.generateToken();

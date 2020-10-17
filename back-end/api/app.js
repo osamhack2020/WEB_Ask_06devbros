@@ -13,10 +13,18 @@ const app = express();
 const adminRoutes = require('./routes/admin');
 const authRoutes = require('./routes/auth');
 const mypageRoutes = require('./routes/mypage');
+const chatRoutes = require('./routes/chat');
 
 const { MONGO_URI } = process.env;
 
-// db 연결
+
+// for test
+// app.set('views', __dirname + '/views');
+// app.engine('html', require('ejs').renderFile);
+
+// app.set('view engine', 'ejs');
+
+//db 연결
 mongoose
   .connect(MONGO_URI, {
     useUnifiedTopology: true,
@@ -39,6 +47,7 @@ app.use(
 );
 // parse application/json
 app.use(bodyParser.json());
+
 app.use(cookieParser());
 
 // HANDLING CORS
@@ -55,10 +64,19 @@ app.use((req, res, next) => {
   next();
 });
 
+
+//for test
+// app.get('/', (req, res) => {
+//   res.render('index.html');
+// });
+
+
 // routes들 적용
+
 app.use('/admin', adminRoutes);
 app.use(authRoutes);
 app.use('/mypage', mypageRoutes);
+app.use('/', chatRoutes);
 
 //404 handling
 app.use((req, res, next) => {
