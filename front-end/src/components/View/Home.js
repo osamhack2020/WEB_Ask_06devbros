@@ -9,24 +9,6 @@ import CardContent from '../Card/CardContent';
 import Photos from '../Photos';
 import Introduction from '../Introduction';
 
-const introduction = [
-    {
-        title: '도움이 필요할 때',
-        description:
-            "가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.",
-    },
-    {
-        title: '도움이 필요할 때',
-        description:
-            "가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.",
-    },
-    {
-        title: '도움이 필요할 때',
-        description:
-            "가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.",
-    },
-];
-
 const mainFeaturedPost = {
     title: '도움이 필요할 때',
     description:
@@ -94,7 +76,7 @@ class Home extends React.Component {
         return (
             <React.Fragment>
                 <Jumbotron post={mainFeaturedPost} />
-                <Introduction post={introduction} title={'물어봐'}/>
+                <Introduction title={'물어봐는 어떤 서비스인가요?'}/>
                 <Container maxWidth="lg">
                 <Grid container className={classes.cards} spacing={4}>
                     {cards.map((post) => (

@@ -32,16 +32,16 @@ const styles = (theme) => ({
     marginBottom: theme.spacing(14),
   },
   number: {
-    fontSize: 24,
+    fontSize: 36,
     fontFamily: theme.typography.fontFamily,
     color: theme.palette.secondary.main,
     fontWeight: theme.typography.fontWeightMedium,
   },
   image: {
-    height: 55,
+    width:64,
+    height:64,
     marginTop: theme.spacing(4),
     marginBottom: theme.spacing(4),
-    fontSize:'large',
   },
   curvyLines: {
     pointerEvents: 'none',
@@ -54,10 +54,60 @@ const styles = (theme) => ({
   },
 });
 
+const introductionAry = [
+  {
+      id: 1,
+      title: '고민이 있으신가요?',
+      image: '',
+      description:
+          "누군가의 조언이 필요할 때 이용해보세요.",
+  },
+  {
+      id: 2,
+      title: '말 못할 고민이 있으신가요?',
+      image: '',
+      description:
+          "가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.",
+  },
+  {
+      id: 3,
+      title: '챗봇',
+      image: '',
+      description:
+          "가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.",
+  },
+]
+
+const ary = [
+  {
+      id: 1,
+      title: '고민이 있으신가요?',
+      image: '',
+      description:
+          "누군가의 조언이 필요할 때 이용해보세요.",
+  },
+  {
+      id: 2,
+      title: '말 못할 고민이 있으신가요?',
+      image: '',
+      description:
+          "가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.",
+  },
+  {
+      id: 3,
+      title: '챗봇',
+      image: '',
+      description:
+          "가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.",
+  },
+]
+
 function Introduction(props) {
   const { classes } = props;
 
+
   return (
+    
     <section className={classes.root}>
       <Container className={classes.container}>
         <img
@@ -66,16 +116,31 @@ function Introduction(props) {
           alt="curvy lines"
         />
         <Typography variant="h4" marked="center" className={classes.title} component="h2">
-          소개
+          {props.title}
         </Typography>
         <div>
           <Grid container spacing={5}>
-            <Grid item xs={12} md={4}>
+
+            {ary.map((post) =>
+               (
+                <Grid item xs={12} md={4}>
+                  <div className={classes.item}>
+                    <div className={classes.number}>{post.id}</div>
+                    <Brightness2Icon className={classes.image} />
+                    <Typography variant="h5" align="center">
+                      {post.description}
+                  </Typography>
+                  </div>
+                </Grid>
+              )
+            )}
+            
+            {/* <Grid item xs={12} md={4}>
               <div className={classes.item}>
                 <div className={classes.number}>1.</div>
-    <Brightness2Icon className={classes.image}/>
+                <Brightness2Icon className={classes.image}/>
                 <Typography variant="h5" align="center">
-                  Appointment every Wednesday 9am.
+                가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.
                 </Typography>
               </div>
             </Grid>
@@ -84,7 +149,7 @@ function Introduction(props) {
                 <div className={classes.number}>2.</div>
                 <AccessibilityNewIcon className={classes.image}/>
                 <Typography variant="h5" align="center">
-                  First come, first served. Our offers are in limited quantities, so be quick.
+                가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.
                 </Typography>
               </div>
             </Grid>
@@ -93,11 +158,10 @@ function Introduction(props) {
                 <div className={classes.number}>3.</div>
                 <AddIcCallIcon className={classes.image}/>
                 <Typography variant="h5" align="center">
-                  {'New offers every week. New experiences, new surprises. '}
-                  {'Your Sundays will no longer be alike.'}
+                가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.
                 </Typography>
               </div>
-            </Grid>
+            </Grid> */}
           </Grid>
         </div>
       </Container>
