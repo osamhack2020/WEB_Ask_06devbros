@@ -13,7 +13,7 @@ function Router() {
       <HashRouter>
         <Switch>
           <HomeRoute exact path="/" component={Home} layout={MainLayout}/>
-          {/* <RestrictRoute path="/Login" component={LoginForm} /> */}
+          <RestrictRoute path="/Login" component={LoginForm} />
           <Route component={NotFound} />
         </Switch>
       </HashRouter>
