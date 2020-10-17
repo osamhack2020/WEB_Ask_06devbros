@@ -114,13 +114,13 @@ function ProductCategories(props) {
     {
       url:
         'https://images.unsplash.com/photo-1523309996740-d5315f9cc28b?auto=format&fit=crop&w=400&q=80',
-      title: 'Gastronomy',
+      title: '문제3',
       width: '38%',
     },
     {
       url:
         'https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?auto=format&fit=crop&w=400&q=80',
-      title: 'Shopping',
+      title: '문제4',
       width: '24%',
     },
     
@@ -128,7 +128,7 @@ function ProductCategories(props) {
 
   return (
     <Container className={classes.root} component="section">
-      <Typography variant="h4" marked="center" align="center" component="h2">
+      <Typography variant="h4" marked="center" align="center" component="h2" style={{color:'white'}}>
         다양한 고민들
       </Typography>
       <div className={classes.images}>

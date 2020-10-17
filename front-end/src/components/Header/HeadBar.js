@@ -11,6 +11,9 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import { Link } from 'react-router-dom';
 
 import Profile from './Profile';
 import SearchBar from './SearchBar';
@@ -27,7 +30,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   sectionDesktop: {
-    display: 'flex'
+    display: 'flex',
+    [theme.breakpoints.down('sm')]: {
+      display:'none',
+
+    },
   },
   link: {
     marginRight: theme.spacing(10),
@@ -37,24 +44,55 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function HeadBar(props) {
+  const { children } = props;
   //constants
   const classes = useStyles();
   // const colors = color();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [auth, setAuth] = React.useState(true);  //로그인 체크
-
+  const isMenuOpen = Boolean(anchorEl);
   // event handler
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
+  const handleMenuClose = () => {	
+    setAnchorEl(null);	
+  };
   const handleChange = (event) => {
     setAuth(event.target.checked);
   };
 
   const menuId = 'primary-search-account-menu';
+  const renderMenu = (     // 회원 정보 누를 시 나오는 메뉴바	
+    <Menu	
+      anchorEl={anchorEl}	
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}	
+      id={menuId}	
+      keepMounted	
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}	
+      open={isMenuOpen}	
+      onClose={handleMenuClose}	
+    >	
 
+      {props.isLogin && (<div>	
+        <MenuItem onClick={handleMenuClose}>내 정보</MenuItem>	
+        <MenuItem onClick={handleMenuClose}>나의 질문 / 받은 질문</MenuItem>	
+        <MenuItem onClick={handleMenuClose}>홈페이지 기여하기</MenuItem>	
+        <MenuItem onClick={handleMenuClose}>도움말</MenuItem>	
+      </div>)	
+      }	
+
+      {props.isLogin || (<div>	
+        <MenuItem onClick={handleMenuClose}>회원가입</MenuItem>	
+        <Link to="/Login" style={{textDecoration:"none"}}><MenuItem>로그인</MenuItem></Link>	
+        <MenuItem onClick={handleMenuClose}>홈페이지 기여하기</MenuItem>	
+        <MenuItem onClick={handleMenuClose}>도움말</MenuItem>	
+      </div>)	
+      }	
+
+    </Menu>	
+  );
   //rendering!!!
 
   return (
@@ -69,7 +107,7 @@ function HeadBar(props) {
           <SearchBar />
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            {auth &&
+            {props.isLogin &&
               <div className="login">
                 <IconButton aria-label="show 4 new mails" color="inherit">
                   <Badge badgeContent={4} color="secondary">
@@ -94,13 +132,10 @@ function HeadBar(props) {
               <AccountCircle />
             </IconButton>
           </div>
-          <FormControlLabel
-          control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
-          label={auth ? 'Logout' : 'Login'}
-          />
+          { children }
         </Toolbar>
       </AppBar>
-      <Profile isLogin={auth}/>
+      {renderMenu}
     </div>
   );
 }
