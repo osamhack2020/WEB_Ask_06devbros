@@ -90,8 +90,6 @@ class Home extends React.Component {
                     <Photos/>
                 </div>      
                 <Introduction />
-
-
             </React.Fragment>
         );
     }
