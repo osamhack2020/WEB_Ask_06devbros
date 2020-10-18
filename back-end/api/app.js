@@ -18,11 +18,11 @@ const chatRoutes = require('./routes/chat');
 const { MONGO_URI } = process.env;
 
 
-// for test
-// app.set('views', __dirname + '/views');
-// app.engine('html', require('ejs').renderFile);
+// --------------for test----------------
+app.set('views', __dirname + '/views');
+app.engine('html', require('ejs').renderFile);
 
-// app.set('view engine', 'ejs');
+app.set('view engine', 'ejs');
 
 //db 연결
 mongoose
@@ -65,10 +65,13 @@ app.use((req, res, next) => {
 });
 
 
-//for test
-// app.get('/', (req, res) => {
-//   res.render('index.html');
-// });
+//------------for test-----------
+app.get('/', (req, res) => {
+  res.render('index.html');
+});
+app.get('/chat', (req, res) => {
+  res.render('chat.html');
+});
 
 
 // routes들 적용

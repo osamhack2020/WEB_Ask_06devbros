@@ -74,21 +74,27 @@ router.get('/room/:id', jwtMiddleware, async (req, res, next) => {
 //   }
 // });
 
+// 특정 룸에서 채팅하기
 router.post('/room/:id/chat', jwtMiddleware, async (req, res, next) => {
   try {
     const chat = await Chat.create({
       user: req.userData,
       chat: req.body.chat,
     });
-    req.app.get('io').of('/chat').to(req.params.id).emit('chat', chat);
+    const room = await Room.findOne({ _id: req.params.id });
+    room.chats.push(chat);
+    await room.save();
+
+
+    const newchat = chat.replyChat();
+    
+    req.app.get('io').of('/chat').emit('chat', newchat);
     res.send('ok');
   } catch (error) {
     console.error(error);
     next(error);
   }
 });
-
-
 
 
 module.exports = router;

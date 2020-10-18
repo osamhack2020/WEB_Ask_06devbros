@@ -3,7 +3,6 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
-const { Types: { ObjectId } } = Schema;
 const jwt = require("jsonwebtoken");
 
 
@@ -13,10 +12,10 @@ const userSchema = Schema({
   realname: { type: String, required: true }, // 실명
   unit: { type: String, required: true }, // 소속부대
   pro: { type: Boolean, required: true }, // 전문상담관 여부
-  room: {
-    type: ObjectId,
-    ref: 'Room'
-  }
+  // room: {
+  //   type: ObjectId,
+  //   ref: 'Room'
+  // }
 });
 
 userSchema.methods.generateToken = function () {
@@ -28,7 +27,7 @@ userSchema.methods.generateToken = function () {
       realname: this.realname,
       unit: this.unit,
       pro: this.pro,
-      room: this.room
+      // room: this.room
     },
     process.env.JWT_SECRET, // 두번째 파라미터에는 JWT 암호를 넣습니다
     {
