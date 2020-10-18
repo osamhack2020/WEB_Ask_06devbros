@@ -1,5 +1,8 @@
 const express = require('express');
 const jwtMiddleware = require('../middleware/jwtMiddleware');
+const checkIsPro = require('../middleware/checkIsPro');
+const checkIsNotpro = require('../middleware/checkIsNotpro');
+
 
 const Room = require('../models/room');
 const Chat = require('../models/chat');
@@ -7,7 +10,7 @@ const Chat = require('../models/chat');
 const router = express.Router();
 
 // 모든 룸 정보 요청
-router.get('/room', (req, res) => {
+router.get('/room', jwtMiddleware, checkIsPro, (req, res) => {
   Room.find({})
   .exec()
   .then(rooms => {
@@ -43,7 +46,7 @@ router.post('/room', jwtMiddleware ,async (req, res, next) => {
 });
 
 // 해당 룸 가져오기
-router.get('/room/:id', jwtMiddleware, async (req, res, next) => {
+router.get('/room/:id', jwtMiddleware, checkIsPro, async (req, res, next) => {
   try {
     const room = await Room.findOne({ _id: req.params.id });
     if (!room) {
