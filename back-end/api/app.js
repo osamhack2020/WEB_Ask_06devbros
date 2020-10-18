@@ -76,10 +76,9 @@ app.get('/chat', (req, res) => {
 
 // routes들 적용
 
-app.use('/admin', adminRoutes);
 app.use(authRoutes);
 app.use('/mypage', mypageRoutes);
-app.use('/', chatRoutes);
+app.use('/room', chatRoutes);
 
 //404 handling
 app.use((req, res, next) => {

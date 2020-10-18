@@ -39,7 +39,7 @@ exports.postRegister = (req, res) => {
                       maxAge: 1000 * 60 * 60 * 24 * 7, // 7일
                       httpOnly: true,
                     })
-                    .status(200)
+                    .status(201)
                     .json({
                       message: 'Auth successful',
                     });

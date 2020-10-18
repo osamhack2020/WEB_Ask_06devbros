@@ -3,15 +3,14 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
-const jwt = require("jsonwebtoken");
-
+const jwt = require('jsonwebtoken');
 
 const userSchema = Schema({
   username: { type: String, required: true }, // username
   password: { type: String, required: true }, // pw
   realname: { type: String, required: true }, // 실명
   unit: { type: String, required: true }, // 소속부대
-  pro: { type: Boolean, required: true }, // 전문상담관 여부
+  pro: { type: Boolean, required: true  }, // 전문상담관 여부
   // room: {
   //   type: ObjectId,
   //   ref: 'Room'
@@ -39,8 +38,6 @@ userSchema.methods.generateToken = function () {
 
 userSchema.statics.findByUsername = function (username) {
   return this.findOne({ username });
-}
+};
 
-
-
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model('User', userSchema);
