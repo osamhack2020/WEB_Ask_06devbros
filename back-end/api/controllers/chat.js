@@ -83,7 +83,28 @@ exports.postChat = async (req, res, next) => {
     const newchat = chat.replyChat();
 
     req.app.get('io').of('/chat').emit('chat', newchat);
-    res.send('ok');
+    res.status(201).json({
+      chat: chat
+    });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+};
+
+exports.getChatById = async (req, res, next) => {
+  try {
+    const chat = await Chat.findById(req.params.chatid);
+    const room = await Room.findById(req.params.id);
+    if(!room.chats.includes(chat._id)){
+      return res.status(400).json({
+        message: "wrong room and chat"
+      });
+    }
+
+    res.status(200).json({
+      chat: chat
+    });
   } catch (error) {
     console.error(error);
     next(error);

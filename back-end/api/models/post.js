@@ -9,17 +9,21 @@ const postSchema = new Schema({
     ref: 'User'
   },
   title: {
-      String,
+      type: String,
       required: true
     },
   content: {
-      String,
+      type: String,
       required: true
   },
   createdAt: {
     type: Date,
     default: Date.now,
   },
+  editedAt: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 

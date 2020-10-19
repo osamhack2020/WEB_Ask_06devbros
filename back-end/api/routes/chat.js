@@ -36,5 +36,8 @@ router.get('/search', jwtMiddleware, checkIsPro, chatController.getOneRoomBySear
 // 특정 룸에서 채팅하기
 router.post('/:id/chat', jwtMiddleware, chatController.postChat);
 
+// 특정 채팅 가져오기 
+router.get('/:id/chat/:chatid', jwtMiddleware, chatController.getChatById);
+
 
 module.exports = router;

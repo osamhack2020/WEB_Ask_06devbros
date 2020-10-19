@@ -2,6 +2,7 @@ const User = require('../models/user');
 
 // 유저 정보 얻기
 exports.getUserInfo = (req, res) => {
+  console.log(req.headers);
   const user = req.userData;
   const { username, realname, unit, pro } = user;
   res.status(200).json({
@@ -28,10 +29,15 @@ exports.patchUserInfo = (req, res) => {
   })
     .exec()
     .then((result) => {
+      console.log(result);
       const newUser = new User({
-        ...result,
-        unit  
+        username: result.username,
+        password: result.password,
+        realname: result.realname,
+        unit: unit,
+        pro: result.pro
       });
+      console.log(newUser);
       const token = newUser.generateToken();
       res
         .cookie('access_token', token, {

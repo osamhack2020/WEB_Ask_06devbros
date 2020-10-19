@@ -8,9 +8,14 @@ const commentSchema = new Schema({
     required: true,
     ref: 'User'
   },
+  post: {
+    type: ObjectId,
+    required: true,
+    ref: 'Post'
+  },
   comment: {
-      String,
-      required: true
+    type: String,
+    required: true
   },
   createdAt: {
     type: Date,

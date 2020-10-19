@@ -10,10 +10,10 @@ const morgan = require('morgan');
 const app = express();
 
 // routes import
-const adminRoutes = require('./routes/admin');
 const authRoutes = require('./routes/auth');
 const mypageRoutes = require('./routes/mypage');
 const chatRoutes = require('./routes/chat');
+const postRoutes = require('./routes/post');
 
 const { MONGO_URI } = process.env;
 
@@ -79,6 +79,7 @@ app.get('/chat', (req, res) => {
 app.use(authRoutes);
 app.use('/mypage', mypageRoutes);
 app.use('/room', chatRoutes);
+app.use('/posts', postRoutes);
 
 //404 handling
 app.use((req, res, next) => {
