@@ -14,9 +14,9 @@ const authRoutes = require('./routes/auth');
 const mypageRoutes = require('./routes/mypage');
 const chatRoutes = require('./routes/chat');
 const postRoutes = require('./routes/post');
+const commentRoutes = require('./routes/comment');
 
 const { MONGO_URI } = process.env;
-
 
 // --------------for test----------------
 app.set('views', __dirname + '/views');
@@ -64,7 +64,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
 //------------for test-----------
 app.get('/', (req, res) => {
   res.render('index.html');
@@ -73,13 +72,26 @@ app.get('/chat', (req, res) => {
   res.render('chat.html');
 });
 
-
 // routes들 적용
 
 app.use(authRoutes);
 app.use('/mypage', mypageRoutes);
 app.use('/room', chatRoutes);
 app.use('/posts', postRoutes);
+app.use(
+  '/posts/:postId/comments',
+  (req, res, next) => {
+    try {
+      req.postId = req.params.postId;
+      next();
+    } catch (err) {
+      res.status(500).json({
+        error: err,
+      });
+    }
+  },
+  commentRoutes,
+);
 
 //404 handling
 app.use((req, res, next) => {

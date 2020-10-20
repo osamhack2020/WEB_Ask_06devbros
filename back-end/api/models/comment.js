@@ -21,6 +21,10 @@ const commentSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  editedAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 
