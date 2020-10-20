@@ -1,20 +1,20 @@
 const express = require('express');
 const jwtMiddleware = require('../middleware/jwtMiddleware');
-// const postAuthorize = require('../middleware/postAuthorize');
+const commentAuthorize = require('../middleware/commentAuthorize');
 
 const commentController = require('../controllers/comment');
 
 const router = express.Router();
 
-//get all posts
+//get all comments
 router.get('/', commentController.getComments);
-// add one post
+// add one comment
 router.post('/add', jwtMiddleware, commentController.addComment);
-// // get one post
-// router.get('/:id', postController.getPostById);
-// // edit one post
-// router.put('/:id/edit', jwtMiddleware, postController.editPostById);
-// // delete post
-// router.delete('/:id', jwtMiddleware, postController.deletePostById);
+// get one comment
+router.get('/:commentId', commentController.getCommentById);
+// edit one comment
+router.put('/:commentId/edit', jwtMiddleware, commentAuthorize, commentController.editCommentById);
+// delete comment
+router.delete('/:commentId', jwtMiddleware, commentAuthorize, commentController.deleteCommentById);
 
 module.exports = router;
