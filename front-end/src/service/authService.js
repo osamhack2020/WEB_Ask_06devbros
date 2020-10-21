@@ -8,11 +8,11 @@ import { setLocalStorage, clearLocalStorage } from '../utils/storageUtil';
 export const login = ({ email, password }) => {
   return (dispatch) => {
     axios
-      .post(API_URL + 'auth/login', { email, password })
+      .post(API_URL + '/login', { email, password })
       .then((response) => {
         dispatch(loginSuccess(response.data.token));
         setLocalStorage(JWT_TOKEN, response.data.token);
-        dispatch(push('/dashboard'));
+        dispatch(push('/'));
       })
       .catch((error) => {
         dispatch(loginFailure(error.response.data));

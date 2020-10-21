@@ -10,7 +10,7 @@ const RestrictRoute = ({ component: Component, ...rest }) => (
             isAuthenticated() ? (
                 <Redirect
                     to={{
-                        pathname: '/dashboard',
+                        pathname: '/',
                         state: { from: props.location },
                     }}
                 />
