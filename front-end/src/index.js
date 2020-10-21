@@ -4,6 +4,8 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import store from './store/configuerStore';
+import history from './utils/history';
 
 ReactDOM.render(
   <React.StrictMode>

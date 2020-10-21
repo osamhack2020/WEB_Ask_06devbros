@@ -2,7 +2,8 @@ import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
+import CustomizedSnackbar from './SnakeBar/CustomizedSnackbar';
+import renderText from './renderText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
@@ -129,4 +130,4 @@ const validateLogin = (values) => {
 export default reduxForm({
   form: 'LoginForm', // a unique identifier for this form
   validate: validateLogin, // ←Callback function for client-side validation
-})(withStyles(styles)(LoginForm));
+})(LoginForm);
