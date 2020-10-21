@@ -47,7 +47,6 @@ exports.getOneRoom = async (req, res, next) => {
       room: room,
     });
   } catch (error) {
-    console.error(error);
     return next(error);
   }
 };
@@ -87,7 +86,6 @@ exports.postChat = async (req, res, next) => {
       chat: chat,
     });
   } catch (error) {
-    console.error(error);
     next(error);
   }
 };
@@ -106,7 +104,6 @@ exports.getChatById = async (req, res, next) => {
       chat: chat,
     });
   } catch (error) {
-    console.error(error);
     next(error);
   }
 };

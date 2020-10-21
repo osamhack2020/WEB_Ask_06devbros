@@ -37,7 +37,6 @@ exports.patchUserInfo = (req, res) => {
         unit: unit,
         pro: result.pro
       });
-      console.log(newUser);
       const token = newUser.generateToken();
       res
         .cookie('access_token', token, {

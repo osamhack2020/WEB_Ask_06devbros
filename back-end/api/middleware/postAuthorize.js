@@ -14,7 +14,7 @@ const postAuthorize = async (req, res, next) => {
     else {
         if(post.user._id.toString() !== req.userData._id.toString()) {
             return res.status(401).json({
-                message: "Authhh Failed"
+                message: "Auth Failed"
             });
         } else {
             req.postData = post;
@@ -23,7 +23,7 @@ const postAuthorize = async (req, res, next) => {
     }
   } catch (e) {
     return res.status(401).json({
-        message: "Authorize Failed"
+        message: "Auth Failed"
     });
   }
 };

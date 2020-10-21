@@ -52,7 +52,6 @@ exports.getPostById = async (req, res) => {
 
 exports.editPostById = async (req, res) => {
   try {
-    console.log('hello');
     const post = req.postData;
     const user = req.userData._id;
     const { title, content } = req.body;

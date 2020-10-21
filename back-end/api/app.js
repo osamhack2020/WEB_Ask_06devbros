@@ -47,7 +47,7 @@ app.use(
 );
 // parse application/json
 app.use(bodyParser.json());
-
+// parse cookie
 app.use(cookieParser());
 
 // HANDLING CORS
