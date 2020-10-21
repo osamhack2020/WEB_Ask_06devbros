@@ -12,7 +12,6 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { Field, reduxForm } from 'redux-form';
 
 function Copyright() {
   return (
@@ -58,8 +57,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function LoginForm(props) {
-  const { handleSubmit, onSubmit, errorMessage } = props;
+function LoginForm() {
   const classes = useStyles();
 
   return (
@@ -74,12 +72,29 @@ function LoginForm(props) {
           <Typography component="h1" variant="h5">
             로그인
           </Typography>
-          {errorMessage && (
-            <CustomizedSnackbar variant="error" className={classes.margin} message={errorMessage} />
-          )}
-          <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
-            <Field type="text" name="ID" component={renderText} label="군번" />
-            <Field type="password" name="password" component={renderText} label="비밀번호" />
+          <form className={classes.form} noValidate>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="text"
+              label="군번"
+              name="text"
+              autoComplete="text"
+              autoFocus
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="비밀번호"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="계정 기억하기"
@@ -94,7 +109,7 @@ function LoginForm(props) {
               로그인
             </Button>
             <Grid container>
-              <Grid item xs>
+                <Grid item xs>
                 <Link href="#" variant="body2">
                   비밀번호를 잊으셨나요?
                 </Link>
@@ -110,23 +125,4 @@ function LoginForm(props) {
   );
 }
 
-const validateLogin = (values) => {
-  const errors = {};
-
-  const requiredFields = ['email', 'password'];
-  requiredFields.forEach((field) => {
-    if (!values[field]) {
-      errors[field] = '(The ' + field + ' field is required.)';
-    }
-  });
-
-  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = '(Invalid email address.)';
-  }
-  return errors;
-};
-
-export default reduxForm({
-  form: 'LoginForm', // a unique identifier for this form
-  validate: validateLogin, // ←Callback function for client-side validation
-})(withStyles(styles)(LoginForm));
+export default LoginForm;
