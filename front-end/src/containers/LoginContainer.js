@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as authService from '../service/authService';
 
 // Import custom components
-import LoginForm from '../components/LoginForm';
+import LoginForm from '../components/Form/LoginForm';
 
 class LoginContainer extends Component {
   constructor(props) {

@@ -8,6 +8,7 @@ import NotFound from '../components/Error/NotFound';
 import loadable from '@loadable/component';
 
 const AsyncLoginForm = loadable(() => import('../containers/LoginContainer'));
+const AsyncRegisterForm = loadable(() => import('../containers/RegeisterContainer'));
 
 function Router() {
   return (    
@@ -16,6 +17,7 @@ function Router() {
         <Switch>
           <HomeRoute exact path="/" component={Home} layout={MainLayout}/>
           <RestrictRoute path="/login" component={AsyncLoginForm} />
+          <RestrictRoute path="/register" component={AsyncRegisterForm} />
           <Route component={NotFound} />
         </Switch>
       </HashRouter>
