@@ -38,7 +38,7 @@ exports.getCommentById = async (req, res) => {
   try {
     const comment = await Comment.findById(req.params.commentId);
     if(!comment) {
-      res.status(409).json({
+      res.status(400).json({
         message: "bad id"  
       });
     }

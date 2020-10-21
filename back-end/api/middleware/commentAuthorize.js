@@ -7,7 +7,7 @@ const commentAuthorize = async (req, res, next) => {
     const commentId = req.params.commentId;
     const comment = await Comment.findById(commentId);
     if(!comment) {
-        return res.status(409).json({
+        return res.status(400).json({
             message: "No Comment"
         });
     }

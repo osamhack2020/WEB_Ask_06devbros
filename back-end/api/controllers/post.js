@@ -36,7 +36,7 @@ exports.getPostById = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     if(!post) {
-      res.status(409).json({
+      res.status(400).json({
         message: "bad id"  
       });
     }
