@@ -1,0 +1,7 @@
+kogpt2-transformers
+kobert-transformers
+transformers==3.0.2
+torch
+kss
+flask
+flask_restful
