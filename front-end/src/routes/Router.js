@@ -1,11 +1,12 @@
 import React from 'react';
 import { Switch , Route, HashRouter } from 'react-router-dom';
 import MainLayout from '../components/Layout/MainLayout';
-import LoginForm from '../components/LoginForm';
 import HomeRoute from './HomeRoute';
 import RestrictRoute from './RestrictRoute';
 import Home from '../components/View/Home';
 import NotFound from '../components/Error/NotFound';
+
+const AsyncLoginForm = loadable(() => import('../containers/LoginContainer'));
 
 function Router() {
   return (    
@@ -13,7 +14,7 @@ function Router() {
       <HashRouter>
         <Switch>
           <HomeRoute exact path="/" component={Home} layout={MainLayout}/>
-          <RestrictRoute path="/Login" component={LoginForm} />
+          <RestrictRoute path="/login" component={AsyncLoginForm} />
           <Route component={NotFound} />
         </Switch>
       </HashRouter>
