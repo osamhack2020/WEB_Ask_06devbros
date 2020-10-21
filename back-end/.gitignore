@@ -1,3 +1,4 @@
+=======
 node_modules
 .env
 .prettierrc
@@ -8,3 +9,4 @@ node_modules
 .env.test
 
 views
+

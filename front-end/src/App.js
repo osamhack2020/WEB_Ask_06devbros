@@ -1,10 +1,11 @@
 import React from 'react';
-import Header from './components/stickyHeader';
+import Router from './routes/Router';
+
+//https://localhost:3000
+
 function App() {
   return (
-    <div className="App">
-      <Header />
-    </div>
+    <Router />
   );
 }
 
