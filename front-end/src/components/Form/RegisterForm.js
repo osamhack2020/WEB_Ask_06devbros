@@ -36,7 +36,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp() {
+const RegisterForm = () => {
+  const { handleSubmit, onSubmit } = props;
   const classes = useStyles();
 
   return (
@@ -49,7 +50,7 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           회원 가입
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
                   <Grid container spacing={2}>
                       <Grid item xs={12}>
                           <Field type="text" name="name" component={renderText} label="이름" />
@@ -94,3 +95,24 @@ export default function SignUp() {
     </Container>
   );
 }
+
+  const validateSignUp = (values) => {
+    const errors = {};
+  
+    const requiredFields = ['name', 'unit', 'id', 'password'];
+    requiredFields.forEach((field) => {
+      if (!values[field]) {
+        errors[field] = '(The ' + field + ' field is required.)';
+      }
+    });
+  
+    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+      errors.email = '(Invalid email address.)';
+    }
+    return errors;
+  };
+
+  export default reduxForm({
+    form: 'RegisterForm', // a unique identifier for this form
+    validate: validateSignUp, // ←Callback function for client-side validation
+  })(RegisterForm);
