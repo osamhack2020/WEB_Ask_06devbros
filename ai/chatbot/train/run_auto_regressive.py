@@ -10,10 +10,10 @@ from model.kogpt2 import DialogKoGPT2
 if __name__ == '__main__':
     data_path = "../data/wellness_dialog_for_autoregressive_train.txt"
     checkpoint_path ="../checkpoint"
-    save_ckpt_path = f"{checkpoint_path}/kogpt2-wellnesee-auto-regressive.pth"
+    save_ckpt_path = f"{checkpoint_path}/kogpt2-wellness-auto-regressive.pth"
 
     n_epoch = 5         # Num of Epoch
-    batch_size = 4      # 배치 사이즈
+    batch_size = 2      # 배치 사이즈
     device = "cuda" if torch.cuda.is_available() else "cpu"
     save_step = 100 # 학습 저장 주기
     learning_rate = 5e-5  # Learning Rate
@@ -48,8 +48,8 @@ if __name__ == '__main__':
 
                 losses.append(loss.item())
 
-                if count % 10 == 0:
-                    print('epoch no.{} train no.{}  loss = {}'.format(epoch, count + 1, loss))
+                #if count % 10 == 0:
+                #    print('epoch no.{} train no.{}  loss = {}'.format(epoch, count + 1, loss))
                 if (count > 0 and count % save_step == 0) or (len(data) < batch_size):
                     torch.save({
                         'epoch': epoch,

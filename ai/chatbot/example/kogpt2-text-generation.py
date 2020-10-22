@@ -8,8 +8,7 @@ from kogpt2_transformers import get_kogpt2_tokenizer
 root_path = '..'
 data_path = f"{root_path}/data/wellness_dialog_for_autoregressive_train.txt"
 checkpoint_path =f"{root_path}/checkpoint"
-# save_ckpt_path = f"{checkpoint_path}/kogpt2-wellnesee-auto-regressive.pth"
-save_ckpt_path = f"{checkpoint_path}/kogpt2-catbot-wellness.pth"
+save_ckpt_path = f"{checkpoint_path}/kogpt2-wellness-auto-regressive.pth"
 
 ctx = "cuda" if torch.cuda.is_available() else "cpu"
 device = torch.device(ctx)
