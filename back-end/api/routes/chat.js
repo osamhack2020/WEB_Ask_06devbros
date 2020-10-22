@@ -17,7 +17,7 @@ router.post('/', jwtMiddleware , chatController.postNewRoom);
 router.get('/:id', jwtMiddleware, checkIsPro, chatController.getOneRoom);
 
 // 해당 룸 가져오기
-router.get('/search', jwtMiddleware, checkIsPro, chatController.getOneRoomBySearch);
+router.post('/search', jwtMiddleware, checkIsPro, chatController.getOneRoomBySearch);
 
 // router.delete('/room/:id', async (req, res, next) => {
 //   try {

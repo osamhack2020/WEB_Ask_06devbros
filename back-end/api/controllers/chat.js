@@ -53,10 +53,10 @@ exports.getOneRoom = async (req, res, next) => {
 
 exports.getOneRoomBySearch = async (req, res, next) => {
   try {
-    const roomId = req.body.id;
+    const roomId = req.body.roomId;
     const room = await Room.findOne({ _id: roomId });
     if (!room) {
-      return res.status(401).json({
+      return res.status(400).json({
         message: 'No Room',
       });
     }
@@ -64,7 +64,6 @@ exports.getOneRoomBySearch = async (req, res, next) => {
       room: room,
     });
   } catch (error) {
-    console.error(error);
     return next(error);
   }
 };
@@ -94,7 +93,16 @@ exports.getChatById = async (req, res, next) => {
   try {
     const chat = await Chat.findById(req.params.chatid);
     const room = await Room.findById(req.params.id);
-    if (!room.chats.includes(chat._id)) {
+    if(!room) {
+      return res.status(400).json({
+        message: 'No Room',
+      });
+    } else if(!chat) {
+      return res.status(400).json({
+        message: 'No Chat',
+      });
+    }
+    else if (!room.chats.includes(chat._id)) {
       return res.status(400).json({
         message: 'wrong room and chat',
       });
