@@ -3,11 +3,9 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-import Button from '@material-ui/core/Button';
 import Typography from './Typography/Typography';
 import Brightness2Icon from '@material-ui/icons/Brightness2';
-import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew';
-import AddIcCallIcon from '@material-ui/icons/AddIcCall';
+
 const styles = (theme) => ({
   root: {
     display: 'flex',
