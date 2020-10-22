@@ -65,7 +65,7 @@ class WellnessTextClassificationDataset(Dataset):
       line = file.readline()
       if not line:
         break
-      datas = line.split("    ")
+      datas = line.split("\t")
       index_of_words = tokenizer.encode(datas[0])
       token_type_ids = [0] * len(index_of_words)
       attention_mask = [1] * len(index_of_words)
