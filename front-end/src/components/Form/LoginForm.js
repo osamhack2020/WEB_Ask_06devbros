@@ -67,7 +67,7 @@ function LoginForm(props) {
             <CustomizedSnackbar variant="error" className={classes.margin} message={errorMessage} />
           )}
           <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
-            <Field type="text" name="ID" component={renderText} label="군번" />
+            <Field type="text" name="id" component={renderText} label="군번" />
             <Field type="password" name="password" component={renderText} label="비밀번호" />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -102,7 +102,7 @@ function LoginForm(props) {
 const validateLogin = (values) => {
   const errors = {};
 
-  const requiredFields = ['email', 'password'];
+  const requiredFields = ['id', 'password'];
   requiredFields.forEach((field) => {
     if (!values[field]) {
       errors[field] = '(The ' + field + ' field is required.)';

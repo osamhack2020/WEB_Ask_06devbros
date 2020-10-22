@@ -2,7 +2,6 @@ import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
@@ -14,6 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Copyright from './Copyright';
 import renderText from '../renderText';
+import renderCheckbox from '../renderCheckbox';
 import { Field, reduxForm } from 'redux-form';
 
 const useStyles = makeStyles((theme) => ({
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RegisterForm = () => {
+const RegisterForm = (props) => {
   const { handleSubmit, onSubmit } = props;
   const classes = useStyles();
 
@@ -66,7 +66,8 @@ const RegisterForm = () => {
                       </Grid>
                       <Grid item xs={12}>
                           <FormControlLabel
-                              control={<Checkbox value="allowExtraEmails" color="primary" />}
+                              control={<Checkbox color="primary" />}
+                              control={<Field type="checkbox" name="pro" component={renderCheckbox} color="primary" />}
                               label="전문 상담사 확인 여부"
                           />
                       </Grid>
@@ -99,7 +100,7 @@ const RegisterForm = () => {
   const validateSignUp = (values) => {
     const errors = {};
   
-    const requiredFields = ['name', 'unit', 'id', 'password'];
+    const requiredFields = ['name', 'unit', 'id', 'password', 'pro'];
     requiredFields.forEach((field) => {
       if (!values[field]) {
         errors[field] = '(The ' + field + ' field is required.)';

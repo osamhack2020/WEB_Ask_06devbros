@@ -8,7 +8,7 @@ import * as commonAction from './commonAction';
 /**
  * Import all httpService as an object.
  */
-import * as httpService from '../services/httpService';
+import * as httpService from '../service/httpService';
 
 
 /**

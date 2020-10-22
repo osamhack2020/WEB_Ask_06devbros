@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { USERS } from '../constants/entity';
-import * as authService from '../service/authService';
+import * as crudAction from '../actions/crudAction';
 
 // Import custom components
 import RegisterForm from '../components/Form/RegisterForm';
@@ -30,19 +30,10 @@ class RegisterContainer extends Component {
 }
 
 /**
- * Map the state to props.
- */
-const mapStateToProps = (state) => ({
-  token: state.auth.token,
-  isAuthenticated: state.auth.isAuthenticated,
-  errorMessage: state.auth.errorMessage,
-});
-
-/**
  * Map the actions to props.
  */
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(Object.assign({}, authService), dispatch),
+  actions: bindActionCreators(Object.assign({}, crudAction), dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterContainer);
+export default connect(null, mapDispatchToProps)(RegisterContainer);

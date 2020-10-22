@@ -8,7 +8,7 @@ import NotFound from '../components/Error/NotFound';
 import loadable from '@loadable/component';
 
 const AsyncLoginForm = loadable(() => import('../containers/LoginContainer'));
-const AsyncRegisterForm = loadable(() => import('../containers/RegeisterContainer'));
+const AsyncRegisterForm = loadable(() => import('../containers/RegisterContainer'));
 
 function Router() {
   return (    
