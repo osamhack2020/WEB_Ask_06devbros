@@ -66,7 +66,7 @@ const RegisterForm = (props) => {
                       </Grid>
                       <Grid item xs={12}>
                           <FormControlLabel
-                              control={<Checkbox color="primary" />}
+                              // control={<Checkbox color="primary" />}
                               control={<Field type="checkbox" name="pro" component={renderCheckbox} color="primary" />}
                               label="전문 상담사 확인 여부"
                           />

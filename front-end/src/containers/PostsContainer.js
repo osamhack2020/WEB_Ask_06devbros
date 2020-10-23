@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
-import * as authService from '../service/authService';
+import { POSTS } from '../constants/entity';
+import * as crudAction from '../actions/crudAction';
 
 // Import custom components
 import PostsForm from '../components/Form/PostsForm';
@@ -13,16 +13,16 @@ class PostsContainer extends Component {
   }
 
   /**
-   * Submit the form.
+   * refresh the board.
    *
-   * @param {object} formProps
    */
-  clickContent(formProps) {
-    // this.props.actions.login(formProps);
+  refreshBoard() {
+    this.props.actions.fetchAll(POSTS);
   }
 
   render() {
-    return <PostsForm errorMessage={this.props.errorMessage} />;
+    this.refreshBoard();
+    return <PostsForm errorMessage={this.props.errorMessage} products={this.props.products}/>;
   }
 }
 
@@ -30,16 +30,15 @@ class PostsContainer extends Component {
  * Map the state to props.
  */
 const mapStateToProps = (state) => ({
-  token: state.auth.token,
-  isAuthenticated: state.auth.isAuthenticated,
-  errorMessage: state.auth.errorMessage,
+  products: state.crud.products,
+  selectedItem: state.crud.selectedItem,
 });
 
 /**
  * Map the actions to props.
  */
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(Object.assign({}, authService), dispatch),
+  actions: bindActionCreators(Object.assign({}, crudAction), dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostsContainer);

@@ -3,20 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Field, reduxForm } from 'redux-form';
 import Grid from '@material-ui/core/Grid';
 import PostsTable from '../Table/PostsTable';
+import PostsHeadBar from '../Header/PostHeadBar';
 import Container from '@material-ui/core/Container';
-
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import CustomizedSnackbar from '../SnakeBar/CustomizedSnackbar';
-import renderText from '../renderText';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import Copyright from './Copyright';
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -39,13 +28,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function PostsForm(props) {
-  const { handleClick, onClick, errorMessage } = props;
+  const { handleClick, onClick, errorMessage, products } = props;
   const classes = useStyles();
   return (
     <Container maxWidth="lg" className={classes.content}>
+        <PostsHeadBar />
       <Grid item xs={12}>
         <Paper className={classes.paper}>
-          <PostsTable errorMessage={errorMessage} />
+          <PostsTable errorMessage={errorMessage} products={products}/>
         </Paper>
       </Grid>
     </Container>

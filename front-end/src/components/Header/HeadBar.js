@@ -97,9 +97,11 @@ function HeadBar(props) {
       <AppBar>
         <Toolbar>
           <Grid item xs={3}>
+          <Link to="/" style={{textDecoration:"none", color:"white"}}>
             <Typography className={classes.title} variant="h6" noWrap>
               물어봐
             </Typography>
+          </Link>
           </Grid>
           <SearchBar />
           <div className={classes.grow} />
