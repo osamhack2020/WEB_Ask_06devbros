@@ -24,18 +24,21 @@ const cards = [
         description:
             "가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.",
         image: 'https://source.unsplash.com/random/2',
+        link: '/posts',
     },
     {
         title: '상담사가 필요한 고민',
         description:
             "가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.",
         image: 'https://source.unsplash.com/random/3',
+        link: '/posts',
     },
     {
         title: '챗봇을 이용하기',
         description:
             "가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.",
         image: 'https://source.unsplash.com/random/4',
+        link: '/posts',
     },
 ];
 
@@ -78,7 +81,7 @@ class Home extends React.Component {
                 <Grid container className={classes.cards} spacing={4}>
                     {cards.map((post) => (
                         <Grid item xs={12} sm={post.title === '챗봇을 이용하기' ? 12 : 6} md={4} lg={4} >
-                            <CardContent key={post.title} title={post.title} description={post.description} image={post.image} />
+                            <CardContent key={post.title} title={post.title} description={post.description} image={post.image} link={post.link}/>
                         </Grid>
                     ))}
                 </Grid>

@@ -7,11 +7,11 @@ import PrivateRoute from './PrivateRoute';
 
 import NotFound from '../components/Error/NotFound';
 import loadable from '@loadable/component';
-import PrivateRoute from './PrivateRoute';
 
 const AsyncLoginForm = loadable(() => import('../containers/LoginContainer'));
 const AsyncRegisterForm = loadable(() => import('../containers/RegisterContainer'));
 const AsyncHome = loadable(() => import('../containers/HomeContainer'));
+const AsyncPosts = loadable(() => import('../containers/PostsContainer'));
 
 function Router() {
   return (    
@@ -21,7 +21,7 @@ function Router() {
           <HomeRoute exact path="/" component={AsyncHome} layout={MainLayout}/>
           <RestrictRoute path="/login" component={AsyncLoginForm} />
           <RestrictRoute path="/register" component={AsyncRegisterForm} />
-          <PrivateRoute exact path="/post" component={AsyncHome} layout={MainLayout}/>
+          <PrivateRoute exact path="/posts" component={AsyncPosts} layout={MainLayout}/>
           <Route component={NotFound} />
         </Switch>
       </HashRouter>
