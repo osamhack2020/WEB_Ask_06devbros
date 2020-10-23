@@ -32,7 +32,9 @@ function PostsForm(props) {
   const classes = useStyles();
   return (
     <Container maxWidth="lg" className={classes.content}>
+      <Grid item xs={12}>
         <PostsHeadBar />
+      </Grid>
       <Grid item xs={12}>
         <Paper className={classes.paper}>
           <PostsTable errorMessage={errorMessage} products={products}/>
