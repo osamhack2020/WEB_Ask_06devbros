@@ -57,7 +57,7 @@ const styles = theme => ({
         },
       },
     photos: {
-        backgroundColor:'#000',
+        backgroundColor:'white',
         paddingTop: theme.spacing(1),
         paddingBottom: theme.spacing(5),
     },
@@ -66,9 +66,6 @@ const styles = theme => ({
 class Home extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-
-        }
     }
 
     render() {
@@ -86,10 +83,10 @@ class Home extends React.Component {
                     ))}
                 </Grid>
                 </Container>
+                <Introduction />
                 <div className={classes.photos}>
                     <Photos/>
                 </div>      
-                <Introduction />
             </React.Fragment>
         );
     }

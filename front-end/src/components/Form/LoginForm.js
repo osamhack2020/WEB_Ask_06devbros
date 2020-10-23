@@ -50,7 +50,6 @@ const useStyles = makeStyles((theme) => ({
 function LoginForm(props) {
   const { handleSubmit, onSubmit, errorMessage } = props;
   const classes = useStyles();
-
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -67,7 +66,7 @@ function LoginForm(props) {
             <CustomizedSnackbar variant="error" className={classes.margin} message={errorMessage} />
           )}
           <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
-            <Field type="text" name="id" component={renderText} label="군번" />
+            <Field type="text" name="id" component={renderText} label="아이디" />
             <Field type="password" name="password" component={renderText} label="비밀번호" />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
