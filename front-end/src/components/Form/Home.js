@@ -4,10 +4,10 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 
 // Import custom components
-import Jumbotron from '../components/Jumbo/Jumbotron';
-import CardContent from '../components/Card/CardContent';
-import Photos from '../components/Photos';
-import Introduction from '../components/Introduction';
+import Jumbotron from '../Jumbo/Jumbotron';
+import CardContent from '../Card/CardContent';
+import Photos from '../Photos';
+import Introduction from '../Introduction';
 
 const mainFeaturedPost = {
     title: '도움이 필요할 때',

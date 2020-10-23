@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as authService from '../service/authService';
 
 // Import custom components
-import Home from '../components/Home';
+import Home from '../components/Form/Home';
 
 class HomeContainer extends Component {
   constructor(props) {
