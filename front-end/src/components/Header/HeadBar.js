@@ -9,13 +9,10 @@ import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { Link } from 'react-router-dom';
 
-import Profile from './Profile';
 import SearchBar from './SearchBar';
 
 // http://localhost:3000
@@ -84,8 +81,8 @@ function HeadBar(props) {
       }	
 
       {props.isLogin || (<div>	
-        <MenuItem onClick={handleMenuClose}>회원가입</MenuItem>	
-        <Link to="/Login" style={{textDecoration:"none"}}><MenuItem>로그인</MenuItem></Link>	
+        <Link to="/register" style={{textDecoration:"none", color:"black"}}><MenuItem>회원가입</MenuItem></Link>	
+        <Link to="/login" style={{textDecoration:"none", color:"black"}}><MenuItem>로그인</MenuItem></Link>	
         <MenuItem onClick={handleMenuClose}>홈페이지 기여하기</MenuItem>	
         <MenuItem onClick={handleMenuClose}>도움말</MenuItem>	
       </div>)	

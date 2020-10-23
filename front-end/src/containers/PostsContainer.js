@@ -5,13 +5,11 @@ import { connect } from 'react-redux';
 import * as authService from '../service/authService';
 
 // Import custom components
-import LoginForm from '../components/Form/LoginForm';
+import PostsForm from '../components/Form/PostsForm';
 
-class LoginContainer extends Component {
+class PostsContainer extends Component {
   constructor(props) {
     super(props);
-
-    this.submitForm = this.submitForm.bind(this);
   }
 
   /**
@@ -19,12 +17,12 @@ class LoginContainer extends Component {
    *
    * @param {object} formProps
    */
-  submitForm(formProps) {
-    this.props.actions.login(formProps);
+  clickContent(formProps) {
+    // this.props.actions.login(formProps);
   }
 
   render() {
-    return <LoginForm onSubmit={this.submitForm} errorMessage={this.props.errorMessage} />;
+    return <PostsForm errorMessage={this.props.errorMessage} />;
   }
 }
 
@@ -44,4 +42,4 @@ const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(Object.assign({}, authService), dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(PostsContainer);

@@ -2,7 +2,8 @@ import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
+import CustomizedSnackbar from '../SnakeBar/CustomizedSnackbar';
+import renderText from '../renderText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
@@ -13,19 +14,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { Field, reduxForm } from 'redux-form';
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://github.com/osamhack2020/WEB_Ask_06devbros">
-        2020 물어봐, Inc. All rights reserved
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import Copyright from './Copyright';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,7 +50,6 @@ const useStyles = makeStyles((theme) => ({
 function LoginForm(props) {
   const { handleSubmit, onSubmit, errorMessage } = props;
   const classes = useStyles();
-
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -78,7 +66,7 @@ function LoginForm(props) {
             <CustomizedSnackbar variant="error" className={classes.margin} message={errorMessage} />
           )}
           <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
-            <Field type="text" name="ID" component={renderText} label="군번" />
+            <Field type="text" name="id" component={renderText} label="아이디" />
             <Field type="password" name="password" component={renderText} label="비밀번호" />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -113,7 +101,7 @@ function LoginForm(props) {
 const validateLogin = (values) => {
   const errors = {};
 
-  const requiredFields = ['email', 'password'];
+  const requiredFields = ['id', 'password'];
   requiredFields.forEach((field) => {
     if (!values[field]) {
       errors[field] = '(The ' + field + ' field is required.)';
@@ -129,4 +117,4 @@ const validateLogin = (values) => {
 export default reduxForm({
   form: 'LoginForm', // a unique identifier for this form
   validate: validateLogin, // ←Callback function for client-side validation
-})(withStyles(styles)(LoginForm));
+})(LoginForm);
