@@ -106,20 +106,6 @@ def main():
     # for i in range(0,len(all_comments)):
     # all_comments['comments'].iloc[0]
 
-    # kkma = kopy.tag.Kkma()
-    # print(kkma.morphs(all_comments['comments'].iloc[0]))
-
-    
-    # print(okt.morphs(all_comments['comments'].iloc[0]))
-
-    
-    # stop_words = ["하", "있", "되", "않", "없", "사람", "지", "보", "때", "같", "년", "대하", "주", "말", "일", "위하", "때문", "말하", "가",
-    #               "받", "그렇", "알", ".", "?", "!", "。", "‘", "’", "“", "”", "`", "\'", "\"", "(", ")", "{", "}", "[", "]",
-    #               "─", "『", "』", ",", "ㆍ", "·", "ᆞ", ":", ";", "/", "…", "_", "~", "∼", "∽", "□", "■", "▶", "◀", "◆",
-    #               "▲", "◇", "◈", "☎", "【", "】", "+", "-", "=", "±", "÷", "×", "*", "^", ">", "<", "｜", "|", "％", "%",
-    #               "&", "￦", "₩", "\\", "\t", "\r\n", "\n", "＄", "$", "¥", "￥", "£", "￡", "°", "㎞", "㎏", "@", "©", "ⓒ",
-    #               "↑", "|", "#", "♥", "♡", "★", "☆", "♪", "♬"]
-
     # for index in range(0, len(all_comments)):
     #     sentence = okt.pos(all_comments['comments'].iloc[index], norm=True, stem=True)
     #     new_sent = []
