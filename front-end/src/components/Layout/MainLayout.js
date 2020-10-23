@@ -15,6 +15,8 @@ import BottomNav from '../Footer/BottomNav';
 import HeadBar from '../Header/HeadBar';
 import ScrollTop from '../ScrollTop';
 
+import { connect } from 'react-redux';
+
 const styles = (theme) => ({
     content: {
       width: '100%',
@@ -35,7 +37,7 @@ const styles = (theme) => ({
 
 
 const MainLayout = (props) => {
-    const { classes, children } = props;
+    const { classes, children, isAuthenticated } = props;
     const [auth, setAuth] = React.useState(true);  //로그인 체크
 
     const handleChange = (event) => {
@@ -46,11 +48,11 @@ const MainLayout = (props) => {
         <div className={classes.main}>
             <div>
                 <CssBaseline />
-                <HeadBar isLogin={auth}>
-                    <FormControlLabel
+                <HeadBar isLogin={isAuthenticated}>
+                    {/* <FormControlLabel
                         control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
                         label={auth ? 'Logout' : 'Login'}
-                    />
+                    /> */}
                 </HeadBar>
                 {/* <main className={classes.content}>{children}</main> */}
                 <Toolbar id="back-to-top-anchor" />
@@ -71,5 +73,6 @@ MainLayout.propTypes = {
     classes: PropTypes.object.isRequired,
     children: PropTypes.element,
 };
+
 
 export default withStyles(styles)(MainLayout);

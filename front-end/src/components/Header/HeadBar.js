@@ -81,8 +81,8 @@ function HeadBar(props) {
       }	
 
       {props.isLogin || (<div>	
-        <MenuItem onClick={handleMenuClose}>회원가입</MenuItem>	
-        <Link to="/Login" style={{textDecoration:"none"}}><MenuItem>로그인</MenuItem></Link>	
+        <Link to="/register" style={{textDecoration:"none", color:"black"}}><MenuItem>회원가입</MenuItem></Link>	
+        <Link to="/login" style={{textDecoration:"none", color:"black"}}><MenuItem>로그인</MenuItem></Link>	
         <MenuItem onClick={handleMenuClose}>홈페이지 기여하기</MenuItem>	
         <MenuItem onClick={handleMenuClose}>도움말</MenuItem>	
       </div>)	
