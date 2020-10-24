@@ -39,7 +39,6 @@ const styles = (theme) => ({
 const MainLayout = (props) => {
     const { classes, children, isAuthenticated } = props;
     const [auth, setAuth] = React.useState(true);  //로그인 체크
-
     const handleChange = (event) => {
       setAuth(event.target.checked);
     };

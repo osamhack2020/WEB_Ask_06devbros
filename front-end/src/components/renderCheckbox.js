@@ -2,16 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Checkbox from '@material-ui/core/Checkbox';
 
-const renderCheckbox = ({ color, name }) => (
+const renderCheckbox = ({ id, color, label, type, meta: { touched, error, invalid }  }) => (
   <Checkbox
+    id={id}
     color={color}
-    name={name}
-
+    type={type}
+    label={label}
+    error={touched && invalid}
+    helperText={touched && error}
   />
 );
 
 renderCheckbox.propTypes = {
-  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  meta: PropTypes.object,
 };
 
 export default renderCheckbox;
