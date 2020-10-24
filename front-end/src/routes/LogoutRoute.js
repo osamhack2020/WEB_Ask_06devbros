@@ -3,21 +3,21 @@ import { Route, Redirect } from 'react-router-dom';
 
 import { isAuthenticated } from '../utils/jwtUtil';
 
-const PrivateRoute = ({ component: Component, layout: Layout, ...rest }) => (
+const LogoutRoute = ({ component: Component, layout: Layout, ...rest }) => (
   <Route
     {...rest}
     render={(props) =>
       isAuthenticated() ? (
-        <Layout>
-          <Component {...props} />
-        </Layout>
-      ) : (
-      //   <Layout>
-      //   <Component {...props} />
-      // </Layout>
         <Redirect
           to={{
-            pathname: '/login',
+            pathname: '/',
+            state: { from: props.location },
+          }}
+        />
+      ) : (
+        <Redirect
+          to={{
+            pathname: '/',
             state: { from: props.location },
           }}
         />
@@ -26,4 +26,4 @@ const PrivateRoute = ({ component: Component, layout: Layout, ...rest }) => (
   />
 );
 
-export default PrivateRoute;
+export default LogoutRoute;

@@ -37,9 +37,9 @@ const styles = (theme) => ({
 
 
 const MainLayout = (props) => {
-    const { classes, children, isAuthenticated } = props;
+    const { classes, children, onClick } = props;
+    console.log(onClick)
     const [auth, setAuth] = React.useState(true);  //로그인 체크
-
     const handleChange = (event) => {
       setAuth(event.target.checked);
     };
@@ -48,7 +48,7 @@ const MainLayout = (props) => {
         <div className={classes.main}>
             <div>
                 <CssBaseline />
-                <HeadBar isLogin={isAuthenticated}>
+                <HeadBar onClick={onClick}>
                     {/* <FormControlLabel
                         control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
                         label={auth ? 'Logout' : 'Login'}

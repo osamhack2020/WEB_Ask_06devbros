@@ -53,23 +53,22 @@ const RegisterForm = (props) => {
         <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
                   <Grid container spacing={2}>
                       <Grid item xs={12}>
-                          <Field type="text" name="name" component={renderText} label="이름" />
+                          <Field type="text" name="realname" component={renderText} label="이름" />
                       </Grid>
                       <Grid item xs={12}>
                           <Field type="text" name="unit" component={renderText} label="소속" />
                       </Grid>
                       <Grid item xs={12}>
-                          <Field type="text" name="id" component={renderText} label="아이디" />
+                          <Field type="text" name="username" component={renderText} label="아이디" />
                       </Grid>
                       <Grid item xs={12}>
                           <Field type="password" name="password" component={renderText} label="비밀번호" />
                       </Grid>
                       <Grid item xs={12}>
-                          <FormControlLabel
-                              control={<Checkbox color="primary" />}
-                              control={<Field type="checkbox" name="pro" component={renderCheckbox} color="primary" />}
-                              label="전문 상담사 확인 여부"
-                          />
+                        <FormControlLabel
+                          control={<Field type="checkbox" id="pro" name="pro" component="input"/>}
+                          label="전문 상담사 확인 여부"
+                        />
                       </Grid>
                   </Grid>
           <Button

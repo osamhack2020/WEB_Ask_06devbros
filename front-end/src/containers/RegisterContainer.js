@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { USERS } from '../constants/entity';
-import * as crudAction from '../actions/crudAction';
+import * as registerService from '../service/registerService';
 
 // Import custom components
 import RegisterForm from '../components/Form/RegisterForm';
@@ -11,7 +11,6 @@ import RegisterForm from '../components/Form/RegisterForm';
 class RegisterContainer extends Component {
   constructor(props) {
     super(props);
-
     this.submitForm = this.submitForm.bind(this);
   }
 
@@ -21,7 +20,8 @@ class RegisterContainer extends Component {
    * @param {object} formProps
    */
   submitForm(formProps) {
-    this.props.actions.submitForm(USERS, formProps);
+    console.log(formProps);
+    this.props.actions.register(formProps);
   }
 
   render() {
@@ -30,10 +30,17 @@ class RegisterContainer extends Component {
 }
 
 /**
+ * Map the state to props.
+ */
+const mapStateToProps = (state) => ({
+  values: state.form.values,
+});
+
+/**
  * Map the actions to props.
  */
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(Object.assign({}, crudAction), dispatch),
+  actions: bindActionCreators(Object.assign({}, registerService), dispatch),
 });
 
-export default connect(null, mapDispatchToProps)(RegisterContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterContainer);

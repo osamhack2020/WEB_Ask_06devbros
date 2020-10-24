@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,10 +7,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import Typography from '@material-ui/core/Typography';
+import { Link } from 'react-router-dom';
 
 // Generate Order Data
-function createData(key, id, title, summary, writer, date) {
-  return { key, id, title, summary, writer, date};
+function createData(key, _id, title, content, user, createdAt) {
+  return { _id, _id, title, content, user, createdAt};
 }
 
 const rows = [
@@ -53,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PostsTable = (props) => {
+    console.log(props.products);
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(20);
@@ -86,12 +87,12 @@ const PostsTable = (props) => {
               ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               : rows
             ).map((row) => (
-              <TableRow key={row.key} >
-                <TableCell>{row.id}</TableCell>
+              <TableRow key={row._id} component={Link} to="/" style={{textDecoration:"none", color:"black"}}>
+                <TableCell>{row._id}</TableCell>
                 <TableCell>{row.title}</TableCell>
-                <TableCell>{row.summary.slice(0, 30) + '...'}</TableCell>
-                <TableCell>{row.writer}</TableCell>
-                <TableCell align="right">{row.date}</TableCell>
+                <TableCell>{row.content.slice(0, 30) + '...'}</TableCell>
+                <TableCell>{row.user}</TableCell>
+                <TableCell align="right">{row.createdAt}</TableCell>
               </TableRow>
             ))}
           </TableBody>
