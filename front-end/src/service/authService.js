@@ -5,17 +5,18 @@ import { loginSuccess, loginFailure, logoutSuccess } from '../actions/authAction
 import { API_URL, JWT_TOKEN } from '../config/config';
 import { setLocalStorage, clearLocalStorage } from '../utils/storageUtil';
 
-export const login = ({ id, password }) => {
+export const login = ({ username, password }) => {
   return (dispatch) => {
     axios
-      .post('/login', { id, password })
+      .post('/login', { username, password })
       .then((response) => {
+        console.log(response);
         dispatch(loginSuccess(response.data.token));
         setLocalStorage(JWT_TOKEN, response.data.token);
         dispatch(push('/'));
       })
       .catch((error) => {
-        console.log(error.message);
+        console.log(error);
         dispatch(loginFailure(error.message));
       });
   };
@@ -23,9 +24,16 @@ export const login = ({ id, password }) => {
 
 export const logout = () => {
   return (dispatch) => {
-    clearLocalStorage(JWT_TOKEN);
-    dispatch(logoutSuccess());
-    dispatch(push('/'));
+    axios
+      .post('/logout', {})
+      .then((response) => {
+        clearLocalStorage(JWT_TOKEN);
+        dispatch(logoutSuccess());
+        dispatch(push('/'));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     return false;
   };
 };

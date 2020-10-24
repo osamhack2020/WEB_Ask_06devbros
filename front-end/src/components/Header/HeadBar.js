@@ -41,8 +41,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function HeadBar(props) {
-  console.log(isAuthenticated());
-  const { children } = props ;
+  const { children, onClick } = props ;
   //constants
   const classes = useStyles();
   // const colors = color();
@@ -73,15 +72,15 @@ function HeadBar(props) {
       onClose={handleMenuClose}	
     >	
 
-      {isAuthenticated && (<div>	
+      {isAuthenticated() && (<div>	
         <MenuItem onClick={handleMenuClose}>내 정보</MenuItem>	
         <MenuItem onClick={handleMenuClose}>나의 질문 / 받은 질문</MenuItem>	
-        <MenuItem onClick={handleMenuClose}>로그아웃</MenuItem>	
+        <MenuItem onClick={onClick}>로그아웃</MenuItem>
         <MenuItem onClick={handleMenuClose}>도움말</MenuItem>	
       </div>)	
       }	
 
-      {isAuthenticated || (<div>	
+      {isAuthenticated() || (<div>	
         <Link to="/register" style={{textDecoration:"none", color:"black"}}><MenuItem>회원가입</MenuItem></Link>	
         <Link to="/login" style={{textDecoration:"none", color:"black"}}><MenuItem>로그인</MenuItem></Link>	
         <MenuItem onClick={handleMenuClose}>홈페이지 기여하기</MenuItem>	
@@ -107,7 +106,7 @@ function HeadBar(props) {
           <SearchBar />
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            {isAuthenticated &&
+            {isAuthenticated() &&
               <div className="login">
                 <IconButton aria-label="show 4 new mails" color="inherit">
                   <Badge badgeContent={4} color="secondary">

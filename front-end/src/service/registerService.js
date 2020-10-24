@@ -15,7 +15,7 @@ export const register = ({ username, password, realname, unit, pro }) => {
         dispatch(push('/login'));
       })
       .catch((error) => {
-        console.log('fail');
+        console.log(error);
         dispatch(registerFailure(error.message));
       });
   };
