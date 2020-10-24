@@ -4,6 +4,7 @@ import MainLayout from '../components/Layout/MainLayout';
 import HomeRoute from './HomeRoute';
 import RestrictRoute from './RestrictRoute';
 import PrivateRoute from './PrivateRoute';
+import LogoutRoute from './LogoutRoute';
 
 import NotFound from '../components/Error/NotFound';
 import loadable from '@loadable/component';
@@ -22,6 +23,7 @@ function Router() {
           <RestrictRoute path="/login" component={AsyncLoginForm} />
           <RestrictRoute path="/register" component={AsyncRegisterForm} />
           <PrivateRoute exact path="/posts" component={AsyncPosts} layout={MainLayout}/>
+          <Route path="/logout" />
           <Route component={NotFound} />
         </Switch>
       </HashRouter>

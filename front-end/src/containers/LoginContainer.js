@@ -20,6 +20,7 @@ class LoginContainer extends Component {
    * @param {object} formProps
    */
   submitForm(formProps) {
+    console.log(formProps);
     this.props.actions.login(formProps);
   }
 

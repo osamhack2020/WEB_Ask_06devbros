@@ -14,7 +14,7 @@ import Menu from '@material-ui/core/Menu';
 import { Link } from 'react-router-dom';
 
 import SearchBar from './SearchBar';
-
+import { isAuthenticated } from '../../utils/jwtUtil';
 // http://localhost:3000
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function HeadBar(props) {
-  const { children } = props;
+  const { children, onClick } = props ;
   //constants
   const classes = useStyles();
   // const colors = color();
@@ -72,15 +72,15 @@ function HeadBar(props) {
       onClose={handleMenuClose}	
     >	
 
-      {props.isLogin && (<div>	
+      {isAuthenticated() && (<div>	
         <MenuItem onClick={handleMenuClose}>내 정보</MenuItem>	
         <MenuItem onClick={handleMenuClose}>나의 질문 / 받은 질문</MenuItem>	
-        <MenuItem onClick={handleMenuClose}>홈페이지 기여하기</MenuItem>	
+        <MenuItem onClick={onClick}>로그아웃</MenuItem>
         <MenuItem onClick={handleMenuClose}>도움말</MenuItem>	
       </div>)	
       }	
 
-      {props.isLogin || (<div>	
+      {isAuthenticated() || (<div>	
         <Link to="/register" style={{textDecoration:"none", color:"black"}}><MenuItem>회원가입</MenuItem></Link>	
         <Link to="/login" style={{textDecoration:"none", color:"black"}}><MenuItem>로그인</MenuItem></Link>	
         <MenuItem onClick={handleMenuClose}>홈페이지 기여하기</MenuItem>	
@@ -97,14 +97,16 @@ function HeadBar(props) {
       <AppBar>
         <Toolbar>
           <Grid item xs={3}>
+          <Link to="/" style={{textDecoration:"none", color:"white"}}>
             <Typography className={classes.title} variant="h6" noWrap>
               물어봐
             </Typography>
+          </Link>
           </Grid>
           <SearchBar />
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            {props.isLogin &&
+            {isAuthenticated() &&
               <div className="login">
                 <IconButton aria-label="show 4 new mails" color="inherit">
                   <Badge badgeContent={4} color="secondary">
