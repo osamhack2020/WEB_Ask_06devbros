@@ -32,28 +32,8 @@ const packageDefinition = protoLoader.loadSync(
 const chat_proto = grpc.loadPackageDefinition(packageDefinition).chatbot;
 const client = new chat_proto.Chat('localhost:50051',
                                        grpc.credentials.createInsecure());
-// const chatbotResponse = (clientChat) => {
-//   let answer = false;
-//   const client = new chat_proto.Chat('localhost:50051',
-//                                        grpc.credentials.createInsecure());
-                                    
-//   console.log(client);
 
-  grpc_promise.promisifyAll(client);
-//   console.log('hi');
-//   while(!answer){
-//     client
-//   .chatBot()
-//   .sendMessage({clientChat: clientChat })
-//   .then(res => {
-//     answer = true;
-//     console.log(res.serverChat);
-//     return res.serverChat;
-//   })
-//   .catch(err => {
-//     console.log(err);
-//   });
-//   }
-// }
+grpc_promise.promisifyAll(client);
 
+// export client
 module.exports = client;

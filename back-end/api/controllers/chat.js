@@ -79,7 +79,7 @@ exports.postChat = async (req, res, next) => {
     const room = await Room.findOne({ _id: req.params.id });
     room.chats.push(chat);
     await room.save();
-
+    // nlp 처리후 reply
     client
     .chatBot()
     .sendMessage({clientChat: chat.chat })
