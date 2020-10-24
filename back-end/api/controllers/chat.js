@@ -1,6 +1,8 @@
 const Room = require('../models/room');
 const Chat = require('../models/chat');
 
+const client = require('../lib/chat');
+
 exports.getRooms = (req, res) => {
   Room.find({})
     .exec()
@@ -78,11 +80,18 @@ exports.postChat = async (req, res, next) => {
     room.chats.push(chat);
     await room.save();
 
-    const newchat = chat.replyChat();
-
-    req.app.get('io').of('/chat').emit('chat', newchat);
-    res.status(201).json({
-      chat: chat,
+    client
+    .chatBot()
+    .sendMessage({clientChat: chat.chat })
+    .then(result => {
+      const newchat = result.serverChat;
+      req.app.get('io').of('/chat').emit('chat', newchat);
+      res.status(201).json({
+        chat: chat,
+      });
+    })
+    .catch(err => {
+      console.log(err);
     });
   } catch (error) {
     next(error);
