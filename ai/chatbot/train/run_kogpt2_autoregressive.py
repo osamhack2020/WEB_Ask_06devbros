@@ -1,4 +1,5 @@
 import os
+import pathlib
 import numpy as np
 from tqdm import tqdm
 
@@ -8,15 +9,15 @@ from dataloader.wellness import WellnessAutoRegressiveDataset
 from model.kogpt2 import DialogKoGPT2
 
 if __name__ == '__main__':
-    data_path = "../data/wellness_dialog_for_autoregressive_train.txt"
-    checkpoint_path ="../checkpoint"
+    data_path = str(pathlib.Path(__file__).parent.absolute()) + "/../data/chatbot_wellness_dialog_for_autoregressive.txt"
+    checkpoint_path = str(pathlib.Path(__file__).parent.absolute()) + "/../checkpoint"
     save_ckpt_path = f"{checkpoint_path}/kogpt2-wellness-auto-regressive.pth"
 
     n_epoch = 5         # Num of Epoch
     batch_size = 2      # 배치 사이즈
     device = "cuda" if torch.cuda.is_available() else "cpu"
     save_step = 100 # 학습 저장 주기
-    learning_rate = 5e-5  # Learning Rate
+    learning_rate = 2e-5  # Learning Rate
 
     dataset= WellnessAutoRegressiveDataset()
     train_loader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True)

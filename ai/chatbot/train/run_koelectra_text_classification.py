@@ -1,4 +1,5 @@
 import os
+import pathlib
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -12,8 +13,8 @@ from transformers import (
   ElectraTokenizer
 )
 from torch.utils.data import dataloader
-from dataloader.wellness import WellnessTextClassificationDataset
-from model.koelectra import koElectraForSequenceClassification
+#from dataloader.wellness import WellnessTextClassificationDataset
+#from model.koelectra import koElectraForSequenceClassification
 
 def train(epoch, model, optimizer, train_loader, save_step, save_ckpt_path, train_step = 0):
     losses = []
@@ -63,17 +64,18 @@ def train(epoch, model, optimizer, train_loader, save_step, save_ckpt_path, trai
     return np.mean(losses)
 
 if __name__ == '__main__':
-    data_path = "../data/wellness_dialog_for_text_classification_train.txt"
-    checkpoint_path ="../checkpoint"
-    save_ckpt_path = f"{checkpoint_path}/koelectra-wellnesee-text-classification.pth"
+    data_path = str(pathlib.Path(__file__).parent.absolute()) + "/../data/wellness_data_for_text_classification.txt"
+    checkpoint_path = str(pathlib.Path(__file__).parent.absolute()) + "/../checkpoint"
+    save_ckpt_path = f"{checkpoint_path}/koelectra-wellness-text-classification.pth"
+    print(save_ckpt_path)
     model_name_or_path = "monologg/koelectra-base-discriminator"
 
-    n_epoch = 20          # Num of Epoch
-    batch_size = 4      # 배치 사이즈
+    n_epoch = 50          # Num of Epoch
+    batch_size = 16      # 배치 사이즈
     ctx = "cuda" if torch.cuda.is_available() else "cpu"
     device = torch.device(ctx)
     save_step = 100 # 학습 저장 주기
-    learning_rate = 5e-5  # Learning Rate
+    learning_rate = 5e-6  # Learning Rate
 
     # Electra Tokenizer
     tokenizer = ElectraTokenizer.from_pretrained(model_name_or_path)
