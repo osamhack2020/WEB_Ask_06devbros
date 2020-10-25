@@ -13,9 +13,7 @@ export const getAllPosts = () => {
       .get('/posts')
       .then((response) => {
         console.log(response);
-        // dispatch(getAllPostsSuccess(response.data.token));
-        // dispatch(push('/posts'));
-        // window.location.reload();
+        dispatch(getAllPostsSuccess(response.data.posts));
       })
       .catch((error) => {
         dispatch(getAllPostsFailure(error.response.data));

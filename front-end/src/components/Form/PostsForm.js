@@ -28,12 +28,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function PostsForm(props) {
-  const {onRefresh, errorMessage, products } = props;
+  const { errorMessage, posts } = props;
   const classes = useStyles();
   
-  useEffect(() => {
-    onRefresh();
-  })
+  // useEffect(() => {
+  //   onRefresh();
+  // })
 
   return (
     <Container maxWidth="lg" className={classes.content}>
@@ -42,7 +42,7 @@ function PostsForm(props) {
       </Grid>
       <Grid item xs={12}>
         <Paper className={classes.paper}>
-          <PostsTable errorMessage={errorMessage} products={products}/>
+          <PostsTable errorMessage={errorMessage} posts={posts}/>
         </Paper>
       </Grid>
     </Container>

@@ -23,9 +23,17 @@ class PostsContainer extends Component {
   }
 
   render() {
-    return <PostsForm onRefresh={this.refreshBoard} errorMessage={this.props.errorMessage} products={this.props.products}/>;
+    this.refreshBoard();
+    return <PostsForm  errorMessage={this.props.errorMessage} posts={this.props.posts}/>;
   }
 }
+
+/**
+ * Map the state to props.
+ */
+const mapStateToProps = (state) => ({
+  posts:state.posts.posts,
+});
 
 /**
  * Map the actions to props.
@@ -34,4 +42,4 @@ const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(Object.assign({}, postsService), dispatch),
 });
 
-export default connect(null, mapDispatchToProps)(PostsContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(PostsContainer);
