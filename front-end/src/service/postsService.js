@@ -1,30 +1,83 @@
 import axios from 'axios';
 import { push } from 'connected-react-router';
 
-import { loginSuccess, loginFailure, logoutSuccess } from '../actions/authAction';
+import { getAllPostsSuccess, getAllPostsFailure, addPostSuccess,
+   addPostFailure, getPostSuccess, getPostFailure,
+   editPostSuccess, editPostFailure, deletePostSuccess,
+   deletePostFailure, } from '../actions/authAction';
 import { API_URL, JWT_TOKEN } from '../config/config';
-import { setLocalStorage, clearLocalStorage } from '../utils/storageUtil';
 
-export const getPosts = ({ id, password }) => {
+export const getAllPosts = () => {
   return (dispatch) => {
     axios
-      .get(API_URL + '/posts', { id, password })
+      .get('/posts', {})
       .then((response) => {
-        dispatch(loginSuccess(response.data.token));
-        setLocalStorage(JWT_TOKEN, response.data.token);
-        dispatch(push('/'));
+        dispatch(getAllPostsSuccess(response.data.token));
+        dispatch(push('/posts'));
+        window.location.reload();
       })
       .catch((error) => {
-        dispatch(loginFailure(error.response.data));
+        dispatch(getAllPostsFailure(error.response.data));
       });
   };
 };
 
-export const logout = () => {
+export const addPost = ({ content, title }) => {
   return (dispatch) => {
-    clearLocalStorage(JWT_TOKEN);
-    dispatch(logoutSuccess());
-    dispatch(push('/'));
-    return false;
+    axios
+      .post(API_URL + '/posts', { content, title })
+      .then((response) => {
+        dispatch(addPostSuccess(response.data.token));
+        dispatch(push('/posts'));
+        window.location.reload();
+      })
+      .catch((error) => {
+        dispatch(addPostFailure(error.response.data));
+      });
+  };
+};
+
+export const getPost = ({ id, password }) => {
+  return (dispatch) => {
+    axios
+      .get(API_URL + '/posts', { id, password })
+      .then((response) => {
+        dispatch(getPostSuccess(response.data.token));
+        dispatch(push('/posts'));
+        window.location.reload();
+      })
+      .catch((error) => {
+        dispatch(getPostFailure(error.response.data));
+      });
+  };
+};
+
+export const editPost = ({ id, password }) => {
+  return (dispatch) => {
+    axios
+      .get(API_URL + '/posts', { id, password })
+      .then((response) => {
+        dispatch(editPostSuccess(response.data.token));
+        dispatch(push('/posts'));
+        window.location.reload();
+      })
+      .catch((error) => {
+        dispatch(editPostFailure(error.response.data));
+      });
+  };
+};
+
+export const deletePost = ({ id, password }) => {
+  return (dispatch) => {
+    axios
+      .get(API_URL + '/posts', { id, password })
+      .then((response) => {
+        dispatch(deletePostSuccess(response.data.token));
+        dispatch(push('/posts'));
+        window.location.reload();
+      })
+      .catch((error) => {
+        dispatch(deletePostFailure(error.response.data));
+      });
   };
 };
