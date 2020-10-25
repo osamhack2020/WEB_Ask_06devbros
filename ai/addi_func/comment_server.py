@@ -20,25 +20,17 @@ import grpc
 
 import comment_pb2
 import comment_pb2_grpc
-import predictor as predict
+import predictor as pdtr
 
 class Comment(comment_pb2_grpc.CommentServicer):
 
     def CensorComment(self, request, context):
         reqComment = request.clientComment #들어온 채팅 데이터
         resCensor = True
-        """
-            ------todo------
-
-            여기서 reqComment를 ai로 처리해서 보내고 싶은 데이터를 resCensor에 넣으면된다.
-
-        """
-        # 예시 함수 (들어오는 comment에 바보가 있으면 false,아니면 true)
-        if '바보' in reqComment:
+        score = pdtr.predict_comment(reqComment)
+        #점수 값이 0.6 보다 높으면 악플로 판정/ 낮으면 클린한 글
+        if score >= 0.6: 
             resCensor = False
-        if score >= 0.6:
-            resCensor = False
-        
         return comment_pb2.CensorReply(serverCensor=resCensor)
 
 
