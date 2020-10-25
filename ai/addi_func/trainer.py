@@ -1,18 +1,34 @@
 import tensorflow as tf
-import tensorflow as hub
 import pandas as pd
 import os
 import json
 import numpy as np
 import nltk
+import csv
 from konlpy.tag import Okt
 from tensorflow.keras import models, layers, optimizers, losses, metrics
 
 
 okt = Okt()
+LENGTH = 0
 
 def tokenize(comment):
     return ['|'.join(word) for word in okt.pos(comment, norm=True, stem=True)]
+
+
+def preprocess_data(labeled_dataframe):
+    tokens = [token for data in labeled_dataframe.to_numpy() for token in data[0]]
+    text = nltk.Text(tokens, name='NMSC')
+    LENGTH = len(set(text.tokens))
+    selected_words = [vocab[0] for vocab in text.vocab().most_common(len(labeled_dataframe))]
+    # with open('selected_words.csv', 'w', newline="\n") as fd:
+    #     writer = csv.writer(fd)
+    #     writer.writerow(selected_words)
+    return selected_words
+
+
+# def term_frequency(doc, selected_words):
+#             return [doc.count(word) for word in selected_words]
 
 
 def determine_pos_neg_label(input_dataframe):
@@ -24,7 +40,6 @@ def determine_pos_neg_label(input_dataframe):
                   "&", "￦", "₩", "\\", "\t", "\r\n", "\n", "＄", "$", "¥", "￥", "£", "￡", "°", "㎞", "㎏", "@", "©", "ⓒ",
                   "↑", "|", "#", "♥", "♡", "★", "☆", "♪", "♬"]
 
-
     for row in input_dataframe.itertuples():
         if row.hate == 'none' and row.contain_gender_bias == False and row.bias == 'none':
             input_dataframe.at[row.Index, 'label'] = 0 # clean comment
@@ -32,104 +47,80 @@ def determine_pos_neg_label(input_dataframe):
             pass
         word = tokenize(row.comments)
         input_dataframe.at[row.Index, 'comments'] = word
-    newdf = input_dataframe[['comments', 'label']]
+    labeled_dataframe = input_dataframe[['comments', 'label']]
+    return labeled_dataframe
+    
 
-    tokens = [t for d in newdf.to_numpy() for t in d[0]]
-    text = nltk.Text(tokens, name='NMSC')
-
-    selected_words = [f[0] for f in text.vocab().most_common(12986)]
-
-    def term_frequency(doc):
+def term_frequency(doc, selected_words):
         return [doc.count(word) for word in selected_words]
 
-    # train_x = [term_frequency(d) for d, _ in newdf.to_numpy()]
-    # train_y = [c for _, c in newdf.to_numpy()]
+
+def train_data(labeled_dataframe, test_comments):
+    selected_words = preprocess_data(labeled_dataframe)
+
+    # train_x = [term_frequency(text_npval, selected_words) for text_npval, _ in labeled_dataframe.to_numpy()]
+    # train_y = [label_val for _, label_val in labeled_dataframe.to_numpy()]
 
     # x_train = np.asarray(train_x).astype('float32')
     # y_train = np.asarray(train_y).astype('float32')
 
+
+    # selected_words = preprocess_data(test_comments)
+    # print([term_frequency(text_npval) for text_npval, _ in test_comments.to_numpy()])
+   
+    # test_x = [term_frequency(text_npval, selected_words) for text_npval, _ in test_comments.to_numpy()]
+    # test_y = [label_val for _, label_val in test_comments.to_numpy()]
+
+    # x_test = np.asarray(test_x).astype('float32')
+    # y_test = np.asarray(test_y).astype('float32')
+
     # model = models.Sequential()
-    # model.add(layers.Dense(64, activation='relu', input_shape=(12986,)))
-    # model.add(layers.Dense(64, activation='relu'))
+    # model.add(layers.Dense(32, activation='relu', input_shape=(len(labeled_dataframe),)))
+    # model.add(layers.Dense(32, activation='relu'))
     # model.add(layers.Dense(1, activation='sigmoid'))
 
     # model.compile(optimizer=optimizers.RMSprop(lr=0.001),
     #             loss=losses.binary_crossentropy,
     #             metrics=[metrics.binary_accuracy])
 
-    # model.fit(x_train, y_train, epochs=10, batch_size=512)
-    # # save model
-    # model.save("toxic_comment_model.h5")
-    # load model
+    # model.fit(x_train, y_train, epochs=10, batch_size=256)
+
+    # # test_data(determine_pos_neg_label(test_comments) , model)
+    # eval_results = model.evaluate(x_test, y_test)
     
-    # npcomments = np.array(input_dataframe['comments'])
-    # print(npcomments)
-        
-        # if (word not in stop_words) and (word == 'Noun' or word == 'Adjective' or word=='Number' or word=='Verb'):
-        #     input_dataframe.at[row.Index, 'comments'] = word
-    # print(input_dataframe['comments'])
-    # tokens = [t for d in input_dataframe['comments'] for t in d[0]]
-    # train_doc = [(tokenize(row[0]), row[3]) for comment, label in input_dataframe]
-    # print(train_doc)
-    # if os.path.isfile('../dataset/train_doc.json'):
-    #     pass
-    # #     with open ('/dataset/train_doc.json') as fd:
-    # #         json.dump(train_doc, fd, ensure_ascii=False, indent='\t')
-    # else:
-    # with open('dataset/train_doc.json', 'w', encoding='utf-8') as newfile:
-    #     json.dump(train_doc, newfile, ensure_ascii=False, indent='\t')
-        
+    # # save model
+    # model.save("toxic_comment_model.h5") 
+
+    model = models.load_model("toxic_comment_model.h5")
+    review = "어쩌라고 무슨 말을 하는지 모르겠네"
+    token = tokenize(review)
+    tf = term_frequency(token, selected_words)
+    data = np.expand_dims(np.asarray(tf).astype('float32'), axis=0)
+    score = float(model.predict(data))
+    print("스코어: ",score) # 클린 댓글 일수록 낮은 숫자
+    
+
+# def test_data(labeled_dataframe, model):
+#     selected_words = preprocess_data(labeled_dataframe)
+#     test_x = [term_frequency(text_npval, selected_words) for text_npval, _ in labeled_dataframe.to_numpy()]
+#     test_y = [label_val for _, label_val in labeled_dataframe.to_numpy()]
+
+#     x_test = np.asarray(test_x).astype('float32')
+#     y_test = np.asarray(test_y).astype('float32')
+#     eval_results = model.evaluate(x_test, y_test)
+
 
 def main():
     DEFAULT_VALUE = 1  # set default label value to 1 == toxic comment
    
-    all_comments = pd.read_csv('dataset/train.tsv', sep='\t', header=0)
-    all_comments['label'] = DEFAULT_VALUE
+    train_comments = pd.read_csv('dataset/train.tsv', sep='\t', header=0)
+    train_comments['label'] = DEFAULT_VALUE
 
     test_comments = pd.read_csv('dataset/dev.tsv', sep='\t', header=0)
     test_comments['label'] = DEFAULT_VALUE
-
-
-    # find distinctive values
-    # print(all_comments.contain_gender_bias.unique())
-    # print(all_comments.hate.unique())
-    # print(all_comments.bias.unique())
-
-    all_comments[all_comments['hate'] == 'none'].shape[0]
-    all_comments[all_comments['bias'] == 'others'].shape[0]
-    all_comments[all_comments['contain_gender_bias'] == True].shape[0]
-
-    determine_pos_neg_label(all_comments)
-    # determine_pos_neg_label(test_comments)
-    # print(all_comments[all_comments['label'] == 0].shape[0])
-
-    # for i in range(0,len(all_comments)):
-    # all_comments['comments'].iloc[0]
-
-    # for index in range(0, len(all_comments)):
-    #     sentence = okt.pos(all_comments['comments'].iloc[index], norm=True, stem=True)
-    #     new_sent = []
-    #     for word in sentence:
-    #         if (word[0] not in stop_words) and (word[1] == 'Noun' or word[1] == 'Adjective' or word[1]=='Number' or word[1]=='Verb'):
-    #             new_sent.append(word[0])
-
-        
-        #  print(new_sent)
-
-    # tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
-    # model = TFAutoModel.from_pretrained("bert-base-uncased")
-    # inputs = tokenizer("Hello yellow below!", return_tensors='tf')
-    # outputs = model(**inputs)
+    train_data(determine_pos_neg_label(train_comments), determine_pos_neg_label(test_comments))
     
-
-    # model = TFElectraModel.from_pretrained("monologg/koelectra-base-v3-discriminator", from_pt=True)
-    # classifier = pipeline('sentiment-analysis')
-    # print(classifier(''))
-    # model = TFElectraModel.from_pretrained("monologg/korean-hate-speech-koelectra")
-    # tokenizer = ElectraTokenizer.from_pretrained("monologg/koelectra-base-v3-discriminator")
-    # print(tokenizer.tokenize(all_comments['comments'].iloc[0]))
-    # model = TFBertForSequenceClassification.from_pretrained('bert-base-multilingual-cased')
-
+    
    
 if __name__ == '__main__':
     main()
