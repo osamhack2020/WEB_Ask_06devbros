@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch , Route, HashRouter } from 'react-router-dom';
 import MainLayout from '../components/Layout/MainLayout';
+import MainLayoutContainer from '../containers/MainLayoutContainer';
 import HomeRoute from './HomeRoute';
 import RestrictRoute from './RestrictRoute';
 import PrivateRoute from './PrivateRoute';
@@ -19,10 +20,10 @@ function Router() {
     <React.Fragment>
       <HashRouter>
         <Switch>
-          <HomeRoute exact path="/" component={AsyncHome} layout={MainLayout}/>
+          <HomeRoute exact path="/" component={AsyncHome} layout={MainLayoutContainer}/>
           <RestrictRoute path="/login" component={AsyncLoginForm} />
           <RestrictRoute path="/register" component={AsyncRegisterForm} />
-          <PrivateRoute exact path="/posts" component={AsyncPosts} layout={MainLayout}/>
+          <PrivateRoute exact path="/posts" component={AsyncPosts} layout={MainLayoutContainer}/>
           <Route path="/logout" />
           <Route component={NotFound} />
         </Switch>
