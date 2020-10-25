@@ -11,7 +11,7 @@ import loadable from '@loadable/component';
 const AsyncLoginForm = loadable(() => import('../containers/LoginContainer'));
 const AsyncRegisterForm = loadable(() => import('../containers/RegisterContainer'));
 const AsyncHome = loadable(() => import('../containers/HomeContainer'));
-const AsyncPosts = loadable(() => import('../containers/PostsContainer'));\
+const AsyncPosts = loadable(() => import('../containers/PostsContainer'));
 const AsyncPost = loadable(() => import('../containers/PostContainer'));
 
 function Router() {
