@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { push } from 'connected-react-router';
-
 import { loginSuccess, loginFailure, logoutSuccess } from '../actions/authAction';
 import { API_URL, JWT_TOKEN } from '../config/config';
 import { setLocalStorage, clearLocalStorage } from '../utils/storageUtil';
@@ -14,6 +13,7 @@ export const login = ({ username, password }) => {
         dispatch(loginSuccess(response.data.token));
         setLocalStorage(JWT_TOKEN, response.data.token);
         dispatch(push('/'));
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error);
@@ -30,6 +30,7 @@ export const logout = () => {
         clearLocalStorage(JWT_TOKEN);
         dispatch(logoutSuccess());
         dispatch(push('/'));
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error);
