@@ -49,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 function LoginForm(props) {
   const { handleSubmit, onSubmit, errorMessage } = props;
+  console.log(onSubmit);
   const classes = useStyles();
   return (
     <Grid container component="main" className={classes.root}>

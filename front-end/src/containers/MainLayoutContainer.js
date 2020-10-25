@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Import custom components
@@ -9,8 +10,7 @@ import * as authService from '../service/authService';
 class MainLayoutContainer extends Component {
   constructor(props) {
     super(props);
-
-    this.submitForm = this.submitForm.bind(this);
+    this.onLogout = this.onLogout.bind(this);
   }
 
   /**
@@ -20,8 +20,9 @@ class MainLayoutContainer extends Component {
     this.props.actions.logout();
   }
 
+
   render() {
-    return <MainLayout onClick={this.onLogout} errorMessage={this.props.errorMessage}/>;
+    return <MainLayout onLogout={this.onLogout} errorMessage={this.props.errorMessage} children={this.props.children}/>;
   }
 }
 
