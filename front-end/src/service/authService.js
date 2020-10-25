@@ -10,8 +10,8 @@ export const login = ({ username, password }) => {
       .post('/login', { username, password })
       .then((response) => {
         console.log(response);
-        dispatch(loginSuccess(response.data.token));
-        setLocalStorage(JWT_TOKEN, response.data.token);
+        dispatch(loginSuccess(response.data.message));
+        setLocalStorage(JWT_TOKEN, response.data.message);
         dispatch(push('/'));
         window.location.reload();
       })
