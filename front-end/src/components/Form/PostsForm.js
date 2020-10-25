@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Field, reduxForm } from 'redux-form';
 import Grid from '@material-ui/core/Grid';
@@ -28,8 +28,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function PostsForm(props) {
-  const { handleClick, onClick, errorMessage, products } = props;
+  const {onRefresh, errorMessage, products } = props;
   const classes = useStyles();
+  
+  useEffect(() => {
+    onRefresh();
+  })
+
   return (
     <Container maxWidth="lg" className={classes.content}>
       <Grid item xs={12}>
