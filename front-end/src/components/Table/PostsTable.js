@@ -53,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PostsTable = (props) => {
-    console.log(props.products);
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(20);

@@ -4,17 +4,18 @@ import { push } from 'connected-react-router';
 import { getAllPostsSuccess, getAllPostsFailure, addPostSuccess,
    addPostFailure, getPostSuccess, getPostFailure,
    editPostSuccess, editPostFailure, deletePostSuccess,
-   deletePostFailure, } from '../actions/authAction';
+   deletePostFailure, } from '../actions/postsAction';
 import { API_URL, JWT_TOKEN } from '../config/config';
 
 export const getAllPosts = () => {
   return (dispatch) => {
     axios
-      .get('/posts', {})
+      .get('/posts')
       .then((response) => {
-        dispatch(getAllPostsSuccess(response.data.token));
-        dispatch(push('/posts'));
-        window.location.reload();
+        console.log(response);
+        // dispatch(getAllPostsSuccess(response.data.token));
+        // dispatch(push('/posts'));
+        // window.location.reload();
       })
       .catch((error) => {
         dispatch(getAllPostsFailure(error.response.data));
