@@ -1,11 +1,12 @@
 import os
+import pathlib
 import numpy as np
 import torch
 from model.kogpt2 import DialogKoGPT2
 from kogpt2_transformers import get_kogpt2_tokenizer
 
 # root_path='drive/My Drive/Colab Notebooks/dialogLM'
-root_path = '..'
+root_path = str(pathlib.Path(__file__).parent.absolute())
 data_path = f"{root_path}/data/wellness_dialog_for_autoregressive_train.txt"
 checkpoint_path =f"{root_path}/checkpoint"
 save_ckpt_path = f"{checkpoint_path}/kogpt2-wellness-auto-regressive.pth"
