@@ -14,18 +14,18 @@
 
 syntax = "proto3";
 
-package chatbot;
+package comment;
 
 // The Chat service definition.
-service Chat {
+service Comment {
   // Sends a chat
-  rpc ChatBot (ChatRequest) returns (ChatReply) {}
+  rpc CensorComment (CommentRequest) returns (CensorReply) {}
 }
 
-message ChatRequest {
-  string clientChat = 1;
+message CommentRequest {
+  string clientComment = 1;
 }
 
-message ChatReply {
-  string serverChat = 1;
+message CensorReply {
+  bool serverCensor = 1;
 }
