@@ -13,6 +13,7 @@ export const register = ({ username, password, realname, unit, pro }) => {
         console.log(response);
         dispatch(registerSuccess(response.data.token));
         dispatch(push('/login'));
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error);

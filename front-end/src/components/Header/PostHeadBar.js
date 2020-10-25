@@ -130,7 +130,7 @@ const PostHeadBar = (props) => {
                 inputProps={{ 'aria-label': 'search' }}
               />
             </div>
-            <Button variant="contained" component={Link} to="/" >글쓰기</Button>
+            <Button variant="contained" component={Link} to="/posts/write" >글쓰기</Button>
           </Toolbar>
         </Box>
         </Grid>

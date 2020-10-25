@@ -66,7 +66,7 @@ const RegisterForm = (props) => {
                       </Grid>
                       <Grid item xs={12}>
                         <FormControlLabel
-                          control={<Field type="checkbox" id="pro" name="pro" component="input"/>}
+                          control={<Field type="checkbox" id="pro" name="pro" component="input" value="false"/>}
                           label="전문 상담사 확인 여부"
                         />
                       </Grid>

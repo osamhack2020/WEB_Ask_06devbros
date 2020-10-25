@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-import Typography from './Typography/Typography';
+import Typography from '../Typography/Typography';
 import Brightness2Icon from '@material-ui/icons/Brightness2';
+import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew';
+import AddIcCallIcon from '@material-ui/icons/AddIcCall';
 
 const styles = (theme) => ({
   root: {
@@ -62,7 +64,7 @@ const introductionAry = [
   },
   {
       id: 2,
-      title: '말 못할 고민이 있으신가요?',
+      title: '말 못할 고민이 있으신요?',
       image: '',
       description:
           "가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.",
@@ -118,27 +120,12 @@ function Introduction(props) {
         </Typography>
         <div>
           <Grid container spacing={5}>
-
-            {ary.map((post) =>
-               (
-                <Grid item xs={12} md={4}>
-                  <div className={classes.item}>
-                    <div className={classes.number}>{post.id}</div>
-                    <Brightness2Icon className={classes.image} />
-                    <Typography variant="h5" align="center">
-                      {post.description}
-                  </Typography>
-                  </div>
-                </Grid>
-              )
-            )}
-            
-            {/* <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={4}>
               <div className={classes.item}>
                 <div className={classes.number}>1.</div>
                 <Brightness2Icon className={classes.image}/>
                 <Typography variant="h5" align="center">
-                가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.
+                  가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.
                 </Typography>
               </div>
             </Grid>
@@ -159,7 +146,7 @@ function Introduction(props) {
                 가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.
                 </Typography>
               </div>
-            </Grid> */}
+            </Grid>
           </Grid>
         </div>
       </Container>

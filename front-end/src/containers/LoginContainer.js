@@ -10,7 +10,6 @@ import LoginForm from '../components/Form/LoginForm';
 class LoginContainer extends Component {
   constructor(props) {
     super(props);
-
     this.submitForm = this.submitForm.bind(this);
   }
 
@@ -20,7 +19,7 @@ class LoginContainer extends Component {
    * @param {object} formProps
    */
   submitForm(formProps) {
-    console.log(formProps);
+    console.log(this.props.actions.logout);
     this.props.actions.login(formProps);
   }
 

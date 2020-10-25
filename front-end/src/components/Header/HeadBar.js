@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function HeadBar(props) {
-  const { children, onClick } = props ;
+  const { children, onLogout } = props ;
   //constants
   const classes = useStyles();
   // const colors = color();
@@ -75,7 +75,7 @@ function HeadBar(props) {
       {isAuthenticated() && (<div>	
         <MenuItem onClick={handleMenuClose}>내 정보</MenuItem>	
         <MenuItem onClick={handleMenuClose}>나의 질문 / 받은 질문</MenuItem>	
-        <MenuItem onClick={onClick}>로그아웃</MenuItem>
+        <MenuItem onClick={onLogout}>로그아웃</MenuItem>
         <MenuItem onClick={handleMenuClose}>도움말</MenuItem>	
       </div>)	
       }	

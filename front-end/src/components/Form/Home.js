@@ -7,7 +7,7 @@ import Container from '@material-ui/core/Container';
 import Jumbotron from '../Jumbo/Jumbotron';
 import CardContent from '../Card/CardContent';
 import Photos from '../Photos';
-import Introduction from '../Introduction';
+import Introduction from '../Introduction/Introduction';
 
 const mainFeaturedPost = {
     title: '도움이 필요할 때',
@@ -76,7 +76,7 @@ class Home extends React.Component {
         return (
             <React.Fragment>
                 <Jumbotron post={mainFeaturedPost} />
-                <Introduction title={'물어봐는 어떤 서비스인가요?'}/>
+                <Introduction title={'물어봐는 어떤 서비스인가요?'} content={'intro'}/>
                 <Container maxWidth="lg">
                 <Grid container className={classes.cards} spacing={4}>
                     {cards.map((post) => (
@@ -86,7 +86,7 @@ class Home extends React.Component {
                     ))}
                 </Grid>
                 </Container>
-                <Introduction />
+                <Introduction content={'intro'}/>
                 <div className={classes.photos}>
                     <Photos/>
                 </div>      
