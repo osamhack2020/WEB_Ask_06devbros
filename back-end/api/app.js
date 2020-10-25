@@ -79,10 +79,10 @@ app.use('/mypage', mypageRoutes);
 app.use('/room', chatRoutes);
 app.use('/posts', postRoutes);
 app.use(
-  '/posts/:postId/comments',
+  '/posts/:postid/comments',
   (req, res, next) => {
     try {
-      req.postId = req.params.postId;
+      req.postid = req.params.postid;
       next();
     } catch (err) {
       res.status(500).json({

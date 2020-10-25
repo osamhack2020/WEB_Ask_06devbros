@@ -4,7 +4,7 @@ const Comment = require('../models/comment');
 
 const commentAuthorize = async (req, res, next) => {
   try {
-    const commentId = req.params.commentId;
+    const commentId = req.params.commentid;
     const comment = await Comment.findById(commentId);
     if(!comment) {
         return res.status(400).json({

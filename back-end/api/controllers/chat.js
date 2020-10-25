@@ -1,6 +1,8 @@
 const Room = require('../models/room');
 const Chat = require('../models/chat');
 
+const client = require('../lib/chat');
+
 exports.getRooms = (req, res) => {
   Room.find({})
     .exec()
@@ -53,10 +55,10 @@ exports.getOneRoom = async (req, res, next) => {
 
 exports.getOneRoomBySearch = async (req, res, next) => {
   try {
-    const roomId = req.body.id;
+    const roomId = req.body.roomId;
     const room = await Room.findOne({ _id: roomId });
     if (!room) {
-      return res.status(401).json({
+      return res.status(400).json({
         message: 'No Room',
       });
     }
@@ -64,7 +66,6 @@ exports.getOneRoomBySearch = async (req, res, next) => {
       room: room,
     });
   } catch (error) {
-    console.error(error);
     return next(error);
   }
 };
@@ -78,12 +79,19 @@ exports.postChat = async (req, res, next) => {
     const room = await Room.findOne({ _id: req.params.id });
     room.chats.push(chat);
     await room.save();
-
-    const newchat = chat.replyChat();
-
-    req.app.get('io').of('/chat').emit('chat', newchat);
-    res.status(201).json({
-      chat: chat,
+    // nlp 처리후 reply
+    client
+    .chatBot()
+    .sendMessage({clientChat: chat.chat })
+    .then(result => {
+      const newchat = result.serverChat;
+      req.app.get('io').of('/chat').emit('chat', newchat);
+      res.status(201).json({
+        chat: chat,
+      });
+    })
+    .catch(err => {
+      console.log(err);
     });
   } catch (error) {
     next(error);
@@ -94,7 +102,16 @@ exports.getChatById = async (req, res, next) => {
   try {
     const chat = await Chat.findById(req.params.chatid);
     const room = await Room.findById(req.params.id);
-    if (!room.chats.includes(chat._id)) {
+    if(!room) {
+      return res.status(400).json({
+        message: 'No Room',
+      });
+    } else if(!chat) {
+      return res.status(400).json({
+        message: 'No Chat',
+      });
+    }
+    else if (!room.chats.includes(chat._id)) {
       return res.status(400).json({
         message: 'wrong room and chat',
       });

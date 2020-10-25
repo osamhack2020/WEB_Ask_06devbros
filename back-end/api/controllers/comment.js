@@ -3,7 +3,7 @@ const Post = require('../models/post');
 
 exports.getComments = async (req, res) => {
   try {
-    const comments = await Comment.find({post: req.postId});
+    const comments = await Comment.find({post: req.postid});
     res.status(200).json({
         comments: comments
     });
@@ -16,7 +16,7 @@ exports.getComments = async (req, res) => {
 
 exports.addComment = async (req, res) => {
   try {
-    const post = await Post.findById(req.postId);
+    const post = await Post.findById(req.postid);
     const comment = new Comment({
         user: req.userData,
         post: post._id,
@@ -36,7 +36,7 @@ exports.addComment = async (req, res) => {
 
 exports.getCommentById = async (req, res) => {
   try {
-    const comment = await Comment.findById(req.params.commentId);
+    const comment = await Comment.findById(req.params.commentid);
     if(!comment) {
       res.status(400).json({
         message: "bad id"  
@@ -59,7 +59,7 @@ exports.editCommentById = async (req, res) => {
     const newComment = {
       user: req.userData._id,
       comment: comment,
-      post: req.postId,
+      post: req.postid,
       editedAt: Date.now(),
       createdAt: oldComment.createdAt,
     }
@@ -74,8 +74,8 @@ exports.editCommentById = async (req, res) => {
 
 exports.deleteCommentById = async (req, res) => {
   try {
-    const commentId = req.commentData._id;
-    await Comment.findByIdAndDelete(commentId);
+    const commentid = req.commentData._id;
+    await Comment.findByIdAndDelete(commentid);
     res.status(200).json({
         message: "comment deleted"
     });
