@@ -21,18 +21,36 @@ import grpc
 import chat_pb2
 import chat_pb2_grpc
 
+import os, sys
+sys.path.append('../') # cwd == WEB_ASK_06DEVBROS/grpc_test
+import torch
+from ai.chatbot.model.kogpt2 import DialogKoGPT2
+from kogpt2_transformers import get_kogpt2_tokenizer
 
 class Chat(chat_pb2_grpc.ChatServicer):
+    # WEB_ASK_06DEVBROS/ai/chatbot/checkpoint에 저장된 pth 파일(pytorch weight 파일)을 불러옴
+    root_path='../ai/chatbot'
+    checkpoint_path =f"{root_path}/checkpoint"
+    save_ckpt_path = f"{checkpoint_path}/kogpt2-wellness-auto-regressive.pth"
+
+    ctx = "cuda" if torch.cuda.is_available() else "cpu"
+    device = torch.device(ctx)
+
+    # 저장한 Checkpoint 불러오기
+    checkpoint = torch.load(save_ckpt_path, map_location=device)
+    model = DialogKoGPT2()
+    model.load_state_dict(checkpoint['model_state_dict'])
+    model.eval()
+    tokenizer = get_kogpt2_tokenizer()
 
     def ChatBot(self, request, context):
         reqChat = request.clientChat #들어온 채팅 데이터
-        """
-            ------todo------
 
-            여기서 reqChat를 ai로 처리해서 보내고 싶은 데이터를 resChat에 넣으면된다.
-
-        """
-        resChat = reqChat + ' 이것은 답변이여' # 예시 함수 (들어오는 chatting에 이것은 답변이여라는 말을 추가해서 되돌리기
+        tokenized_indexs = self.tokenizer.encode(reqChat)
+        input_ids = torch.tensor([self.tokenizer.bos_token_id,]  + tokenized_indexs +[self.tokenizer.eos_token_id]).unsqueeze(0)
+        output = self.model.generate(input_ids=input_ids)
+        resChat = self.tokenizer.decode(output[0].tolist()[len(tokenized_indexs)+1:],skip_special_tokens=True)
+        
         return chat_pb2.ChatReply(serverChat=resChat)
 
 
