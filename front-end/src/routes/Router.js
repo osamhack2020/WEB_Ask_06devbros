@@ -22,8 +22,10 @@ function Router() {
           <HomeRoute exact path="/" component={AsyncHome} layout={MainLayoutContainer}/>
           <RestrictRoute path="/login" component={AsyncLoginForm} />
           <RestrictRoute path="/register" component={AsyncRegisterForm} />
-          <PrivateRoute path="/posts" component={AsyncPosts} layout={MainLayoutContainer}/>
+          <PrivateRoute exact path="/posts" component={AsyncPosts} layout={MainLayoutContainer}/>
           <PrivateRoute path="/posts/write" component={AsyncPost} layout={MainLayoutContainer}/>
+          <PrivateRoute path="/posts/:id/edit" component={AsyncPost} layout={MainLayoutContainer}/>
+          <PrivateRoute path="/posts/:id" component={AsyncPost} layout={MainLayoutContainer}/>
           <Route path="/logout" />
           <Route component={NotFound} />
         </Switch>

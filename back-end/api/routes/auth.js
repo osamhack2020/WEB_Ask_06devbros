@@ -1,5 +1,6 @@
 const express = require('express');
 const authController = require('../controllers/auth');
+const jwtMiddleware = require('../middleware/jwtMiddleware');
 
 const router = express.Router();
 
@@ -11,7 +12,7 @@ router.post('/login', authController.postLogin);
 
 
 //로그아웃
-router.post('/logout', authController.postLogout);
+router.post('/logout', jwtMiddleware, authController.postLogout);
 
 
 module.exports = router;
