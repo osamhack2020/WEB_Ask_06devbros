@@ -20,17 +20,18 @@ import grpc
 
 import comment_pb2
 import comment_pb2_grpc
-import predictor as pdtr
+from predictor import Predictor
 
 class Comment(comment_pb2_grpc.CommentServicer):
 
     def CensorComment(self, request, context):
-        reqComment = request.clientComment #들어온 채팅 데이터
-        resCensor = True
-        score = pdtr.predict_comment(reqComment)
-        #점수 값이 0.6 보다 높으면 악플로 판정/ 낮으면 클린한 글
-        if score >= 0.6: 
-            resCensor = False
+        reqComment = request.clientComment # 들어온 채팅 데이터
+        resCensor = False
+        predic = Predictor(reqComment)
+        score = predic.predict_comment()
+        # 점수 값이 0.51 보다 높으면 악플로 판정/ 낮으면 클린한 글
+        if score >= 0.51: 
+            resCensor = True # censor comment 
         return comment_pb2.CensorReply(serverCensor=resCensor)
 
 
