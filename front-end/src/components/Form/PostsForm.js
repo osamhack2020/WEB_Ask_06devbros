@@ -28,12 +28,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function PostsForm(props) {
-  const { errorMessage, posts } = props;
+  const { errorMessage, posts, onLoad } = props;
   const classes = useStyles();
   
-  // useEffect(() => {
-  //   onRefresh();
-  // })
+  useEffect(() => {
+    onLoad();
+  })
 
   return (
     <Container maxWidth="lg" className={classes.content}>

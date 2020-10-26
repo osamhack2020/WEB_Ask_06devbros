@@ -12,8 +12,7 @@ export const getAllPosts = () => {
     axios
       .get('/posts')
       .then((response) => {
-        console.log(response);
-        dispatch(getAllPostsSuccess(response.data.posts));
+        // dispatch(getAllPostsSuccess(response.data.posts));
       })
       .catch((error) => {
         dispatch(getAllPostsFailure(error.response.data));
@@ -24,7 +23,7 @@ export const getAllPosts = () => {
 export const addPost = ({ content, title }) => {
   return (dispatch) => {
     axios
-      .post(API_URL + '/posts', { content, title })
+      .post('/posts', { content, title })
       .then((response) => {
         dispatch(addPostSuccess(response.data.token));
         dispatch(push('/posts'));
@@ -36,10 +35,10 @@ export const addPost = ({ content, title }) => {
   };
 };
 
-export const getPost = ({ id, password }) => {
+export const getPost = ({ id }) => {
   return (dispatch) => {
     axios
-      .get(API_URL + '/posts', { id, password })
+      .get('/posts' + {id})
       .then((response) => {
         dispatch(getPostSuccess(response.data.token));
         dispatch(push('/posts'));
@@ -51,10 +50,10 @@ export const getPost = ({ id, password }) => {
   };
 };
 
-export const editPost = ({ id, password }) => {
+export const editPost = ({ id, title, content }) => {
   return (dispatch) => {
     axios
-      .get(API_URL + '/posts', { id, password })
+      .put('/posts' + { id }, { title, content })
       .then((response) => {
         dispatch(editPostSuccess(response.data.token));
         dispatch(push('/posts'));
@@ -66,10 +65,10 @@ export const editPost = ({ id, password }) => {
   };
 };
 
-export const deletePost = ({ id, password }) => {
+export const deletePost = ({ id }) => {
   return (dispatch) => {
     axios
-      .get(API_URL + '/posts', { id, password })
+      .delete('/posts' + { id })
       .then((response) => {
         dispatch(deletePostSuccess(response.data.token));
         dispatch(push('/posts'));
