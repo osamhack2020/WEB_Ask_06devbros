@@ -1,6 +1,7 @@
 // env파일 적용
 require('dotenv').config();
 
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -64,8 +65,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.disable('etag');
-//혹은 app.
+// app.disable('etag');
+app.set('etag', false); 
+// app.use(express.static(path.join(__dirname, 'public'), {etag: false}));
 
 //------------for test-----------
 app.get('/', (req, res) => {
