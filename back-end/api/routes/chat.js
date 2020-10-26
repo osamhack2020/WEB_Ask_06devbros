@@ -14,7 +14,7 @@ router.get('/', jwtMiddleware, checkIsPro, chatController.getRooms);
 router.post('/', jwtMiddleware , chatController.postNewRoom);
 
 // 해당 룸 가져오기
-router.get('/:id', jwtMiddleware, checkIsPro, chatController.getOneRoom);
+router.get('/:id', jwtMiddleware, chatController.getOneRoom);
 
 // 해당 룸 가져오기
 router.post('/search', jwtMiddleware, checkIsPro, chatController.getOneRoomBySearch);
