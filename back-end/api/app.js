@@ -64,11 +64,17 @@ app.use((req, res, next) => {
   next();
 });
 
+app.disable('etag');
+//혹은 app.
+
 //------------for test-----------
 app.get('/', (req, res) => {
   res.render('index.html');
 });
 app.get('/chat', (req, res) => {
+  res.render('chat2.html');
+})
+app.get('/chat/:id', (req, res) => {
   res.render('chat.html');
 });
 
