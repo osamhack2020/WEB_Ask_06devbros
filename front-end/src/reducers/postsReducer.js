@@ -13,35 +13,43 @@ import {
 } from '../constants/actionType';
 
 var initialState = {
-    title: null,
-    content: null,
-    createdAt: null,
+    posts:{},
+    title:null,
+    content:null,
+    createdAt:null,
+    editedAt:null,
     isLoading: false
 };
 
 /**
  * A reducer takes two arguments, the current state and an action.
  */
-const authReducer = (state, action) => {
+const postsReducer = (state, action) => {
     state = state || initialState;
 
     switch (action.type) {
-        case LOG_IN_SUCCESS:
+        case GET_ALL_POSTS_SUCCESS:
             return Object.assign({}, state, {
-                isAuthenticated: true,
-                isLoading: false,
-                token: action.data,
+                posts:action.data,
+                title:null,
+                content:null,
+                createdAt:null,
+                editedAt:null,
+                isLoading: false
             });
 
-        case LOG_IN_FAILURE:
+        case GET_ALL_POSTS_FAILURE:
             return Object.assign({}, state, {
-                isAuthenticated: false,
+                posts:{},
+                title:null,
+                content:null,
+                createdAt:null,
+                editedAt:null,
                 isLoading: false,
-                token: null,
                 errorMessage: action.error.message || 'Something went wrong.'
             });
 
-        case LOG_OUT_SUCCESS:
+        case ADD_POST_SUCCESS:
             return Object.assign({}, state, {
                 isAuthenticated: false,
                 isLoading: true,
@@ -53,4 +61,4 @@ const authReducer = (state, action) => {
     }
 };
 
-export default authReducer;
+export default postsReducer;

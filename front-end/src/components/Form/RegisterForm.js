@@ -12,8 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Copyright from './Copyright';
-import renderText from '../renderText';
-import renderCheckbox from '../renderCheckbox';
+import renderText from '../Render/renderText';
+import renderCheckbox from '../Render/renderCheckbox';
 import { Field, reduxForm } from 'redux-form';
 
 const useStyles = makeStyles((theme) => ({

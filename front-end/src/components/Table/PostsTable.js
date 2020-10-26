@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,38 +9,28 @@ import TablePagination from '@material-ui/core/TablePagination';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 
+let rows = [];
+let key = 1;
 // Generate Order Data
-function createData(key, _id, title, content, user, createdAt) {
-  return { _id, _id, title, content, user, createdAt};
-}
+function createData(posts) {
+  let postsAry = [];
 
-const rows = [
-  createData(0, 0, '고민있어요!', '대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.', 'Elvis Presley', '2020-10-11'),
-  createData(1, 1, '이런 고민 하신적 있나요?', '대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.', 'Paul McCartney', '2020-10-11'),
-  createData(2, 2, '너무 힘들어요...', '대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.', 'Tom Scholz', '2020-10-11'),
-  createData(3, 3, '빨리 전역하고 싶다ㅏ..', '대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.', 'Michael Jackson', '2020-10-11'),
-  createData(4, 4, '이거 아는 분!', '대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.', 'Bruce Springsteen', '2020-10-11'),
-  createData(0, 0, '고민있어요!', '대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.', 'Elvis Presley', '2020-10-11'),
-  createData(1, 1, '이런 고민 하신적 있나요?', '대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.', 'Paul McCartney', '2020-10-11'),
-  createData(2, 2, '너무 힘들어요...', '대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.', 'Tom Scholz', '2020-10-11'),
-  createData(3, 3, '빨리 전역하고 싶다ㅏ..', '대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.', 'Michael Jackson', '2020-10-11'),
-  createData(4, 4, '이거 아는 분!', '대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.', 'Bruce Springsteen', '2020-10-11'),
-  createData(0, 0, '고민있어요!', '대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.', 'Elvis Presley', '2020-10-11'),
-  createData(1, 1, '이런 고민 하신적 있나요?', '대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.', 'Paul McCartney', '2020-10-11'),
-  createData(2, 2, '너무 힘들어요...', '대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.', 'Tom Scholz', '2020-10-11'),
-  createData(3, 3, '빨리 전역하고 싶다ㅏ..', '대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.', 'Michael Jackson', '2020-10-11'),
-  createData(4, 4, '이거 아는 분!', '대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.', 'Bruce Springsteen', '2020-10-11'),
-  createData(0, 0, '고민있어요!', '대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.', 'Elvis Presley', '2020-10-11'),
-  createData(1, 1, '이런 고민 하신적 있나요?', '대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.', 'Paul McCartney', '2020-10-11'),
-  createData(2, 2, '너무 힘들어요...', '대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.', 'Tom Scholz', '2020-10-11'),
-  createData(3, 3, '빨리 전역하고 싶다ㅏ..', '대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.', 'Michael Jackson', '2020-10-11'),
-  createData(4, 4, '이거 아는 분!', '대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.', 'Bruce Springsteen', '2020-10-11'),
-  createData(0, 0, '고민있어요!', '대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.', 'Elvis Presley', '2020-10-11'),
-  createData(1, 1, '이런 고민 하신적 있나요?', '대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.', 'Paul McCartney', '2020-10-11'),
-  createData(2, 2, '너무 힘들어요...', '대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.', 'Tom Scholz', '2020-10-11'),
-  createData(3, 3, '빨리 전역하고 싶다ㅏ..', '대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.', 'Michael Jackson', '2020-10-11'),
-  createData(4, 4, '이거 아는 분!', '대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.', 'Bruce Springsteen', '2020-10-11'),
-];
+  for(let i = 0; i < posts.length; i++){
+    postsAry.push(posts[i]);
+  }
+
+  postsAry.map((post) => {
+    rows.push({
+      key:key,
+      id:key,
+      title:post.title,
+      content:post.content,
+      user:'익명',
+      createdAt:post.createdAt.slice(0, 10),
+    })
+    key++;
+  })
+}
 
 function preventDefault(event) {
   event.preventDefault();
@@ -53,9 +43,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PostsTable = (props) => {
-    const classes = useStyles();
+    const { errorMessage, posts } = props;
+    const classes = useStyles()
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(20);
+
+    useEffect(() => {
+      createData(posts);
+    });
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -86,7 +81,7 @@ const PostsTable = (props) => {
               ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               : rows
             ).map((row) => (
-              <TableRow key={row._id} component={Link} to="/" style={{textDecoration:"none", color:"black"}}>
+              <TableRow key={row._id} component={Link} to={"/" + row._id } style={{textDecoration:"none", color:"black"}}>
                 <TableCell>{row._id}</TableCell>
                 <TableCell>{row.title}</TableCell>
                 <TableCell>{row.content.slice(0, 30) + '...'}</TableCell>
