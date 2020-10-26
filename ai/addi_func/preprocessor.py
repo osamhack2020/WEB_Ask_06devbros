@@ -1,9 +1,6 @@
 import pandas as pd
-# import os
 import json
-# import numpy as np
 import nltk
-# import csv
 from konlpy.tag import Okt
 
 
