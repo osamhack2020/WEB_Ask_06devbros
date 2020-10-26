@@ -64,9 +64,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.disable('etag');
-// 혹은 app.set('etag', false); 
-// 그래도 안되면 위의 둘 중 하나에다가 다음코드도 추가: app.use(express.static(path.join(__dirname, 'public'), {etag: false}));
+// app.disable('etag');
+app.set('etag', false); 
+// app.use(express.static(path.join(__dirname, 'public'), {etag: false}));
 
 //------------for test-----------
 app.get('/', (req, res) => {
