@@ -86,7 +86,7 @@ class Chat(chat_pb2_grpc.ChatServicer):
         input_ids = torch.tensor([self.tokenizer_gpt2.bos_token_id,]  + tokenized_indexs +[self.tokenizer_gpt2.eos_token_id]).unsqueeze(0)
         output_chat = self.model_chat.generate(input_ids=input_ids)
         resChat = self.tokenizer_gpt2.decode(output_chat[0].tolist()[len(tokenized_indexs)+1:],skip_special_tokens=True)
-        # 대화 분류
+        # 대화 분류 작업
         data = koelectra_input(tokenizer_electra, reqChat, device, 512)
         output_class = model_class(**data)
 
