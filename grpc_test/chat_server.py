@@ -22,14 +22,17 @@ import chat_pb2
 import chat_pb2_grpc
 
 import os, sys
+import pathlib
+sys.path.append(str(pathlib.Path(__file__).parent.absolute())+'/../ai/chatbot')
 sys.path.append('../') # cwd == WEB_ASK_06DEVBROS/grpc_test
 import torch
-from ai.chatbot.model.kogpt2 import DialogKoGPT2
+from model.kogpt2 import DialogKoGPT2
 from kogpt2_transformers import get_kogpt2_tokenizer
 
 class Chat(chat_pb2_grpc.ChatServicer):
     # WEB_ASK_06DEVBROS/ai/chatbot/checkpoint에 저장된 pth 파일(pytorch weight 파일)을 불러옴
-    root_path='../ai/chatbot'
+    
+    root_path= str(pathlib.Path(__file__).parent.absolute()) + '/../ai/chatbot'
     checkpoint_path =f"{root_path}/checkpoint"
     save_ckpt_path = f"{checkpoint_path}/kogpt2-wellness-auto-regressive.pth"
 
