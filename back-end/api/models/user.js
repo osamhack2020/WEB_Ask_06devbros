@@ -11,10 +11,6 @@ const userSchema = Schema({
   realname: { type: String, required: true }, // 실명
   unit: { type: String, required: true }, // 소속부대
   pro: { type: Boolean, required: true  }, // 전문상담관 여부
-  // room: {
-  //   type: ObjectId,
-  //   ref: 'Room'
-  // }
 });
 
 userSchema.methods.generateToken = function () {

@@ -6,6 +6,7 @@ module.exports = (server, app) => {
   app.set('io', io);
   const room = io.of('/room');
   const chat = io.of('/chat');
+  const socketIds = [];
 
   // 채팅방과 연결
   room.on('connection', (socket) => {
@@ -13,24 +14,23 @@ module.exports = (server, app) => {
     socket.on('disconnect', () => {
       console.log('room 네임스페이스 접속 해제');
     });
-    socket.on('reply', () => {
-      console.log('Oh my baby~');
-    });
   });
 
   //채팅과 연결
   chat.on('connection', (socket) => {
     console.log('chat 네임스페이스에 접속');
-    // const req = socket.request;
-    // const { headers: { referer } } = req;
+    socket.on('joinRoom', (roomId) => {
+      socket.join(roomId);
+    });
     // const roomId = referer
     //   .split('/')[referer.split('/').length - 1]
     //   .replace(/\?.+/, '');
     // socket.join(roomId);
 
-    socket.on('disconnect', () => {
+    socket.on('disconnect', (roomId) => {
       console.log('chat 네임스페이스 접속 해제');
-      // socket.leave(roomId);
+        console.log('finished');
+        socket.leave(roomId);
     });
   });
 };

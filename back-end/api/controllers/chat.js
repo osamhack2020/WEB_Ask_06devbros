@@ -85,7 +85,8 @@ exports.postChat = async (req, res, next) => {
     .sendMessage({clientChat: chat.chat })
     .then(result => {
       const newchat = result.serverChat;
-      req.app.get('io').of('/chat').emit('chat', newchat);
+      const chatSO = req.app.get('io').of('/chat');
+      chatSO.to(req.params.id).emit('chat', newchat);
       res.status(201).json({
         chat: chat,
       });
