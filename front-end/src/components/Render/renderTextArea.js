@@ -13,6 +13,7 @@ const renderText = ({ input, label, type, rows, meta: { touched, error, invalid 
     {...input}
     variant="outlined"
     required
+    multiline
     fullWidth
     autoComplete="current-text"
   />

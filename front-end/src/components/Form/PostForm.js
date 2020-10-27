@@ -18,8 +18,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   button: {
-    margin: theme.spacing(1),
-    width: '100px',
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(1),
+    width: '912px',
   },
 }));
 
@@ -54,9 +55,10 @@ function PostForm(props) {
         <Grid item xs={12}>
           <Button
             variant="contained"
-            color="primary"
+            color="secondary"
+            size="large"
             className={classes.button}
-            endIcon={<Icon>send</Icon>}
+            endIcon={<Icon></Icon>}
           >
             뒤로 가기
       </Button>
