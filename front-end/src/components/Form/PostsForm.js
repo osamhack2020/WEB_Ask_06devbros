@@ -1,14 +1,10 @@
 import React, { useEffect } from 'react';
-import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
-import { Field, reduxForm } from 'redux-form';
 import Grid from '@material-ui/core/Grid';
 import PostsTable from '../Table/PostsTable';
 import PostsHeadBar from '../Header/PostHeadBar';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
-
-import { POSTS } from '../../constants/entity';
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -35,23 +31,14 @@ function isEmptyObject(param) {
 }
 
 function PostsForm(props) {
-  const { errorMessage, onLoad } = props;
+  const { errorMessage, onLoad, posts } = props;
   const classes = useStyles();
-  const [postss, setPostss] = React.useState({});
 
   useEffect(() => {
-    async function getPosts(){
-      const {
-        data: {
-          posts
-        }
-      } = await axios.get('/posts');
-      setPostss(posts);
-    }
-    getPosts();
+    onLoad();
   }, []);
 
-  const isLoading = (isEmptyObject(postss));
+  const isLoading = (isEmptyObject(posts));
 
   return (
     <React.Fragment>
@@ -67,7 +54,7 @@ function PostsForm(props) {
         </Grid>
         <Grid item xs={12}>
           <Paper className={classes.paper}>
-            <PostsTable errorMessage={errorMessage} posts={postss}/>
+            <PostsTable errorMessage={errorMessage} posts={posts}/>
           </Paper>
         </Grid>
       </Container>

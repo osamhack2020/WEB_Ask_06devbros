@@ -5,9 +5,6 @@ import { getAllPostsSuccess, getAllPostsFailure, addPostSuccess,
    addPostFailure, getPostSuccess, getPostFailure,
    editPostSuccess, editPostFailure, deletePostSuccess,
    deletePostFailure, } from '../actions/postsAction';
-import { API_URL, JWT_TOKEN } from '../config/config';
-
-import { POSTS } from '../constants/entity';
 
 export const getAllPosts = () => {
   return (dispatch) => {

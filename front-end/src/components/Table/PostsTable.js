@@ -16,7 +16,7 @@ let key = 1;
 function createData(posts) {
   let postsAry = [];
   rows = [];
-  
+
   for(let i = 0; i < posts.length; i++){
     postsAry.push(posts[i]);
   }
@@ -61,7 +61,6 @@ const PostsTable = (props) => {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(20);
     const [isLoading, setIsLoading] = React.useState(true);
-    const [postss, setPostss] = React.useState(null);
 
     useEffect(() => {
       createData(posts);
