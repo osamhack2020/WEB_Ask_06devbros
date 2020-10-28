@@ -43,7 +43,6 @@ class PostContainer extends Component {
   }
 
   render() {
-    console.log("RENDERING!!!!");
     return <PostForm
             path={this.props.match.path} 
             id={this.props.match.params} 
