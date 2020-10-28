@@ -11,10 +11,12 @@ import { Link } from 'react-router-dom';
 
 let rows = [];
 let key = 1;
+
 // Generate Order Data
 function createData(posts) {
   let postsAry = [];
-
+  rows = [];
+  
   for(let i = 0; i < posts.length; i++){
     postsAry.push(posts[i]);
   }
@@ -30,10 +32,21 @@ function createData(posts) {
     })
     key++;
   })
+
+  return postsAry;
 }
 
 function preventDefault(event) {
   event.preventDefault();
+}
+
+function setPosts(posts, postss) {
+  createData(posts)
+  if(postss == posts){
+    console.log("YES");
+  }else {
+    console.log("NO");
+  }
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -48,6 +61,7 @@ const PostsTable = (props) => {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(20);
     const [isLoading, setIsLoading] = React.useState(true);
+    const [postss, setPostss] = React.useState(null);
 
     useEffect(() => {
       createData(posts);

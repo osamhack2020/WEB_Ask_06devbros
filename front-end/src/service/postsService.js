@@ -10,8 +10,8 @@ import { API_URL, JWT_TOKEN } from '../config/config';
 import { POSTS } from '../constants/entity';
 
 export const getAllPosts = () => {
-  return async (dispatch) => {
-    await axios
+  return (dispatch) => {
+      axios
       .get('/posts')
       .then((response) => {
         dispatch(getAllPostsSuccess(response.data.posts));
@@ -32,7 +32,7 @@ export const addPost = ({ content, title }) => {
         window.location.reload();
       })
       .catch((error) => {
-        dispatch(addPostFailure(error.response.data));
+        dispatch(addPostFailure(error.response));
       });
   };
 };

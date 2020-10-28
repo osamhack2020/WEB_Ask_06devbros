@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import { Field, reduxForm } from 'redux-form';
 import Grid from '@material-ui/core/Grid';
@@ -34,15 +35,23 @@ function isEmptyObject(param) {
 }
 
 function PostsForm(props) {
-  const { errorMessage, posts, onLoad } = props;
+  const { errorMessage, onLoad } = props;
   const classes = useStyles();
-  
+  const [postss, setPostss] = React.useState({});
+
   useEffect(() => {
-    onLoad();
+    async function getPosts(){
+      const {
+        data: {
+          posts
+        }
+      } = await axios.get('/posts');
+      setPostss(posts);
+    }
+    getPosts();
   }, []);
 
-
-  const isLoading = (isEmptyObject(posts));
+  const isLoading = (isEmptyObject(postss));
 
   return (
     <React.Fragment>
@@ -58,7 +67,7 @@ function PostsForm(props) {
         </Grid>
         <Grid item xs={12}>
           <Paper className={classes.paper}>
-            <PostsTable errorMessage={errorMessage} posts={posts}/>
+            <PostsTable errorMessage={errorMessage} posts={postss}/>
           </Paper>
         </Grid>
       </Container>
