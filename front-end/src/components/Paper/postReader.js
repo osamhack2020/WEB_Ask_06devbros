@@ -72,7 +72,7 @@ function PostReader(props) {
                   }}
                 />
                 <Grid item xs={12}>
-                  <CommentTable />
+                  <CommentTable id={location.state.id} />
                 </Grid>
                 <Field name="content" rows={5} component={renderTextArea} label="댓글을 입력해주세요." />
                 <Grid item xs={12}>

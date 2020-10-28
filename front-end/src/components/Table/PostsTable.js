@@ -102,6 +102,7 @@ const PostsTable = (props) => {
                   to={{
                     pathname: "/posts/" + row.key,
                     state:{
+                      id:row.key,
                       title:row.title,
                       content:row.content,
                       user:row.user,

@@ -19,11 +19,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PostsTable = (props) => {
+    const { id } = props;
     const classes = useStyles()
     const [isLoading, setIsLoading] = React.useState(true);
+    const [commentList, setCommentList] = React.useState(null);
 
-    useEffect(() => {
-
+    useEffect(async () => {
+        const {
+            comments
+        } = await axios.get(`/posts/${id}/comments`);
+        console.log(comments);
     }, []);
 
     return (
