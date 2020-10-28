@@ -29,10 +29,29 @@
  - 기타 사용한 라이브러리
 
 ## 설치 안내 (Installation Process)
-```bash
+파일 받기
+```
 $ git clone git주소
-$ yarn or npm install
-$ yarn start or npm run start
+```
+
+AI 악플감지 서버 활성화
+```
+$ cd ai/addi_func/
+$ python3 chat_server.py
+```
+AI 챗봇 서버 활성화
+```
+```
+백엔드 서버 활성화
+```
+$ cd backend/
+$ npm install
+$ npm start
+```
+프론트 엔드 실행
+```
+$
+$
 ```
 
 ## 프로젝트 사용법 (Getting Started)
@@ -46,10 +65,11 @@ $ yarn start or npm run start
  샘플 에디터 [https://stackedit.io/app#](https://stackedit.io/app#)
  
 ## 팀 정보 (Team Information)
--
--
+- 강태영 (tae_11@naver.com), Github Id: tzerok
+- 이용우 (brotherwoo@naver.com), Github Id: hellowoo-lee
 - 양용진 (dyyjkd@naver.com), Github Id: YangYongJin
-- 
+- 임성빈 (dlatqdlatq@naver.com), Github Id: NEM-NE
 
 ## 저작권 및 사용권 정보 (Copyleft / End User License)
  * [MIT](https://github.com/osam2020-WEB/Sample-ProjectName-TeamName/blob/master/license.md)
+
