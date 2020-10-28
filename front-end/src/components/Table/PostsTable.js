@@ -22,8 +22,9 @@ function createData(posts) {
   }
 
   postsAry.map((post) => {
+    console.log(post._id);
     rows.push({
-      key:key,
+      key:post._id,
       id:key,
       title:post.title,
       content:post.content,
@@ -38,15 +39,6 @@ function createData(posts) {
 
 function preventDefault(event) {
   event.preventDefault();
-}
-
-function setPosts(posts, postss) {
-  createData(posts)
-  if(postss == posts){
-    console.log("YES");
-  }else {
-    console.log("NO");
-  }
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -65,6 +57,7 @@ const PostsTable = (props) => {
     useEffect(() => {
       createData(posts);
       setIsLoading(false);
+      key = 1;
     }, []);
 
     const handleChangePage = (event, newPage) => {
@@ -103,8 +96,19 @@ const PostsTable = (props) => {
                   ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   : rows
                 ).map((row) => (
-                  <TableRow key={row._id} component={Link} to={"/" + row._id } style={{textDecoration:"none", color:"black"}}>
-                    <TableCell>{row._id}</TableCell>
+                  <TableRow 
+                  key={row.key} 
+                  component={Link} 
+                  to={{
+                    pathname: "/posts/" + row.key,
+                    state:{
+                      title:row.title,
+                      content:row.content,
+                      user:row.user,
+                    }
+                  }} 
+                  style={{textDecoration:"none", color:"black"}}>
+                    <TableCell>{row.id}</TableCell>
                     <TableCell>{row.title}</TableCell>
                     <TableCell>{row.content.slice(0, 30) + '...'}</TableCell>
                     <TableCell>{row.user}</TableCell>

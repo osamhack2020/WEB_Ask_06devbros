@@ -34,7 +34,6 @@ const PostWriter = (props) => {
     const classes = useStyles();
     return (
         <Paper className={classes.paper} elevation={3}>
-
             <form onSubmit={handleSubmit(addPost)}>
                 <Field type="text" name="title" component={renderText} label="제목을 입력해주세요."/>
                 <Field name="content" rows={20} component={renderTextArea} label="내용을 입력해주세요." />

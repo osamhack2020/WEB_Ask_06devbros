@@ -35,6 +35,7 @@ function PostsForm(props) {
   const classes = useStyles();
 
   useEffect(() => {
+    console.log(posts);
     onLoad();
   }, []);
 
