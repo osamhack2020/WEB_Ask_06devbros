@@ -47,10 +47,12 @@ const PostsTable = (props) => {
     const classes = useStyles()
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(20);
+    const [isLoading, setIsLoading] = React.useState(true);
 
     useEffect(() => {
       createData(posts);
-    });
+      setIsLoading(false);
+    }, []);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -77,18 +79,27 @@ const PostsTable = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {(rowsPerPage > 0
-              ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              : rows
-            ).map((row) => (
-              <TableRow key={row._id} component={Link} to={"/" + row._id } style={{textDecoration:"none", color:"black"}}>
-                <TableCell>{row._id}</TableCell>
-                <TableCell>{row.title}</TableCell>
-                <TableCell>{row.content.slice(0, 30) + '...'}</TableCell>
-                <TableCell>{row.user}</TableCell>
-                <TableCell align="right">{row.createdAt}</TableCell>
-              </TableRow>
-            ))}
+            {
+              isLoading ?
+              (
+                <div>isLoading....</div>
+              )
+              :
+              (
+                (rowsPerPage > 0
+                  ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  : rows
+                ).map((row) => (
+                  <TableRow key={row._id} component={Link} to={"/" + row._id } style={{textDecoration:"none", color:"black"}}>
+                    <TableCell>{row._id}</TableCell>
+                    <TableCell>{row.title}</TableCell>
+                    <TableCell>{row.content.slice(0, 30) + '...'}</TableCell>
+                    <TableCell>{row.user}</TableCell>
+                    <TableCell align="right">{row.createdAt}</TableCell>
+                  </TableRow>
+                ))
+              )
+            }
           </TableBody>
         </Table>
         <div className={classes.seeMore}>

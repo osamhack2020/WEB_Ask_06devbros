@@ -7,12 +7,14 @@ import { getAllPostsSuccess, getAllPostsFailure, addPostSuccess,
    deletePostFailure, } from '../actions/postsAction';
 import { API_URL, JWT_TOKEN } from '../config/config';
 
+import { POSTS } from '../constants/entity';
+
 export const getAllPosts = () => {
-  return (dispatch) => {
-    axios
+  return async (dispatch) => {
+    await axios
       .get('/posts')
       .then((response) => {
-        // dispatch(getAllPostsSuccess(response.data.posts));
+        dispatch(getAllPostsSuccess(response.data.posts));
       })
       .catch((error) => {
         dispatch(getAllPostsFailure(error.response.data));

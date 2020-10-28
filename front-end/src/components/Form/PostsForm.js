@@ -7,6 +7,8 @@ import PostsHeadBar from '../Header/PostHeadBar';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 
+import { POSTS } from '../../constants/entity';
+
 const useStyles = makeStyles((theme) => ({
   content: {
     width: '100%',
@@ -27,26 +29,43 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function isEmptyObject(param) {
+  return Object.keys(param).length === 0 && param.constructor === Object;
+}
+
 function PostsForm(props) {
   const { errorMessage, posts, onLoad } = props;
   const classes = useStyles();
   
   useEffect(() => {
     onLoad();
-  })
+  }, []);
+
+
+  const isLoading = (isEmptyObject(posts));
 
   return (
-    <Container maxWidth="lg" className={classes.content}>
-      <Grid item xs={12}>
-        <PostsHeadBar />
-      </Grid>
-      <Grid item xs={12}>
-        <Paper className={classes.paper}>
-          <PostsTable errorMessage={errorMessage} posts={posts}/>
-        </Paper>
-      </Grid>
-    </Container>
-  );
+    <React.Fragment>
+      { isLoading ?
+        (
+          <Container maxWidth="lg" className={classes.content}>
+            isLoading...
+          </Container>
+        ) : 
+        (<Container maxWidth="lg" className={classes.content}>
+        <Grid item xs={12}>
+          <PostsHeadBar />
+        </Grid>
+        <Grid item xs={12}>
+          <Paper className={classes.paper}>
+            <PostsTable errorMessage={errorMessage} posts={posts}/>
+          </Paper>
+        </Grid>
+      </Container>
+        )
+      };
+    </React.Fragment>
+  )
 }
 
 export default PostsForm;
