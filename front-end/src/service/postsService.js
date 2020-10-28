@@ -5,14 +5,13 @@ import { getAllPostsSuccess, getAllPostsFailure, addPostSuccess,
    addPostFailure, getPostSuccess, getPostFailure,
    editPostSuccess, editPostFailure, deletePostSuccess,
    deletePostFailure, } from '../actions/postsAction';
-import { API_URL, JWT_TOKEN } from '../config/config';
 
 export const getAllPosts = () => {
   return (dispatch) => {
-    axios
+      axios
       .get('/posts')
       .then((response) => {
-        // dispatch(getAllPostsSuccess(response.data.posts));
+        dispatch(getAllPostsSuccess(response.data.posts));
       })
       .catch((error) => {
         dispatch(getAllPostsFailure(error.response.data));
@@ -30,7 +29,7 @@ export const addPost = ({ content, title }) => {
         window.location.reload();
       })
       .catch((error) => {
-        dispatch(addPostFailure(error.response.data));
+        dispatch(addPostFailure(error.response));
       });
   };
 };

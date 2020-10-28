@@ -11,17 +11,20 @@ import { Link } from 'react-router-dom';
 
 let rows = [];
 let key = 1;
+
 // Generate Order Data
 function createData(posts) {
   let postsAry = [];
+  rows = [];
 
   for(let i = 0; i < posts.length; i++){
     postsAry.push(posts[i]);
   }
 
   postsAry.map((post) => {
+    console.log(post._id);
     rows.push({
-      key:key,
+      key:post._id,
       id:key,
       title:post.title,
       content:post.content,
@@ -30,6 +33,8 @@ function createData(posts) {
     })
     key++;
   })
+
+  return postsAry;
 }
 
 function preventDefault(event) {
@@ -47,10 +52,13 @@ const PostsTable = (props) => {
     const classes = useStyles()
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(20);
+    const [isLoading, setIsLoading] = React.useState(true);
 
     useEffect(() => {
       createData(posts);
-    });
+      setIsLoading(false);
+      key = 1;
+    }, []);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -77,18 +85,39 @@ const PostsTable = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {(rowsPerPage > 0
-              ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              : rows
-            ).map((row) => (
-              <TableRow key={row._id} component={Link} to={"/" + row._id } style={{textDecoration:"none", color:"black"}}>
-                <TableCell>{row._id}</TableCell>
-                <TableCell>{row.title}</TableCell>
-                <TableCell>{row.content.slice(0, 30) + '...'}</TableCell>
-                <TableCell>{row.user}</TableCell>
-                <TableCell align="right">{row.createdAt}</TableCell>
-              </TableRow>
-            ))}
+            {
+              isLoading ?
+              (
+                <div>isLoading....</div>
+              )
+              :
+              (
+                (rowsPerPage > 0
+                  ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  : rows
+                ).map((row) => (
+                  <TableRow 
+                  key={row.key} 
+                  component={Link} 
+                  to={{
+                    pathname: "/posts/" + row.key,
+                    state:{
+                      id:row.key,
+                      title:row.title,
+                      content:row.content,
+                      user:row.user,
+                    }
+                  }} 
+                  style={{textDecoration:"none", color:"black"}}>
+                    <TableCell>{row.id}</TableCell>
+                    <TableCell>{row.title}</TableCell>
+                    <TableCell>{row.content.slice(0, 30) + '...'}</TableCell>
+                    <TableCell>{row.user}</TableCell>
+                    <TableCell align="right">{row.createdAt}</TableCell>
+                  </TableRow>
+                ))
+              )
+            }
           </TableBody>
         </Table>
         <div className={classes.seeMore}>

@@ -22,16 +22,19 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(1),
         marginBottom: theme.spacing(1),
         width: '54em',
+        [theme.breakpoints.down('md')]: {
+            marginLeft: theme.spacing(),
+            width: 'auto',
+        },
     },
   }));
 
 const PostWriter = (props) => {
-    const { handleSubmit } = props;
+    const { handleSubmit, addPost } = props;
     const classes = useStyles();
     return (
         <Paper className={classes.paper} elevation={3}>
-
-            <form onSubmit>
+            <form onSubmit={handleSubmit(addPost)}>
                 <Field type="text" name="title" component={renderText} label="제목을 입력해주세요."/>
                 <Field name="content" rows={20} component={renderTextArea} label="내용을 입력해주세요." />
                 <Grid item xs={12}>

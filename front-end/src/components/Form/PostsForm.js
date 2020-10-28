@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Field, reduxForm } from 'redux-form';
 import Grid from '@material-ui/core/Grid';
 import PostsTable from '../Table/PostsTable';
 import PostsHeadBar from '../Header/PostHeadBar';
@@ -27,26 +26,43 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function isEmptyObject(param) {
+  return Object.keys(param).length === 0 && param.constructor === Object;
+}
+
 function PostsForm(props) {
-  const { errorMessage, posts, onLoad } = props;
+  const { errorMessage, onLoad, posts } = props;
   const classes = useStyles();
-  
+
   useEffect(() => {
+    console.log(posts);
     onLoad();
-  })
+  }, []);
+
+  const isLoading = (isEmptyObject(posts));
 
   return (
-    <Container maxWidth="lg" className={classes.content}>
-      <Grid item xs={12}>
-        <PostsHeadBar />
-      </Grid>
-      <Grid item xs={12}>
-        <Paper className={classes.paper}>
-          <PostsTable errorMessage={errorMessage} posts={posts}/>
-        </Paper>
-      </Grid>
-    </Container>
-  );
+    <React.Fragment>
+      { isLoading ?
+        (
+          <Container maxWidth="lg" className={classes.content}>
+            isLoading...
+          </Container>
+        ) : 
+        (<Container maxWidth="lg" className={classes.content}>
+        <Grid item xs={12}>
+          <PostsHeadBar />
+        </Grid>
+        <Grid item xs={12}>
+          <Paper className={classes.paper}>
+            <PostsTable errorMessage={errorMessage} posts={posts}/>
+          </Paper>
+        </Grid>
+      </Container>
+        )
+      };
+    </React.Fragment>
+  )
 }
 
 export default PostsForm;

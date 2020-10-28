@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import * as postsService from '../service/postsService';
-
+import { POSTS } from '../constants/entity';
 // Import custom components
 import PostsForm from '../components/Form/PostsForm';
 

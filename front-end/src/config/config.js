@@ -7,3 +7,4 @@ export const HOST = `${APP_HOST}:${APP_PORT}`;
 // export const API_URL = `http://${HOST}${apiPath}`;
 export const API_URL = `http://${HOST}`;
 export const JWT_TOKEN = 'token';
+export const JWT_POST = 'havepost';
