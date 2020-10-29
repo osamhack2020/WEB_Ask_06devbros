@@ -28,4 +28,6 @@ message ChatRequest {
 
 message ChatReply {
   string serverChat = 1;
+  string chatType = 2;
+  double danger = 3;
 }
