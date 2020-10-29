@@ -30,10 +30,12 @@ class Chat(chat_pb2_grpc.ChatServicer):
             ------todo------
 
             여기서 reqChat를 ai로 처리해서 보내고 싶은 데이터를 resChat에 넣으면된다.
-
+            추가사항: 위험감지 후 index를 chatType에, value를 danger에 넣는다.
         """
         resChat = reqChat + ' 이것은 답변이여' # 예시 함수 (들어오는 chatting에 이것은 답변이여라는 말을 추가해서 되돌리기
-        return chat_pb2.ChatReply(serverChat=resChat)
+        danger = 0.874545 # 예시 값
+        chatType = '굉장히 위험함' #예시 값
+        return chat_pb2.ChatReply(serverChat=resChat,chatType=chatType,danger=danger)
 
 
 def serve():

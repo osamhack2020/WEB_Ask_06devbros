@@ -10,6 +10,7 @@ const chatSchema = new Schema({
     ref: 'User'
   },
   chat: String,
+  replyChat: String,
   chatType: String,
   danger: Number,
   createdAt: {
@@ -17,12 +18,5 @@ const chatSchema = new Schema({
     default: Date.now,
   },
 });
-
-// 여기서 chat를 바탕으로 ai 답변을 해줌(newchat = ai(chat))
-chatSchema.methods.replyChat =  function () {
-  const answer =  chatbotResponse(this.chat);
-  console.log(answer, '답안');
-  return answer;
-};
 
 module.exports = mongoose.model('Chat', chatSchema);
