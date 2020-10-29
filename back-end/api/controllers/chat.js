@@ -85,7 +85,7 @@ exports.getOneRoomBySearch = async (req, res, next) => {
 //   }
 // }
 
-exports.postChat = async (req, res, next) => {
+exports.postChat = (req, res, next) => {
   try {
     // nlp 처리후 reply
     client
