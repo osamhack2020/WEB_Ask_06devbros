@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
+import axios from 'axios';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 
@@ -36,19 +38,55 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 function PostReader(props) {
-    const { addPost, handleSubmit } = props;
-    let location = useLocation();
-    console.log(location);
-    useEffect(() => {
+    const { addPost } = props;
+    const [post, setPost] = React.useState(null);
+    const [isLoading, setIsLoading] = React.useState(true);
+    const [value, setValue] = React.useState(null);
 
-    }, [location]);
+    let location = useLocation();
+    const id = location.pathname.slice(7, location.pathname.length);
+
+    const handleChange = (e) => {
+      setValue(e.target.value);
+    };
+
+    const handleSubmit = () => {
+      axios
+      .post(`/posts/${id}/comments`, { comment:value })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+
+    useEffect(async () => {
+      const { 
+        data: { 
+          post
+        }
+       } = await axios.get(`/posts/${id}`);
+      setPost(post);
+      setIsLoading(false);
+    }, []);
+
     const classes = useStyles();
+
     return (
+      <React.Fragment>
+        { isLoading ?
+        (
+          <Container maxWidth="lg" className={classes.content}>
+            isLoading...
+          </Container>
+        ) :
+        (
         <Paper className={classes.paper}>
-              <form onSubmit>
+              <form onSubmit={handleSubmit}>
                 <TextField
                  name="title" 
-                 value={location.state.title} 
+                 value={post.title} 
                  variant="outlined" 
                  margin="normal" 
                  required 
@@ -61,7 +99,7 @@ function PostReader(props) {
                 <TextField
                  name="content"
                  rows={10}
-                 value={location.state.content}
+                 value={post.content}
                  variant="outlined"
                  margin="normal" 
                  required 
@@ -72,9 +110,9 @@ function PostReader(props) {
                   }}
                 />
                 <Grid item xs={12}>
-                  <CommentTable id={location.state.id} />
+                  <CommentTable id={id} />
                 </Grid>
-                <Field name="content" rows={5} component={renderTextArea} label="댓글을 입력해주세요." />
+                <Field name="content" rows={5} component={renderTextArea} label="댓글을 입력해주세요." onChange={handleChange} />
                 <Grid item xs={12}>
                 <Button
                     type="submit"
@@ -86,7 +124,6 @@ function PostReader(props) {
                     댓글 달기
                 </Button>
                 <Button
-                    type="submit"
                     variant="contained"
                     className={classes.button}
                     endIcon={<Icon></Icon>}
@@ -96,6 +133,9 @@ function PostReader(props) {
                 </Grid>
             </form>
         </Paper>
+        )
+                }
+      </React.Fragment>
     )
 }
 
