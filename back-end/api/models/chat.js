@@ -10,6 +10,8 @@ const chatSchema = new Schema({
     ref: 'User'
   },
   chat: String,
+  chatType: String,
+  danger: Number,
   createdAt: {
     type: Date,
     default: Date.now,

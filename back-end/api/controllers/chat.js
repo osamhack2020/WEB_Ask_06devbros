@@ -70,6 +70,21 @@ exports.getOneRoomBySearch = async (req, res, next) => {
   }
 };
 
+// exports.getUserDangerByRoomId = async (req, res, next) => {
+//   try {
+//     const roomId = req.params.id;
+//     const room = await(Room.findById(roomId));
+//     const userId = req.params.id;
+//     return res.status(200).json({
+      
+//     });
+//   } catch(err) {
+//     res.status(500).json({
+//       error: err
+//     });
+//   }
+// }
+
 exports.postChat = async (req, res, next) => {
   try {
     const chat = await Chat.create({
