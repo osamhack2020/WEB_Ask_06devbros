@@ -70,23 +70,46 @@ exports.getOneRoomBySearch = async (req, res, next) => {
   }
 };
 
-exports.postChat = async (req, res, next) => {
+// exports.getUserDangerByRoomId = async (req, res, next) => {
+//   try {
+//     const roomId = req.params.id;
+//     const room = await(Room.findById(roomId));
+//     const userId = req.params.id;
+//     return res.status(200).json({
+      
+//     });
+//   } catch(err) {
+//     res.status(500).json({
+//       error: err
+//     });
+//   }
+// }
+
+exports.postChat = (req, res, next) => {
   try {
-    const chat = await Chat.create({
-      user: req.userData,
-      chat: req.body.chat,
-    });
-    const room = await Room.findOne({ _id: req.params.id });
-    room.chats.push(chat);
-    await room.save();
     // nlp 처리후 reply
     client
     .chatBot()
-    .sendMessage({clientChat: chat.chat })
-    .then(result => {
-      const newchat = result.serverChat;
+    .sendMessage({clientChat: req.body.chat })
+    .then(async (result) => {
+      const replychat = result.serverChat;
+      const chatType = result.chatType;
+      const danger = result.danger;
+
+      const chat = await Chat.create({
+        user: req.userData,
+        chat: req.body.chat,
+        replyChat: replychat,
+        chatType: chatType,
+        danger: danger 
+      });
+      const room = await Room.findOne({ _id: req.params.id });
+      room.chats.push(chat);
+      await room.save();
+
+
       const chatSO = req.app.get('io').of('/chat');
-      chatSO.to(req.params.id).emit('chat', newchat);
+      chatSO.to(req.params.id).emit('chat', replychat);
       res.status(201).json({
         chat: chat,
       });

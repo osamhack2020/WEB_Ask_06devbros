@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\nchat.proto\x12\x07\x63hatbot\"!\n\x0b\x43hatRequest\x12\x12\n\nclientChat\x18\x01 \x01(\t\"\x1f\n\tChatReply\x12\x12\n\nserverChat\x18\x01 \x01(\t2=\n\x04\x43hat\x12\x35\n\x07\x43hatBot\x12\x14.chatbot.ChatRequest\x1a\x12.chatbot.ChatReply\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\nchat.proto\x12\x07\x63hatbot\"!\n\x0b\x43hatRequest\x12\x12\n\nclientChat\x18\x01 \x01(\t\"A\n\tChatReply\x12\x12\n\nserverChat\x18\x01 \x01(\t\x12\x10\n\x08\x63hatType\x18\x02 \x01(\t\x12\x0e\n\x06\x64\x61nger\x18\x03 \x01(\x01\x32=\n\x04\x43hat\x12\x35\n\x07\x43hatBot\x12\x14.chatbot.ChatRequest\x1a\x12.chatbot.ChatReply\"\x00\x62\x06proto3'
 )
 
 
@@ -72,6 +72,20 @@ _CHATREPLY = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='chatType', full_name='chatbot.ChatReply.chatType', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='danger', full_name='chatbot.ChatReply.danger', index=2,
+      number=3, type=1, cpp_type=5, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -85,7 +99,7 @@ _CHATREPLY = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=58,
-  serialized_end=89,
+  serialized_end=123,
 )
 
 DESCRIPTOR.message_types_by_name['ChatRequest'] = _CHATREQUEST
@@ -115,8 +129,8 @@ _CHAT = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=91,
-  serialized_end=152,
+  serialized_start=125,
+  serialized_end=186,
   methods=[
   _descriptor.MethodDescriptor(
     name='ChatBot',

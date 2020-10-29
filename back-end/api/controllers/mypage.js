@@ -2,7 +2,6 @@ const User = require('../models/user');
 
 // 유저 정보 얻기
 exports.getUserInfo = (req, res) => {
-  console.log(req.headers);
   const user = req.userData;
   const { username, realname, unit, pro } = user;
   res.status(200).json({

@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
     .sendMessage({clientComment: comment })
     .then(result => {
         console.log(typeof(result.serverCensor));
-      if (result.serverCensor) {
+      if (!result.serverCensor) {
         next();
       } else {
         res.status(400).json({
