@@ -20,23 +20,23 @@ const mainFeaturedPost = {
 
 const cards = [
     {
-        title: '일상에서의 고민',
+        title: '간단한 고민',
         description:
-            "가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.",
+            "심각한 고민은 아닌데 상담사에게 상담하기 꺼려지나요? 같은 병사들에게 질문해보는건 어떤가요?",
         image: 'https://source.unsplash.com/random/2',
         link: '/posts',
     },
     {
         title: '상담사가 필요한 고민',
         description:
-            "가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.",
+            "간단한 고민은 아니신가요? 상담사의 조언이 필요할 때 이용해보세요.",
         image: 'https://source.unsplash.com/random/3',
         link: '/posts',
     },
     {
         title: '챗봇을 이용하기',
         description:
-            "가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.",
+            "상담사와 바로 상담할 수 없으면 챗봇으로 먼저 상담해보세요.",
         image: 'https://source.unsplash.com/random/4',
         link: '/posts',
     },
@@ -76,7 +76,7 @@ class Home extends React.Component {
         return (
             <React.Fragment>
                 <Jumbotron post={mainFeaturedPost} />
-                <Introduction title={'물어봐는 어떤 서비스인가요?'} content={'intro'}/>
+                <Introduction title={'물어봐는 어떤 서비스인가요?'} content={'null'}/>
                 <Container maxWidth="lg">
                 <Grid container className={classes.cards} spacing={4}>
                     {cards.map((post) => (

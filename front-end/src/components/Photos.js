@@ -114,13 +114,13 @@ function ProductCategories(props) {
     {
       url:
         'https://images.unsplash.com/photo-1523309996740-d5315f9cc28b?auto=format&fit=crop&w=400&q=80',
-      title: '문제3',
+      title: '선후임과의 관계',
       width: '38%',
     },
     {
       url:
         'https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?auto=format&fit=crop&w=400&q=80',
-      title: '문제4',
+      title: '간부와의 마찰',
       width: '24%',
     },
     
