@@ -50,8 +50,11 @@ const PostEditor = (props) => {
     };
 
     const handleSubmit = () => {
-        console.log(id);
-        axios.put(`/posts/${id}`, { title, content })
+        axios.put(`/posts/${id}`, { title, content });
+    }
+
+    const handleDelete = () => {
+        axios.delete(`/posts/${id}`);
     }
 
     useEffect(() => {
@@ -115,6 +118,7 @@ const PostEditor = (props) => {
                         <Button
                             variant="contained"
                             color="default"
+                            onClick={handleDelete}
                             className={classes.button}
                             endIcon={<Icon></Icon>}
                         >
