@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 
 import PostWriter from '../Paper/postWriter';
 import PostReader from '../Paper/postReader';
+import PostEditor from '../Paper/postEditor';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -38,7 +39,7 @@ const identifyForm = (props) => {
     );
   }else if(path === "/posts/:id/edit"){
     return (
-      <PostWriter editPost={editPost} deletePost={deletePost}/>
+      <PostEditor editPost={editPost} deletePost={deletePost}/>
     );
   }else if(path === "/posts/:id"){
     return (
@@ -68,7 +69,7 @@ function PostForm(props) {
             <Link to="/" style={{textDecoration:"none", color:"white"}}>     
               뒤로 가기
             </Link>
-      </Button>
+          </Button>
         </Grid>
       </Grid>
     </Container>

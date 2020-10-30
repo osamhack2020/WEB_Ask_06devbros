@@ -35,8 +35,8 @@
  
 ### Front-end
  -  react.js
- -  UI framework
- - 기타 사용한 라이브러리
+ -  material ui
+ -  redux
 
 ### AI
 

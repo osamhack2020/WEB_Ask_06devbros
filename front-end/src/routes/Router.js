@@ -25,7 +25,7 @@ function Router() {
           <PrivateRoute exact path="/posts" component={AsyncPosts} layout={MainLayoutContainer}/>
           <PrivateRoute path="/posts/write" component={AsyncPost} layout={MainLayoutContainer}/>
           <PrivateRoute path="/posts/:id/edit" component={AsyncPost} layout={MainLayoutContainer}/>
-          <PrivateRoute path="/posts/:id" component={AsyncPost} layout={MainLayoutContainer}/>
+          <PrivateRoute exact path="/posts/:id" component={AsyncPost} layout={MainLayoutContainer}/>
           <Route path="/logout" />
           <Route component={NotFound} />
         </Switch>
