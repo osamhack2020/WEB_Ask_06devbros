@@ -24,11 +24,14 @@ const CommentTable = (props) => {
     const [isLoading, setIsLoading] = React.useState(true);
     const [commentList, setCommentList] = React.useState(null);
 
-    useEffect(async () => {
+    useEffect(() => {
+      const getComments = async () => {
         const {
-            comments
+          comments
         } = await axios.get(`/posts/${id}/comments`);
-        console.log(comments);
+      }
+
+      getComments();
     }, []);
 
     return (

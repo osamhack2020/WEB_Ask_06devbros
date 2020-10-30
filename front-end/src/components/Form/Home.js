@@ -37,8 +37,8 @@ const cards = [
         title: '챗봇을 이용하기',
         description:
             "상담사와 바로 상담할 수 없으면 챗봇으로 먼저 상담해보세요.",
-        image: 'https://lh3.googleusercontent.com/proxy/3uA1zR1WKV-JhzX1vzxEhvLhM8R6WYTpRybdhHTnCz9mZlaahQll0hZqRa5A2EFlmpYTIxwUh8xQCT9FM5I5E0sZ8gNorCkB8UlhUxeqhVaB51BInjv1VHFf79S_WuRD8Gx9e28EcaRrPsG4mlfaRn1TKnsKXHy8y7J4AJy4VxIxEhSdxyr7wm86N3D4m5qi5uYO9G5OSjXVhfcooZJI_lDE2gXuYicXglooXei4Jw9bKMI3M7PDIR6ySsNfUynY9ScXi8tJ3OFHO6KAuT0vD2fFqNfciIhCYefXKs_BHYInfMKn0zG2QnihUkNkMg',
-        link: '/posts',
+        image: 'https://pds.joins.com/news/component/htmlphoto_mmdata/201706/01/0735e00f-7435-4baf-b459-84ae44348d17.jpg',
+        link: '/room',
     },
 ];
 

@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import PostWriter from '../Paper/postWriter';
 import PostReader from '../Paper/postReader';
@@ -52,6 +52,10 @@ function PostForm(props) {
   const { path, id, errorMessage, addPost, editPost, deletePost } = props;
   const classes = useStyles();
   
+  const goBack = () => {
+    props.history.goBack();
+  }
+
   return (
     <Container maxWidth="md" className={classes.content}>
       <Grid container>
@@ -63,6 +67,7 @@ function PostForm(props) {
             variant="contained"
             color="secondary"
             size="large"
+            onClick={goBack}
             className={classes.button}
             endIcon={<Icon></Icon>}
           >
@@ -76,4 +81,4 @@ function PostForm(props) {
   );
 }
 
-export default PostForm;
+export default withRouter(PostForm);
