@@ -50,7 +50,7 @@ const identifyForm = (props) => {
 function PostForm(props) {
   const { path, id, errorMessage, addPost, editPost, deletePost } = props;
   const classes = useStyles();
-
+  
   return (
     <Container maxWidth="md" className={classes.content}>
       <Grid container>

@@ -54,56 +54,8 @@ const styles = (theme) => ({
   },
 });
 
-const introductionAry = [
-  {
-      id: 1,
-      title: '고민이 있으신가요?',
-      image: '',
-      description:
-          "누군가의 조언이 필요할 때 이용해보세요.",
-  },
-  {
-      id: 2,
-      title: '말 못할 고민이 있으신요?',
-      image: '',
-      description:
-          "가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.",
-  },
-  {
-      id: 3,
-      title: '챗봇',
-      image: '',
-      description:
-          "가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.",
-  },
-]
-
-const ary = [
-  {
-      id: 1,
-      title: '고민이 있으신가요?',
-      image: '',
-      description:
-          "누군가의 조언이 필요할 때 이용해보세요.",
-  },
-  {
-      id: 2,
-      title: '말 못할 고민이 있으신가요?',
-      image: '',
-      description:
-          "가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.",
-  },
-  {
-      id: 3,
-      title: '챗봇',
-      image: '',
-      description:
-          "가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.",
-  },
-]
-
 function Introduction(props) {
-  const { classes } = props;
+  const { classes, content } = props;
 
 
   return (
@@ -120,33 +72,52 @@ function Introduction(props) {
         </Typography>
         <div>
           <Grid container spacing={5}>
-            <Grid item xs={12} md={4}>
-              <div className={classes.item}>
-                <div className={classes.number}>1.</div>
-                <Brightness2Icon className={classes.image}/>
-                <Typography variant="h5" align="center">
-                  가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.
-                </Typography>
-              </div>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <div className={classes.item}>
-                <div className={classes.number}>2.</div>
-                <AccessibilityNewIcon className={classes.image}/>
-                <Typography variant="h5" align="center">
-                가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.
-                </Typography>
-              </div>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <div className={classes.item}>
-                <div className={classes.number}>3.</div>
-                <AddIcCallIcon className={classes.image}/>
-                <Typography variant="h5" align="center">
-                가족과 친구를 사랑하듯이, 자기 자신을 사랑하는 것. 어떤 선택을 하든 그것을 기억하세요.
-                </Typography>
-              </div>
-            </Grid>
+
+            { content === "intro"
+              ? (
+                <React.Fragment>
+                  <Grid item xs={12} md={4}>
+                    <div className={classes.item}>
+                      <div className={classes.number}>1.</div>
+                      <Brightness2Icon className={classes.image}/>
+                      <Typography variant="h6" align="center">
+                        '물어봐'는 비대면 상담 서비스이므로 24시간 언제든지 고민 상담을 할 수 있어요.
+                      </Typography>
+                    </div>
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <div className={classes.item}>
+                      <div className={classes.number}>2.</div>
+                      <AccessibilityNewIcon className={classes.image}/>
+                      <Typography variant="h6" align="center">
+                        심각한 고민은 아닌데 상담사에게 상담하기 꺼려지나요? 같은 병사들에게 질문해보는건 어떤가요?
+                      </Typography>
+                    </div>
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <div className={classes.item}>
+                      <div className={classes.number}>3.</div>
+                      <AddIcCallIcon className={classes.image}/>
+                      <Typography variant="h6" align="center">
+                        상담사와 바로 상담할 수 없으면 챗봇으로 먼저 상담해보세요.
+                      </Typography>
+                    </div>
+                  </Grid>
+                </React.Fragment>
+              )
+              :(
+                <React.Fragment>
+                  <Grid item xs={12}>
+                  <Typography variant="h6" align="center">
+                    '물어봐'는 AI 기반의 실시간 상담 챗봇을 웹페이지에서 구현하여 챗봇의 판단에 따라 전문상담관과의 연결 기능을 제공합니다. 
+                    또한, 상담만으로는 해결할 수 없는 다양한 고민 사항을 공유하고 해결할 수 있도록 질문 게시판을 마련하였습니다. 
+                    AI기반의 악플 검열 기능도 추가하여 유해한 답변은 자동으로 배제됩니다. 
+                    본 서비스를 통해 코로나 블루를 겪거나 군생활의 다양한 고충을 가진 장병들이 상담으로 심리적 우울감과 고민을 해소하여 정신적으로 건강하고 슬기로운 군생활을 보낼 수 있습니다.
+                  </Typography>
+                  </Grid>
+                </React.Fragment>
+              )
+            }
           </Grid>
         </div>
       </Container>

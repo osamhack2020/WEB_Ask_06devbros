@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const PostsTable = (props) => {
+const CommentTable = (props) => {
     const { id } = props;
     const classes = useStyles()
     const [isLoading, setIsLoading] = React.useState(true);
@@ -67,4 +67,4 @@ const PostsTable = (props) => {
     );
   }
 
-export default PostsTable;
+export default CommentTable;

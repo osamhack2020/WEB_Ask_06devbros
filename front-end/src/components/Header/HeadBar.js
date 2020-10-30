@@ -11,10 +11,12 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import Avatar from '@material-ui/core/Avatar';
 import { Link } from 'react-router-dom';
-
 import SearchBar from './SearchBar';
 import { isAuthenticated } from '../../utils/jwtUtil';
+import logo from './logo1.jpg';
+
 // http://localhost:3000
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -98,9 +100,13 @@ function HeadBar(props) {
         <Toolbar>
           <Grid item xs={3}>
           <Link to="/" style={{textDecoration:"none", color:"white"}}>
-            <Typography className={classes.title} variant="h6" noWrap>
-              물어봐
-            </Typography>
+          <div>
+            <Avatar variant="square" alt="ASK" src={logo}>
+              <Typography className={classes.title} variant="h6" noWrap>
+                물어봐
+              </Typography>
+            </Avatar>
+          </div>
           </Link>
           </Grid>
           <SearchBar />
