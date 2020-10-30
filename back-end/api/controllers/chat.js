@@ -109,7 +109,7 @@ exports.postChat = (req, res, next) => {
 
 
       const chatSO = req.app.get('io').of('/chat');
-      chatSO.to(req.params.id).emit('chat', replychat);
+      chatSO.to(req.params.id).emit('chat', chat);
       res.status(201).json({
         chat: chat,
       });

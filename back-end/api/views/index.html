@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>GIF 채팅방</title>
+</head>
+<body>
+<div>F12를 눌러 console 탭과 network 탭을 확인하세요.</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io('https://0493eac3-e10e-422b-b7dc-fd7f9bce6f4d-4000.app.online.visualstudio.com/room', {
+    path: '/socket.io',
+    transports: ['websocket'],
+  });
+  socket.on('newRoom', function (data) {
+    console.log(data);
+    socket.emit('reply', 'Hello Node.JS');
+  });
+</script>
+</body>
+</html>
