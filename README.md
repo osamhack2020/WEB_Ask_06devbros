@@ -197,14 +197,14 @@ $ npm start
 ```
 
 ## 프로젝트 사용법 (Getting Started)
-**마크다운 문법을 이용하여 자유롭게 기재**
+메인 화면으로 가서 메뉴들을 탐색합니다.
+![main](./img/main.png)
 
-잘 모를 경우
-구글 검색 - 마크다운 문법
-[https://post.naver.com/viewer/postView.nhn?volumeNo=24627214&memberNo=42458017](https://post.naver.com/viewer/postView.nhn?volumeNo=24627214&memberNo=42458017)
+포스트 화면으로 갈경우 다음과 같은 창이 떠 새글을 쓰거나 글을 보고 답글을 작성할 수 있습니다.
+![post](./img/post.png)
 
- 편한 마크다운 에디터를 찾아서 사용
- 샘플 에디터 [https://stackedit.io/app#](https://stackedit.io/app#)
+챗봇 화면으로 갈경우 다음과 같은 화면에서 ai와 대화를 주고받으면 됩니다.
+![chat](./img/chat.png)
  
 ## 팀 정보 (Team Information)
 - 강태영 (tae_11@naver.com), Github Id: tzerok
