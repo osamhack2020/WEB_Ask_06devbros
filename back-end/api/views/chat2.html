@@ -20,53 +20,17 @@
     <div class="row justfiy-content-center">
       <div class="col-1"></div>
       <div class="col-10">
-        <h3 class=" text-center">챗봇과의 대화</h3>
+        <h3 class="text-center my-5 chat_title">챗봇과의 대화</h3>
         <div class="messaging">
           <div class="mesgs">
             <div class="msg_history">
               <div class="incoming_msg">
-                <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+                <div class="incoming_msg_img"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR6YpP5IxgP3WAqJhC_pOIj7t-hHxWSwVkKtA&usqp=CAU" alt="sunil">
                 </div>
                 <div class="received_msg">
                   <div class="received_withd_msg">
-                    <p>Test which is a new approach to have all
-                      solutions</p>
-                    <span class="time_date"> 11:01 AM | June 9</span>
-                  </div>
-                </div>
-              </div>
-              <div class="outgoing_msg">
-                <div class="sent_msg">
-                  <p>Test which is a new approach to have all
-                    solutions</p>
-                  <span class="time_date"> 11:01 AM | June 9</span>
-                </div>
-              </div>
-              <div class="incoming_msg">
-                <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
-                </div>
-                <div class="received_msg">
-                  <div class="received_withd_msg">
-                    <p>Test, which is a new approach to have</p>
-                    <span class="time_date"> 11:01 AM | Yesterday</span>
-                  </div>
-                </div>
-              </div>
-              <div class="outgoing_msg">
-                <div class="sent_msg">
-                  <p>Apollo University, Delhi, India Test</p>
-                  <span class="time_date"> 11:01 AM | Today</span>
-                </div>
-              </div>
-              <div class="incoming_msg">
-                <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
-                </div>
-                <div class="received_msg">
-                  <div class="received_withd_msg">
-                    <p>We work directly with our designers and suppliers,
-                      and sell direct to you, which means quality, exclusive
-                      products, at a price anyone can afford.</p>
-                    <span class="time_date"> 11:01 AM | Today</span>
+                    <p>물어봐 도우미입니당~^^</p>
+                    <span class="time_date" id="start_time"></span>
                   </div>
                 </div>
               </div>
@@ -83,22 +47,29 @@
       </div>
       <div class="col-1"></div>
     </div>
-    <p class="text-center top_spac"> Design by <a target="_blank" href="#">Sunil Rajput</a></p>
 
   </div>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script>
+  window.addEventListener("load", function(event) {
+    console.log('load');
+    let today = new Date();
+    document.querySelector('#start_time').innerHTML = `
+      ${today.toLocaleTimeString()} | ${today.toLocaleDateString()}
+    `;
+  });
   const sendButton = document.getElementById('msg_send_btn');
   const chatInput = document.getElementById('write_msg');
   sendButton.addEventListener('click', async (e) => {
     e.preventDefault();
+    let today = new Date();
     const div = document.createElement('div');
     div.innerHTML = `
       <div class="outgoing_msg">
         <div class="sent_msg">
           <p>${chatInput.value}</p>
-          <span class="time_date"> ${Date.now()}</span>
+          <span class="time_date"> ${today.toLocaleTimeString()} | ${today.toLocaleDateString()}</span>
         </div>
       </div>
     `;
@@ -117,15 +88,16 @@
   });
   socket.on('chat', function (chat) {
     console.log(chat);
+    const today = new Date();
     const div = document.createElement('div');
     div.innerHTML = `
       <div class="incoming_msg">
-        <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+        <div class="incoming_msg_img"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR6YpP5IxgP3WAqJhC_pOIj7t-hHxWSwVkKtA&usqp=CAU" alt="sunil">
         </div>
         <div class="received_msg">
           <div class="received_withd_msg">
             <p>${chat.replyChat}</p>
-            <span class="time_date"> ${chat.createdAt}</span>
+            <span class="time_date"> ${today.toLocaleTimeString()} | ${today.toLocaleDateString()}</span>
           </div>
         </div>
       </div>

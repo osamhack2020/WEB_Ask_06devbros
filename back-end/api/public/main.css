@@ -1,4 +1,14 @@
-.container{margin:auto;}
+body {
+  background-color: rgba(51, 47, 47, 0.801);
+}
+.container{margin:auto;
+  
+background-color: white;
+}
+.chat_title{
+  font-weight: 700;
+  font-size: 2rem;
+}
 img{ max-width:100%;}
 .inbox_people {
   background: #f8f8f8 none repeat scroll 0 0;
@@ -76,7 +86,7 @@ img{ max-width:100%;}
   color: #646464;
   font-size: 14px;
   margin: 0;
-  padding: 5px 10px 5px 12px;
+  padding: 15px 10px 15px 12px;
   width: 100%;
 }
 .time_date {
@@ -96,7 +106,7 @@ img{ max-width:100%;}
   border-radius: 3px;
   font-size: 14px;
   margin: 0; color:#fff;
-  padding: 5px 10px 5px 12px;
+  padding: 15px 10px 15px 12px;
   width:100%;
 }
 .outgoing_msg{ overflow:hidden; margin:26px 0 26px;}

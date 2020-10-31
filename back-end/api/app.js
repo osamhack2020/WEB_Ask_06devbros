@@ -76,10 +76,15 @@ app.get('/', (req, res) => {
   res.render('index.html');
 });
 app.get('/chat', (req, res) => {
-  res.render('chat2.html');
+  const today = new Date();
+  res.render('chat2.html', {
+    today: today
+  });
 })
 app.get('/chat/:id', (req, res) => {
-  res.render('chat.html');
+  res.render('chat.html', {
+    today: Date.now()
+  });
 });
 
 // routes들 적용

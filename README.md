@@ -10,10 +10,13 @@
  - 수기로 작성시 찍어서 올려주세요
 
 ### 백엔드 설계
+- REST API로 구성
+- 
 
 ### AI 설계
 
 ### 전체 기능 연결
+-python으로 작성한 ai코드와 node로 구성된 웹 서버를 grpc를 통해 연결하고, REST API를 통해 프론트엔드와 백엔드를 연결하였습니다.
  ![relation](./img/relation.png)
 
 ## 컴퓨터 구성 / 필수 조건 안내 (Prerequisites)
@@ -43,7 +46,7 @@
 ## 설치 안내 (Installation Process)
 파일 받기
 ```
-$ git clone git주소
+$ git clone https://github.com/osamhack2020/WEB_Ask_06devbros.git
 ```
 
 AI 악플감지 서버 활성화
@@ -53,6 +56,8 @@ $ python3 chat_server.py
 ```
 AI 챗봇 서버 활성화
 ```
+$ cd grpc_test/
+$ python3 chat_server.py
 ```
 백엔드 서버 활성화
 ```
@@ -62,7 +67,7 @@ $ npm start
 ```
 프론트 엔드 실행
 ```
-$
+$ cd frontend/
 $ npm start
 ```
 
