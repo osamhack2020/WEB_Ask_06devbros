@@ -6,3 +6,4 @@ kss
 flask
 flask_restful
 google_drive_downloader
+tokenizers==0.8.1.rc1

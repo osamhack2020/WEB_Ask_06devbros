@@ -1,18 +1,18 @@
 # KoGPT2와 KoELECTRA 모델을 이용한 상담 챗봇 만들기
 [nawnoes/WellnessConversationAI](https://github.com/nawnoes/WellnessConversationAI)을 참고한 심리상담 대화 챗봇.
 
-# 사용 순서
-## 챗봇을 이용할 경우
+## 사용 순서
+### 챗봇을 이용할 경우
 1. ./checkpoint/download_trained_model.py를 실행하여 google drive에서 학습이 완료된 KoGPT2, KoELECTRA 모델을 다운로드 받는다.
 2. ./example/kogpt2-text-generation.py를 실행한다.
-## 위험군 분류 모델을 이용할 경우
+### 위험군 분류 모델을 이용할 경우
 1. ./checkpoint/download_trained_model.py를 실행하여 google drive에서 학습이 완료된 KoGPT2, KoELECTRA 모델을 다운로드 받는다.
 2. ./example/koelectra-wellness-qa.py를 실행한다.
-## 모델을 직접 학습시킬 경우
+### 모델을 직접 학습시킬 경우
 1. ./train/run_koelectra_text_classification.py 혹은 run_kogpt2_autoregressive.py를 실행시킨다.
 
-# 결과 예시
-## 챗봇 결과
+## 결과 예시
+### 챗봇 결과
 ```text
 Question: 요새 힘들어요
 Setting `pad_token_id` to 50256 (first `eos_token_id`) to generate sequence
@@ -35,7 +35,7 @@ Setting `pad_token_id` to 50256 (first `eos_token_id`) to generate sequence
 Answer: 으르렁으르렁으르렁으르렁으르렁으르렁으르렁으르렁
 ----------------------------------------------------------------------------------------------------
 ```
-## 위험군 분류 결과
+### 위험군 분류 결과
 ```text
 Question: 롤러코스터 타는 것처럼 기분이 왔다 갔다 해요.
 index: 감정/감정조절이상, value: 11.001134872436523
@@ -80,3 +80,5 @@ index: 감정/자살충동, value: 14.389313697814941
 
 # 출처
 [nawnoes/WellnessConversationAI](https://github.com/nawnoes/WellnessConversationAI)
+[웰니스 상담 데이터](https://aihub.or.kr/keti_data_board/language_intelligence)
+[챗봇 데이터: songys/Chatbot_data](https://github.com/songys/Chatbot_data)
