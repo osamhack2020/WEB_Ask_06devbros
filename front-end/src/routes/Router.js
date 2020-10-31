@@ -27,7 +27,7 @@ function Router() {
           <PrivateRoute path="/posts/write" component={AsyncPost} layout={MainLayoutContainer}/>
           <PrivateRoute path="/posts/:id/edit" component={AsyncPost} layout={MainLayoutContainer}/>
           <PrivateRoute exact path="/posts/:id" component={AsyncPost} layout={MainLayoutContainer}/>
-          <PrivateRoute exact path="/room" component={AsyncChat} layout={MainLayoutContainer}/>
+          <PrivateRoute exact path="/chat/socket.io" component={AsyncChat} layout={MainLayoutContainer}/>
           <Route path="/logout" />
           <Route component={NotFound} />
         </Switch>

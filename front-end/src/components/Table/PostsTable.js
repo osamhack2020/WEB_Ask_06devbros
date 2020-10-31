@@ -22,7 +22,6 @@ function createData(posts) {
   }
 
   postsAry.map((post) => {
-    console.log(post._id);
     rows.push({
       key:post._id,
       id:key,
@@ -33,8 +32,6 @@ function createData(posts) {
     })
     key++;
   })
-
-  return postsAry;
 }
 
 function preventDefault(event) {
@@ -48,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PostsTable = (props) => {
-    const { errorMessage, posts } = props;
+    const { posts } = props;
     const classes = useStyles()
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(20);

@@ -9,7 +9,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 
 let rows = [];
-let key = 1;
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -29,9 +28,12 @@ const CommentTable = (props) => {
         const {
           comments
         } = await axios.get(`/posts/${id}/comments`);
+        setCommentList(comments);
+        setIsLoading(false);
       }
 
       getComments();
+      console.log(commentList);
     }, []);
 
     return (
