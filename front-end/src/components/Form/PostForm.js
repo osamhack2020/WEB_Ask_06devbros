@@ -6,10 +6,11 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import PostWriter from '../Paper/postWriter';
 import PostReader from '../Paper/postReader';
+import PostEditor from '../Paper/postEditor';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -38,7 +39,7 @@ const identifyForm = (props) => {
     );
   }else if(path === "/posts/:id/edit"){
     return (
-      <PostWriter editPost={editPost} deletePost={deletePost}/>
+      <PostEditor editPost={editPost} deletePost={deletePost}/>
     );
   }else if(path === "/posts/:id"){
     return (
@@ -51,6 +52,10 @@ function PostForm(props) {
   const { path, id, errorMessage, addPost, editPost, deletePost } = props;
   const classes = useStyles();
   
+  const goBack = () => {
+    props.history.goBack();
+  }
+
   return (
     <Container maxWidth="md" className={classes.content}>
       <Grid container>
@@ -62,17 +67,18 @@ function PostForm(props) {
             variant="contained"
             color="secondary"
             size="large"
+            onClick={goBack}
             className={classes.button}
             endIcon={<Icon></Icon>}
           >
             <Link to="/" style={{textDecoration:"none", color:"white"}}>     
               뒤로 가기
             </Link>
-      </Button>
+          </Button>
         </Grid>
       </Grid>
     </Container>
   );
 }
 
-export default PostForm;
+export default withRouter(PostForm);

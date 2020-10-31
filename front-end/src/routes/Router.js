@@ -13,6 +13,7 @@ const AsyncRegisterForm = loadable(() => import('../containers/RegisterContainer
 const AsyncHome = loadable(() => import('../containers/HomeContainer'));
 const AsyncPosts = loadable(() => import('../containers/PostsContainer'));
 const AsyncPost = loadable(() => import('../containers/PostContainer'));
+const AsyncChat = loadable(() => import('../containers/ChatboxContainer'));
 
 function Router() {
   return (    
@@ -25,7 +26,8 @@ function Router() {
           <PrivateRoute exact path="/posts" component={AsyncPosts} layout={MainLayoutContainer}/>
           <PrivateRoute path="/posts/write" component={AsyncPost} layout={MainLayoutContainer}/>
           <PrivateRoute path="/posts/:id/edit" component={AsyncPost} layout={MainLayoutContainer}/>
-          <PrivateRoute path="/posts/:id" component={AsyncPost} layout={MainLayoutContainer}/>
+          <PrivateRoute exact path="/posts/:id" component={AsyncPost} layout={MainLayoutContainer}/>
+          <PrivateRoute exact path="/room" component={AsyncChat} layout={MainLayoutContainer}/>
           <Route path="/logout" />
           <Route component={NotFound} />
         </Switch>

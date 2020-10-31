@@ -11,7 +11,7 @@ import TextField from '@material-ui/core/TextField';
 import {  useLocation } from "react-router-dom";
 import { Field, reduxForm } from 'redux-form';
 
-import renderText from '../Render/renderText';
+import { Link } from 'react-router-dom';
 import renderTextArea from '../Render/renderTextArea';
 import CommentTable from '../Table/CommentTable';
 
@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
+
 function PostReader(props) {
     const { addPost } = props;
     const [post, setPost] = React.useState(null);
@@ -61,14 +62,19 @@ function PostReader(props) {
       });
     }
 
-    useEffect(async () => {
-      const { 
-        data: { 
-          post
-        }
-       } = await axios.get(`/posts/${id}`);
-      setPost(post);
-      setIsLoading(false);
+    useEffect(() => {
+      const getPostById = async () => {
+        const { 
+          data: { 
+            post
+          }
+        } = await axios.get(`/posts/${id}`);
+
+        setPost(post);
+        setIsLoading(false);
+      }
+
+      getPostById();
     }, []);
 
     const classes = useStyles();
@@ -128,7 +134,9 @@ function PostReader(props) {
                     className={classes.button}
                     endIcon={<Icon></Icon>}
                 >
+                  <Link to={`/posts/${id}/edit`} style={{textDecoration:"none", color:"black"}}>
                     수정하기
+                  </Link>
                 </Button>
                 </Grid>
             </form>

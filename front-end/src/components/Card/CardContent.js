@@ -23,6 +23,7 @@ export default function MediaCard(props) {
 
   return (
     <Card className={classes.root}>
+      <Link to={props.link} style={{textDecoration:"none", color:"initial"}}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
@@ -38,11 +39,9 @@ export default function MediaCard(props) {
           </Typography>
         </CardContent>
       </CardActionArea>
+      </Link>
       <CardActions>
-      <Link to={props.link} style={{textDecoration:"none"}}> 더 알아보기</Link>
-        {/* <Button size="small" color="primary">
-          Learn More
-        </Button> */}
+       더 알아보기
       </CardActions>
     </Card>
   );

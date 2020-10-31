@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   image: {
-    backgroundImage: 'url(https://lh3.googleusercontent.com/proxy/3uA1zR1WKV-JhzX1vzxEhvLhM8R6WYTpRybdhHTnCz9mZlaahQll0hZqRa5A2EFlmpYTIxwUh8xQCT9FM5I5E0sZ8gNorCkB8UlhUxeqhVaB51BInjv1VHFf79S_WuRD8Gx9e28EcaRrPsG4mlfaRn1TKnsKXHy8y7J4AJy4VxIxEhSdxyr7wm86N3D4m5qi5uYO9G5OSjXVhfcooZJI_lDE2gXuYicXglooXei4Jw9bKMI3M7PDIR6ySsNfUynY9ScXi8tJ3OFHO6KAuT0vD2fFqNfciIhCYefXKs_BHYInfMKn0zG2QnihUkNkMg)',
+    backgroundImage: 'url(https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F2163C94156A07D4931)',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
