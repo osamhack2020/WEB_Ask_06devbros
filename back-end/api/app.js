@@ -20,7 +20,9 @@ const commentRoutes = require('./routes/comment');
 const { MONGO_URI } = process.env;
 
 // --------------for test----------------
+app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', __dirname + '/views');
+
 app.engine('html', require('ejs').renderFile);
 
 app.set('view engine', 'ejs');
@@ -74,10 +76,15 @@ app.get('/', (req, res) => {
   res.render('index.html');
 });
 app.get('/chat', (req, res) => {
-  res.render('chat2.html');
+  const today = new Date();
+  res.render('chat2.html', {
+    today: today
+  });
 })
 app.get('/chat/:id', (req, res) => {
-  res.render('chat.html');
+  res.render('chat.html', {
+    today: Date.now()
+  });
 });
 
 // routes들 적용

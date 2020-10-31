@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>GIF 채팅방</title>
+</head>
+<body>
+
+    <form action="/login" method="POST">
+        <input type="text" name="username" id="username">
+        <input type="password" id="password" name="password">
+        <button type="submit">Send</button>
+    </form>
+    <input type="text" name="chat1" id="chat1">
+    <button type="button" id="sendbutton">Submit</button>
+  
+    <ul id="chat_group">
+
+    </ul>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const sendButton = document.getElementById('sendbutton');
+  const chatInput = document.getElementById('chat1');
+  sendButton.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const chat = await axios.post('https://0493eac3-e10e-422b-b7dc-fd7f9bce6f4d-4000.app.online.visualstudio.com/room/5f917590c7c1ab0a96f4298c/chat', {
+      chat: chatInput.value
+    });
+    chatInput.value = '';
+  });
+  const socket = io('https://0493eac3-e10e-422b-b7dc-fd7f9bce6f4d-4000.app.online.visualstudio.com/chat', {
+    path: '/socket.io',
+    transports: ['websocket'],
+  });
+  socket.on('connect', () => {
+    socket.emit('joinRoom', '5f917590c7c1ab0a96f4298c');
+  });
+  socket.on('chat', function (chat) {
+    console.log(chat);
+    const li = document.createElement('li');
+    li.textContent = chat.replychat;
+    document.getElementById('chat_group').appendChild(li);
+  });
+  socket.on('disconnect', () => {
+    socket.emit('disconnect', '5f917590c7c1ab0a96f4298c');
+  });
+</script>
+</body>
+</html>
