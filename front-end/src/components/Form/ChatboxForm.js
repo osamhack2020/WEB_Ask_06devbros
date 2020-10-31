@@ -1,19 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Container from '@material-ui/core/Container';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import CustomizedSnackbar from '../SnakeBar/CustomizedSnackbar';
-import renderText from '../Render/renderText';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { Field, reduxForm } from 'redux-form';
 import MessageList from '../Chat/MessageList';
 
 const useStyles = makeStyles((theme) => ({
@@ -31,8 +20,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ChatboxForm(props) {
-  const { handleSubmit, onSubmit, errorMessage } = props;
+  const [room, setRoom] = useState(null);
   const classes = useStyles();
+
+  useEffect(() => {
+    const getAllRooms = async() => {
+        const {
+          data: {
+            room
+          }
+        } = await axios.get('/room/5f8a9cf4e1b24b1d5f27cb94');
+
+        setRoom(room);
+    }
+
+    getAllRooms();
+    console.log(room);
+  }, []);
+
   return (
     <Container maxWidth="md" className={classes.content}>
         <Paper elevation={3}>

@@ -38,7 +38,7 @@ const cards = [
         description:
             "상담사와 바로 상담할 수 없으면 챗봇으로 먼저 상담해보세요.",
         image: 'https://pds.joins.com/news/component/htmlphoto_mmdata/201706/01/0735e00f-7435-4baf-b459-84ae44348d17.jpg',
-        link: '/room',
+        link: '/chat/socket.io',
     },
 ];
 

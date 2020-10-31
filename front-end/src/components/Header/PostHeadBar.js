@@ -9,10 +9,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import Toolbar from '@material-ui/core/Toolbar';
 import Box from '@material-ui/core/Box';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import TablePagination from '@material-ui/core/TablePagination';
-import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 
 const currencies = [
