@@ -63,8 +63,8 @@ const CommentTable = (props) => {
                 rows.map((row) => (
                   <TableRow key={row.key}>
                     <TableCell>{row.comment}</TableCell>
-                    <TableCell>{row.user}</TableCell>
-                    <TableCell align="right">{row.createdAt.slice(0, 9)}</TableCell>
+                    <TableCell>{row.user.slice(0, 8) + '...'}</TableCell>
+                    <TableCell align="right">{row.createdAt.slice(5, 10)}</TableCell>
                   </TableRow>
                 ))
               )
