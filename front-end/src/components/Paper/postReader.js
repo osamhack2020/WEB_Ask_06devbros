@@ -42,7 +42,7 @@ function PostReader(props) {
     const { addPost } = props;
     const [post, setPost] = React.useState(null);
     const [isLoading, setIsLoading] = React.useState(true);
-    const [value, setValue] = React.useState(null);
+    const [comment, setValue] = React.useState(null);
 
     let location = useLocation();
     const id = location.pathname.slice(7, location.pathname.length);
@@ -50,16 +50,9 @@ function PostReader(props) {
     const handleChange = (e) => {
       setValue(e.target.value);
     };
-
-    const handleSubmit = () => {
-      axios
-      .post(`/posts/${id}/comments`, { comment:value })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    console.log(comment);
+    const handleSubmit = async () => {
+      const submit = await axios.post(`/posts/${id}/comments`, { comment });
     }
 
     useEffect(() => {
@@ -89,7 +82,7 @@ function PostReader(props) {
         ) :
         (
         <Paper className={classes.paper}>
-              <form onSubmit={handleSubmit}>
+              <form>
                 <TextField
                  name="title" 
                  value={post.title} 
@@ -118,10 +111,10 @@ function PostReader(props) {
                 <Grid item xs={12}>
                   <CommentTable id={id} />
                 </Grid>
-                <Field name="content" rows={5} component={renderTextArea} label="댓글을 입력해주세요." onChange={handleChange} />
+                <Field name="content" value={comment} rows={5} component={renderTextArea} label="댓글을 입력해주세요." onChange={handleChange} />
                 <Grid item xs={12}>
                 <Button
-                    type="submit"
+                    onClick={handleSubmit}
                     variant="contained"
                     color="primary"
                     className={classes.button}

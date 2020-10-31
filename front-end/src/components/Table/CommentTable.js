@@ -21,19 +21,22 @@ const CommentTable = (props) => {
     const { id } = props;
     const classes = useStyles()
     const [isLoading, setIsLoading] = React.useState(true);
-    const [commentList, setCommentList] = React.useState(null);
+    const [commentList, setCommentList] = React.useState([]);
 
     useEffect(() => {
       const getComments = async () => {
         const {
-          comments
+          data:{
+            comments
+          }
         } = await axios.get(`/posts/${id}/comments`);
-        setCommentList(comments);
+        rows = comments;
+        console.log(rows);
+        setCommentList(rows);
         setIsLoading(false);
       }
 
       getComments();
-      console.log(commentList);
     }, []);
 
     return (
@@ -59,9 +62,9 @@ const CommentTable = (props) => {
               (
                 rows.map((row) => (
                   <TableRow key={row.key}>
-                    <TableCell>{row.content}</TableCell>
+                    <TableCell>{row.comment}</TableCell>
                     <TableCell>{row.user}</TableCell>
-                    <TableCell align="right">{row.createdAt}</TableCell>
+                    <TableCell align="right">{row.createdAt.slice(0, 9)}</TableCell>
                   </TableRow>
                 ))
               )
