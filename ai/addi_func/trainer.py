@@ -28,7 +28,7 @@ def train_model(pprocess, labeled_dataframe, test_comments, selected_words):
                 loss=losses.binary_crossentropy,
                 metrics=[metrics.binary_accuracy])
 
-    model.fit(x_train, y_train, epochs=7, batch_size=256)
+    model.fit(x_train, y_train, epochs=15, batch_size=256)
 
     # function to evaluate the created model
     eval_results = model.evaluate(x_test, y_test)
