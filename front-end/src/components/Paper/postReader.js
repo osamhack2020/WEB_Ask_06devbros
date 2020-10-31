@@ -52,7 +52,7 @@ function PostReader(props) {
     };
     console.log(comment);
     const handleSubmit = async () => {
-      const submit = await axios.post(`/posts/${id}/comments`, { comment });
+      await axios.post(`/posts/${id}/comments`, { comment });
     }
 
     useEffect(() => {

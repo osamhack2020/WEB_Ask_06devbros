@@ -22,6 +22,10 @@ const useStyles = makeStyles((theme) => ({
     },
     input: {
         width: '780px',
+        marginLeft: theme.spacing(2),
+    },
+    compose: {
+        paddingBottom: theme.spacing(1),
     }
 }));
 
@@ -167,7 +171,7 @@ function MessageList(props) {
 
             <div className={classes.message_list_container}>{renderMessages()}</div>
 
-            <div className="compose">
+            <div className={classes.compose}>
                 <TextField
                     id="standard-textarea"
                     placeholder="메세지를 입력해주세요"
