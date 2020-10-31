@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Compose from './Compose';
+import io from 'socket.io-client';
+import axios from 'axios';
 import Toolbar from './Toolbar';
 import ToolbarButton from './ToolbarButton';
 import Message from './Message';
@@ -17,37 +19,77 @@ const useStyles = makeStyles((theme) => ({
     },
     btn: {
         marginLeft: theme.spacing(2),
+    },
+    input: {
+        width: '780px',
     }
 }));
+
+function createMessage(id, author, message, timestamp) {
+    return { id, author, message, timestamp }
+}
 
 const tempMessages = [
     {
         id: 1,
-        author: 'orange',
+        author: 'AI',
         message: '우리나라를 위해 힘쓰시는 장병분들 반갑습니다. 물어봐 AI 챗봇입니다. 어떤 고민이 있으신가요?',
         timestamp: new Date().getTime()
-    },
-    {
-        id: 2,
-        author: 'apple',
-        message: '요즘 선임 분중에 한 분이 저를 계속 괴롭히고 있어요...',
-        timestamp: new Date().getTime()
-    },
-    {
-        id: 3,
-        author: 'orange',
-        message: '어떻게 괴롭힘 당하고 있나요?',
-        timestamp: new Date().getTime()
-    },
+    }
 ]
 
 function MessageList(props) {
     const classes = useStyles();
     const [messages, setMessages] = useState([])
+    const [chat, setChat] = useState(null);
+    const [content, setContent] = useState(null);
+    let id = 2;
+    const handleContentChange = (event) => {
+      setContent(event.target.value);
+    };
 
     useEffect(() => {
         getMessages();
     }, [])
+
+    const onSubmitContent = async () => {
+        const { 
+            data: {
+                chat
+            }
+        } = await axios.post('/room/5f917590c7c1ab0a96f4298c/chat',
+          { chat: content} );
+
+          setContent('');
+          
+          const obj = createMessage(id, MY_USER_ID, chat.chat, new Date().getTime());
+          messages.push(obj);
+          console.log(messages);
+          setMessages([...messages]);
+      };
+
+      const socket = io.connect('/chat', { 
+        path: '/socket.io',
+      });
+    
+      socket.on('connect', () => {
+        socket.emit('joinRoom', '5f917590c7c1ab0a96f4298c');
+        }
+      )
+    
+      socket.on('chat', (chat) => {
+        const obj = createMessage(id, 'AI', chat.replyChat, new Date().getTime());
+            if(messages.length != 0){
+                if(messages[messages.length-1].author != obj.author){
+                    messages.push(obj);
+                    setMessages([...messages]);
+                }
+            }
+      });
+
+    socket.on('disconnect', () => {
+        socket.emit('disconnect', '5f917590c7c1ab0a96f4298c');
+    });
 
     const getMessages = () => {
         setMessages([...messages, ...tempMessages])
@@ -125,7 +167,25 @@ function MessageList(props) {
 
             <div className={classes.message_list_container}>{renderMessages()}</div>
 
-            <Compose />
+            <div className="compose">
+                <TextField
+                    id="standard-textarea"
+                    placeholder="메세지를 입력해주세요"
+                    multiline
+                    className={classes.input}
+                    value={content}
+                    onChange={handleContentChange}
+                />
+
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={onSubmitContent}
+                    className={classes.btn}
+                >
+                    보내기
+                </Button>
+            </div>
         </div>
     );
 }
